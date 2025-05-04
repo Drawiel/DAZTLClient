@@ -4,9 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DAZTLClient"
+        xmlns:controls="clr-namespace:DAZTLClient.Windows.UserControllers"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"
+        Height="1080" Width="1920"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowState="Maximized"
+        Background="Black">
+
     <Grid>
+        <Grid.RenderTransform>
+            <TranslateTransform x:Name="MainTranslate" />
+        </Grid.RenderTransform>
+
+        <!-- Contenedor principal -->
+        <Border x:Name="LogIn"
+                Visibility="Visible"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Panel.ZIndex="100"
+                Opacity="1">
+            <controls:LogIn x:Name="LoginPage" Visibility="Visible"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+        </Border>
+
+        <Border x:Name="SignUp"
+                Visibility="Visible"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Panel.ZIndex="100"
+                Opacity="0">
+            <controls:SingUp x:Name="SignupPage" Visibility="Visible"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+        </Border>
 
     </Grid>
 </Window>
