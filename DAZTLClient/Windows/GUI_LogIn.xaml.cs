@@ -1,5 +1,4 @@
-﻿using DAZTLClient.Windows.UserControllers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +14,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DAZTLClient
-{
+namespace DAZTLClient.Windows {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Lógica de interacción para GUI_LogIn.xaml
     /// </summary>
-    public partial class MainWindow : Window {
-        public MainWindow() {
+    public partial class GUI_LogIn : Page {
+        public GUI_LogIn() {
             InitializeComponent();
 
             LoginPage.SignUpRequested += (s, e) => ShowSignUp();

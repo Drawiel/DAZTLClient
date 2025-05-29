@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAZTLClient.Windows;
+using DAZTLClient.Windows.UserControllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,26 +11,21 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DAZTLClient.Windows.UserControllers
+namespace DAZTLClient
 {
     /// <summary>
-    /// Lógica de interacción para LogIn.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class LogIn : UserControl {
-        public event EventHandler SignUpRequested;
-
-        public LogIn() {
+    public partial class MainWindow : Window {
+        public MainWindow() {
             InitializeComponent();
+            MainFrame.Navigate(new GUI_LogIn());
         }
-
-        private void SignUpButton_Click(object sender, RoutedEventArgs e) {
-            SignUpRequested?.Invoke(this, EventArgs.Empty);
-        }
-
     }
 
 }

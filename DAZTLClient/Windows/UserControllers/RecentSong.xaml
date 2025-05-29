@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="DAZTLClient.Windows.UserControllers.RecentSong"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DAZTLClient.Windows.UserControllers"
+             mc:Ignorable="d">
+    
+    <UserControl.Resources>
+        <Style TargetType="Border" x:Key="HoverBorderStyle">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#54595E"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+    </UserControl.Resources>
+
+    <Border
+        Style="{StaticResource HoverBorderStyle}"
+        Width="560"
+        Height="120">
+        <Button
+
+                Click="btnRecentSong_Click"
+                Background="Transparent"
+                x:Name="btnAccept"
+                HorizontalAlignment="Left" 
+                Height="120"
+                Margin="0"
+                VerticalAlignment="Top" 
+                Width="560"
+                BorderBrush="Transparent">
+            <Grid Margin="0" Width="560" Height="120" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Imagen del álbum -->
+                <Image Source="{Binding AlbumCover, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                   Width="105" 
+                   Height="105" 
+                   Stretch="UniformToFill" 
+                   Margin="15,0,30,0" 
+                   Grid.Column="0"
+                   HorizontalAlignment="Left"/>
+
+                <!-- Información de la canción -->
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock 
+                        Text="{Binding SongTitle, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        d:Text="Anxiety"
+                        FontSize="28"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        FontFamily="Nunito"/>
+                    <TextBlock 
+                        Text="{Binding ArtistName, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        d:Text="Doechii"
+                        FontSize="16"
+                        Foreground="White"
+                        Margin="0,5,0,0"/>
+                </StackPanel>
+            </Grid>
+
+        </Button>
+
+    </Border>
+    </UserControl>
+

@@ -4,14 +4,159 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DAZTLClient.Windows.UserControllers"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:wpf="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
+
              mc:Ignorable="d">
     <Grid
         Height="883"
         Width="764">
         <Grid.Background>
-            <ImageBrush ImageSource="/Multimedia/SingUp.png"/>
+            <ImageBrush ImageSource="/Multimedia/SignUp.png"/>
         </Grid.Background>
-        <Button Content="Button" HorizontalAlignment="Left" Height="168" Margin="663,355,0,0" VerticalAlignment="Top" Width="75" Click="SignUpButton_Click"/>
+        <Button
+            Width="136"
+            Height="68"
+            materialDesign:ButtonAssist.CornerRadius="100 100 0 0"
+            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+            Click="SignUpButton_Click"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            RenderTransformOrigin="0.5,0.5" Margin="633,407,-5,408">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <TextBox
+           Name="txtBoxName"
+           materialDesign:HintAssist.HelperTextFontSize="60"
+           materialDesign:HintAssist.Hint="Nombre(s)"
+           materialDesign:HintAssist.Foreground="White"
+           HorizontalAlignment="Left" 
+           Height="75" 
+           Margin="107,247,0,0" 
+           TextWrapping="NoWrap" 
+           Text="" 
+           VerticalAlignment="Top" 
+           Width="490"
+           FontSize="24"
+           VerticalContentAlignment="Center"
+           Padding="22,0,35,0"
+           Background="Transparent"
+           Foreground="White"/>
+        <TextBox
+           Name="txtBoxLastName"
+           materialDesign:HintAssist.HelperTextFontSize="60"
+           materialDesign:HintAssist.Hint="Apellidos"
+           materialDesign:HintAssist.Foreground="White"
+           HorizontalAlignment="Left" 
+           Height="75" 
+           Margin="107,333,0,0" 
+           TextWrapping="NoWrap" 
+           Text="" 
+           VerticalAlignment="Top" 
+           Width="490"
+           FontSize="24"
+           VerticalContentAlignment="Center"
+           Padding="22,0,35,0"
+           Background="Transparent"
+           Foreground="White"/>
+        <TextBox
+           Name="txtBoxUsername"
+           materialDesign:HintAssist.HelperTextFontSize="60"
+           materialDesign:HintAssist.Hint="Usuario"
+           materialDesign:HintAssist.Foreground="White"
+           HorizontalAlignment="Left" 
+           Height="74" 
+           Margin="107,418,0,0" 
+           TextWrapping="NoWrap" 
+           Text="" 
+           VerticalAlignment="Top" 
+           Width="490"
+           FontSize="24"
+           VerticalContentAlignment="Center"
+           Padding="22,0,35,0"
+           Background="Transparent"
+           Foreground="White"/>
+        <TextBox
+            Name="txtBoxEmail"
+            materialDesign:HintAssist.HelperTextFontSize="60"
+            materialDesign:HintAssist.Hint="Correo"
+            materialDesign:HintAssist.Foreground="White"
+            HorizontalAlignment="Left" 
+            Height="75" 
+            Margin="107,503,0,0" 
+            TextWrapping="NoWrap" 
+            Text="" 
+            VerticalAlignment="Top" 
+            Width="490"
+            FontSize="24"
+            VerticalContentAlignment="Center"
+            Padding="22,0,35,0"
+            Background="Transparent"
+            Foreground="White"/>
+        <PasswordBox
+            Name="pssBoxPaswordOne"
+            HorizontalAlignment="Left" 
+            Margin="107,588,0,0" 
+            VerticalAlignment="Top" 
+            Width="490" 
+            Height="76"
+            materialDesign:HintAssist.Hint="Password"
+            materialDesign:PasswordBoxAssist.Password="{Binding Password1, Mode=TwoWay}"
+            materialDesign:TextFieldAssist.HasClearButton="True"
+            IsEnabled="{Binding IsChecked, ElementName=RevealPasswordDefaultEnabled}"
+            Style="{StaticResource MaterialDesignRevealPasswordBox}"
+            TextElement.FontSize="24"
+            TextElement.Foreground="#C6C6C6"
+            Padding="22,0,10,0"/>
+        <PasswordBox 
+            Name="pssBoxPaswordTwo"
+            HorizontalAlignment="Left" 
+            Margin="107,674,0,0" 
+            VerticalAlignment="Top" 
+            Width="490" 
+            Height="76"
+            materialDesign:HintAssist.Hint="Password"
+            materialDesign:PasswordBoxAssist.Password="{Binding Password1, Mode=TwoWay}"
+            materialDesign:TextFieldAssist.HasClearButton="True"
+            IsEnabled="{Binding IsChecked, ElementName=RevealPasswordDefaultEnabled}"
+            Style="{StaticResource MaterialDesignRevealPasswordBox}"
+            TextElement.FontSize="24"
+            TextElement.Foreground="#C6C6C6"
+            Padding="22,0,10,0"/>
+
+
+        <Button 
+            Click="btnHomeListener_Click"
+            HorizontalAlignment="Left" 
+            Height="66" 
+            Margin="159,765,0,0" 
+            VerticalAlignment="Top"
+            Width="379">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="ButtonBackground" Background="Transparent" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBackground" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="pack://application:,,,/Multimedia/Hovers/Hover_btn_SignUp.png" Stretch="UniformToFill"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
     </Grid>
 </UserControl>

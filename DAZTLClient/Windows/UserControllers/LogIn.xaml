@@ -4,21 +4,90 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DAZTLClient.Windows.UserControllers"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
+
     <Grid
         Height="883"
         Width="764">
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Multimedia/LogIn.png"/>
+            <ImageBrush ImageSource="/Multimedia/LogIn.png"/>
         </Grid.Background>
         <Button 
-            Content="Button" 
             HorizontalAlignment="Left" 
-            Height="168" 
-            Margin="663,355,0,0" 
+            Height="66" 
+            Margin="159,661,0,0" 
+            VerticalAlignment="Top"
+            Width="380">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="ButtonBackground" Background="Transparent" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBackground" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="/Multimedia/Hovers/Hover_btn_LogIn.png" Stretch="UniformToFill"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <TextBox
+            materialDesign:HintAssist.HelperTextFontSize="60"
+            materialDesign:HintAssist.Hint="Correo"
+            materialDesign:HintAssist.Foreground="White"
+            HorizontalAlignment="Left" 
+            Height="76" 
+            Margin="104,341,0,0" 
+            TextWrapping="NoWrap"             
+            Text="" 
             VerticalAlignment="Top" 
-            Width="75" 
-            Click="SignUpButton_Click"/>
+            Width="490"
+            FontSize="24"
+            VerticalContentAlignment="Center"
+            Padding="22,0,35,0"
+            Background="Transparent"
+            Foreground="White"/>
+        <Button
+            Width="136"
+            Height="68"
+            materialDesign:ButtonAssist.CornerRadius="100 100 0 0"
+            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+            Click="SignUpButton_Click"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            RenderTransformOrigin="0.5,0.5" Margin="633,407,-5,408">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+
+        <PasswordBox 
+            HorizontalAlignment="Left"
+            Padding="22,0,10,0"
+            Margin="104,475,0,0" 
+            VerticalAlignment="Top" 
+            Width="490" 
+            Height="76"
+            materialDesign:HintAssist.Hint="Password"
+            materialDesign:PasswordBoxAssist.Password="{Binding Password1, Mode=TwoWay}"
+            materialDesign:TextFieldAssist.HasClearButton="True"
+            IsEnabled="{Binding IsChecked, ElementName=RevealPasswordDefaultEnabled}"
+            Style="{StaticResource MaterialDesignRevealPasswordBox}"
+            TextElement.FontSize="24"
+            TextElement.Foreground="#C6C6C6"/>
+
+
 
     </Grid>
 </UserControl>

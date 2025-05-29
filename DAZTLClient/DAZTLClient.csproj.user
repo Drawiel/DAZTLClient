@@ -7,7 +7,22 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Windows\GUI_LogIn.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\HomeListeners.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControllers\ArtistCover.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\UserControllers\LogIn.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControllers\PlaylistCover.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\UserControllers\RecentSong.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\UserControllers\SingUp.xaml.cs">
@@ -15,10 +30,25 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Windows\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\GUI_LogIn.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\HomeListeners.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\UserControllers\ArtistCover.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\UserControllers\LogIn.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\UserControllers\PlaylistCover.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\UserControllers\RecentSong.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\UserControllers\SingUp.xaml">

@@ -13,8 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DAZTLClient.Windows.UserControllers
-{
+namespace DAZTLClient.Windows.UserControllers {
     /// <summary>
     /// Lógica de interacción para SingUp.xaml
     /// </summary>
@@ -23,11 +22,24 @@ namespace DAZTLClient.Windows.UserControllers
 
         public SingUp() {
             InitializeComponent();
+
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e) {
             LogInRequested?.Invoke(this, EventArgs.Empty);
         }
+        private void btnHomeListener_Click(object sender, RoutedEventArgs e) {
+            var homePage = new HomeListeners();
+
+            NavigationService navigationService = NavigationService.GetNavigationService(this);
+
+            if(navigationService != null) {
+                navigationService.Navigate(homePage);
+            } else {
+                MessageBox.Show("No se encontró el servicio de navegación.");
+            }
+        }
+
     }
 
 }

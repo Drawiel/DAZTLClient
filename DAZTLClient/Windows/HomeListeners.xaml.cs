@@ -1,0 +1,113 @@
+﻿using DAZTLClient.Windows.UserControllers;
+using System;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace DAZTLClient.Windows {
+    /// <summary>
+    /// Lógica de interacción para HomeListeners.xaml
+    /// </summary>
+    public partial class HomeListeners : Page {
+        private int currentPagePlaylist = 0;
+        private int currentPageAlbums = 0;
+        private int currentPageArtists = 0;
+        private int itemsPerPage = 6;
+
+        private List<PlaylistCover> allCovers;
+
+        public HomeListeners() {
+            InitializeComponent();
+            allCovers = new List<PlaylistCover>();
+
+            for(int i = 0; i < 12; i++) {
+                var cover = new PlaylistCover {
+                    SongTitle = $"Canción {i + 1}",
+                    ArtistName = $"Artista {i + 1}",
+                    AlbumCover = "Images/album-placeholder.png"
+                };
+
+                allCovers.Add(cover);
+            }
+
+            LoadPlaylistPage();
+            LoadAlbumsPage();
+            LoadArtistsPage();
+        }
+
+        private void LoadPlaylistPage() {
+            PlaylistGrid.Children.Clear();
+            int start = currentPagePlaylist * itemsPerPage;
+            int end = start + itemsPerPage;
+
+            for(int i = start; i < end && i < allCovers.Count; i++) {
+                var original = allCovers[i];
+                var playlistCover = new PlaylistCover {
+                    SongTitle = original.SongTitle,
+                    ArtistName = original.ArtistName,
+                    AlbumCover = original.AlbumCover
+                };
+                PlaylistGrid.Children.Add(playlistCover);
+            }
+        }
+
+        private void LoadAlbumsPage() {
+            AlbumsGrid.Children.Clear();
+            int start = currentPageAlbums * itemsPerPage;
+            int end = start + itemsPerPage;
+
+            for(int i = start; i < end && i < allCovers.Count; i++) {
+                var original = allCovers[i];
+                var albumCover = new PlaylistCover {
+                    SongTitle = original.SongTitle,
+                    ArtistName = original.ArtistName,
+                    AlbumCover = original.AlbumCover
+                };
+                AlbumsGrid.Children.Add(albumCover);
+            }
+        }
+
+        private void LoadArtistsPage() {
+            ArtistGrid.Children.Clear();
+            int start = currentPageArtists * itemsPerPage;
+            int end = start + itemsPerPage;
+
+            for(int i = start; i < end && i < allCovers.Count; i++) {
+                var original = allCovers[i];
+                var artistCover = new PlaylistCover {
+                    SongTitle = original.SongTitle,
+                    ArtistName = original.ArtistName,
+                    AlbumCover = original.AlbumCover
+                };
+                ArtistGrid.Children.Add(artistCover);
+            }
+        }
+
+        private void NextPagePlaylists_Click(object sender, RoutedEventArgs e) {
+            currentPagePlaylist++;
+            if(currentPagePlaylist * itemsPerPage >= allCovers.Count)
+                currentPagePlaylist = 0;
+
+            LoadPlaylistPage();
+        }
+
+        private void NextPageAlbums_Click(object sender, RoutedEventArgs e) {
+            currentPageAlbums++;
+            if(currentPageAlbums * itemsPerPage >= allCovers.Count)
+                currentPageAlbums = 0;
+
+            LoadAlbumsPage();
+        }
+
+        private void NextPageArtists_Click(object sender, RoutedEventArgs e) {
+            currentPageArtists++;
+            if(currentPageArtists * itemsPerPage >= allCovers.Count)
+                currentPageArtists = 0;
+
+            LoadArtistsPage();
+        }
+
+        private void btnRecentSong_Click(object sender, RoutedEventArgs e) {
+        }
+    }
+}
