@@ -36,7 +36,7 @@ namespace DAZTLClient.Windows.UserControllers
         {
             var request = new LoginRequest
             {
-                Email = txtBoxEmail.Text.Trim(),
+                Username = txtBoxEmail.Text.Trim(),
                 Password = pssBoxPassword.Password
             };
 

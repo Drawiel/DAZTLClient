@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UvS83+VzYKI=",
+  "dgSpecHash": "5Gd5REzkXXI=",
   "success": true,
-  "projectFilePath": "D:\\Repos\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
+  "projectFilePath": "C:\\Users\\daur0\\Source\\Repos\\Drawiel\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\daur0\\.nuget\\packages\\materialdesigncolors\\5.2.1\\materialdesigncolors.5.2.1.nupkg.sha512",
     "C:\\Users\\daur0\\.nuget\\packages\\materialdesignthemes\\5.2.1\\materialdesignthemes.5.2.1.nupkg.sha512",

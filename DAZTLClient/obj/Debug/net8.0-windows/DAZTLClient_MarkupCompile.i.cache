@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Repos\DAZTLClient\DAZTLClient\obj\Debug\net8.0-windows\
+C:\Users\daur0\Source\Repos\Drawiel\DAZTLClient\DAZTLClient\obj\Debug\net8.0-windows\
 DAZTLClient
 none
 false
-TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-D:\Repos\DAZTLClient\DAZTLClient\App.xaml
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP
+C:\Users\daur0\Source\Repos\Drawiel\DAZTLClient\DAZTLClient\App.xaml
 8-561445744
 
 17-1928004086
-201-680238482
+201-698617474
 Windows\GUI_LogIn.xaml;Windows\HomeListeners.xaml;Windows\MainWindow.xaml;Windows\UserControllers\ArtistCover.xaml;Windows\UserControllers\LogIn.xaml;Windows\UserControllers\PlaylistCover.xaml;Windows\UserControllers\RecentSong.xaml;Windows\UserControllers\SingUp.xaml;
 
-False
+True
 

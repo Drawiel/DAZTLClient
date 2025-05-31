@@ -133,7 +133,7 @@
 
 
         <Button 
-            Click="btnHomeListener_Click"
+            Click="SignUpButton_Click"
             HorizontalAlignment="Left" 
             Height="66" 
             Margin="159,765,0,0" 

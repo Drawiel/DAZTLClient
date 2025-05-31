@@ -44,7 +44,7 @@ namespace DAZTLClient.Windows.UserControllers {
             }
         }
 
-        private async void SignUp(object sender, RoutedEventArgs e)
+        private async void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
             var password = pssBoxPaswordOne.Password;
             var confirmPassword = pssBoxPaswordTwo.Password;
@@ -59,8 +59,8 @@ namespace DAZTLClient.Windows.UserControllers {
                 Username = txtBoxUsername.Text.Trim(),
                 Email = txtBoxEmail.Text.Trim(),
                 Password = password,
-                First_Name = txtBoxName.Text.Trim(),
-                Last_Name = txtBoxLastName.Text.Trim(),
+                FirstName = txtBoxName.Text.Trim(),
+                LastName = txtBoxLastName.Text.Trim(),
                 Role = "listener" //TODO: Revisar para ver cual tipo de usuario se va a escoger
 
             };
