@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "AeSkkbhetOw=",
+  "dgSpecHash": "UvS83+VzYKI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\isabe\\source\\repos\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
+  "projectFilePath": "D:\\Repos\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\isabe\\.nuget\\packages\\materialdesigncolors\\5.2.1\\materialdesigncolors.5.2.1.nupkg.sha512",
-    "C:\\Users\\isabe\\.nuget\\packages\\materialdesignthemes\\5.2.1\\materialdesignthemes.5.2.1.nupkg.sha512",
-    "C:\\Users\\isabe\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+    "C:\\Users\\daur0\\.nuget\\packages\\materialdesigncolors\\5.2.1\\materialdesigncolors.5.2.1.nupkg.sha512",
+    "C:\\Users\\daur0\\.nuget\\packages\\materialdesignthemes\\5.2.1\\materialdesignthemes.5.2.1.nupkg.sha512",
+    "C:\\Users\\daur0\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
   ],
   "logs": []
 }

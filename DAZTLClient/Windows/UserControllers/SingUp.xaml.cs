@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAZTLClient.Models;
+using DAZTLClient.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,15 +21,17 @@ namespace DAZTLClient.Windows.UserControllers {
     /// </summary>
     public partial class SingUp : UserControl {
         public event EventHandler LogInRequested;
+        private readonly UserService _userService = new UserService();
 
         public SingUp() {
             InitializeComponent();
 
         }
 
-        private void SignUpButton_Click(object sender, RoutedEventArgs e) {
+        private void LogInButton_Click(object sender, RoutedEventArgs e) {
             LogInRequested?.Invoke(this, EventArgs.Empty);
         }
+
         private void btnHomeListener_Click(object sender, RoutedEventArgs e) {
             var homePage = new HomeListeners();
 
@@ -37,6 +41,38 @@ namespace DAZTLClient.Windows.UserControllers {
                 navigationService.Navigate(homePage);
             } else {
                 MessageBox.Show("No se encontró el servicio de navegación.");
+            }
+        }
+
+        private async void SignUp(object sender, RoutedEventArgs e)
+        {
+            var password = pssBoxPaswordOne.Password;
+            var confirmPassword = pssBoxPaswordTwo.Password;
+
+            if (password != confirmPassword) { 
+                MessageBox.Show("Las contraseñas no coinciden.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var request = new RegisterRequest
+            {
+                Username = txtBoxUsername.Text.Trim(),
+                Email = txtBoxEmail.Text.Trim(),
+                Password = password,
+                First_Name = txtBoxName.Text.Trim(),
+                Last_Name = txtBoxLastName.Text.Trim(),
+                Role = "listener" //TODO: Revisar para ver cual tipo de usuario se va a escoger
+
+            };
+
+            try
+            {
+                var result = await _userService.RegisterAsync(request);
+                MessageBox.Show(result, "Registro", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error de conexion {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
