@@ -11,6 +11,36 @@
 
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
+        <Style x:Key="HoverWhiteButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#8B8D90"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Nunito"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Width" Value="102"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="MediaToggleButtonStyle" TargetType="ToggleButton">
             <Setter Property="Foreground" Value="#595E63"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -142,7 +172,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="IconPlusButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="28"/>
             <Setter Property="Height" Value="33"/>
@@ -231,7 +261,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="AccountButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="57"/>
             <Setter Property="Height" Value="57"/>
@@ -265,6 +295,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
     </Page.Resources>
 
 
@@ -277,15 +308,26 @@
     <Grid Width="1920" Height="1080">
         <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10,86,10,150">
             <StackPanel Margin="20">
-                <TextBlock
-                    VerticalAlignment="Bottom"
-                    Height="40"
+                <StackPanel Orientation="Horizontal" Margin="20,0,0,20">
+                    <TextBlock
                     Text="Playlist"
                     FontFamily="Nunito"
                     FontSize="40"
                     Foreground="White"
-                    Margin="0,0,0,20" />
-                
+                    VerticalAlignment="Center"
+                    Width="124"/>
+
+                    <Button Content="Albums"
+                        Style="{StaticResource HoverWhiteButtonStyle}"
+                        Margin="10,0,0,0"
+                        Click="BtnSeeAllAlbums_Click"/>
+
+                    <Button Content="Artistas"
+                        Style="{StaticResource HoverWhiteButtonStyle}"
+                        Margin="10,0,0,0"
+                        Click="BtnSeeAllArtists_Click"/>
+                </StackPanel>
+
                 <ItemsControl x:Name="PlaylistItemsControl">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -294,12 +336,13 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </StackPanel>
+
         </ScrollViewer>
         <Grid
             Width="1920"
             Height="85"
             VerticalAlignment="Top">
-            <Button  
+            <Button x:Name="NotificationButton"
                 HorizontalAlignment="Left" 
                 Height="33" 
                 Margin="1750,0,0,0" 
@@ -307,9 +350,31 @@
                 Width="28"
                 Background="Transparent"
                 BorderBrush="Transparent"
-                Style="{StaticResource IconButtonStyle}" >
-
+                Style="{StaticResource IconButtonStyle}"
+                Click="NotificationButton_Click">
             </Button>
+
+            <!-- Popup de notificaciones -->
+            <Popup x:Name="NotificationPopup"
+               PlacementTarget="{Binding ElementName=NotificationButton}"
+               Placement="Bottom"
+               AllowsTransparency="True"
+               StaysOpen="False"
+               PopupAnimation="Fade">
+                <Border Width="400" Height="560"
+                    Background="#202123"
+                    CornerRadius="8"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Padding="10"
+                    SnapsToDevicePixels="True"
+                    Effect="{DynamicResource MaterialDesignElevation3}">
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                        <StackPanel x:Name="NotificationList" />
+                    </ScrollViewer>
+                </Border>
+            </Popup>
+
             <Button 
                 HorizontalAlignment="Left" 
                 Height="33" Margin="1793,0,0,0" 
@@ -317,7 +382,8 @@
                 Width="38"
                 Background="Transparent"
                 BorderBrush="Transparent"
-                Style="{StaticResource IconPlusButtonStyle}"/>
+                Style="{StaticResource IconPlusButtonStyle}" 
+                Click="BtnGoToCreatePlaylist_Click"/>
             <TextBox
                 Style="{StaticResource TextBoxWithIconStyle}"
                 HorizontalAlignment="Left" 

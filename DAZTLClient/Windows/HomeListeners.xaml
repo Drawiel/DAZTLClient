@@ -14,6 +14,36 @@
         <!-- BooleanToVisibilityConverter para que funcione el HintText -->
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
+        <Style x:Key="HoverWhiteButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#8B8D90"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Nunito"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Width" Value="102"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- Estilo genérico para los botones -->
         <Style x:Key="MediaToggleButtonStyle" TargetType="ToggleButton">
             <Setter Property="Foreground" Value="#595E63"/>
@@ -502,17 +532,9 @@
                             Margin="0,0,0,20"
                             />
                             <Button Content="Ver todo"
-                                Background="Transparent"
-                                Foreground="#8B8D90"
-                                BorderBrush="Transparent"
-                                VerticalContentAlignment="Bottom"
-                                FontFamily="Nunito"    
-                                DockPanel.Dock="Top"
-                                Width="87"
-                                HorizontalAlignment="Left"
-                                Margin="130,10,0,18"
-                                Click="BtnSeeAllPlaylist_Click"
-                                />
+                                Style="{StaticResource HoverWhiteButtonStyle}"
+                                Margin="155,10,1453,10"
+                                Click="BtnSeeAllPlaylist_Click"/>
                             <Button
                                 VerticalAlignment="Center"
                                 DockPanel.Dock="Top"
@@ -557,17 +579,9 @@
                             Margin="0,0,0,20"
                             />
                             <Button Content="Ver todo"
-                                Background="Transparent"
-                                Foreground="#8B8D90"
-                                BorderBrush="Transparent"
-                                VerticalContentAlignment="Bottom"
-                                FontFamily="Nunito"    
-                                DockPanel.Dock="Top"
-                                VerticalAlignment="Bottom"
-                                Height="30"
-                                Width="87"
-                                HorizontalAlignment="Left"
-                                Margin="130,0,0,20"
+                                Style="{StaticResource HoverWhiteButtonStyle}"
+                                Margin="155,10,1453,10"
+                                Click="BtnSeeAllAlbums_Click"
                                 />
                             <Button
                                 VerticalAlignment="Center"
@@ -610,21 +624,11 @@
                                 FontFamily="Nunito"
                                 FontSize="40"
                                 Foreground="White"
-                                Margin="0,0,0,20"
-                                />
+                                Margin="0,0,0,20"/>
                             <Button Content="Ver todo"
-                                Background="Transparent"
-                                Foreground="#8B8D90"
-                                BorderBrush="Transparent"
-                                VerticalContentAlignment="Bottom"
-                                FontFamily="Nunito"    
-                                DockPanel.Dock="Top"
-                                VerticalAlignment="Bottom"
-                                Height="30"
-                                Width="87"
-                                HorizontalAlignment="Left"
-                                Margin="140,0,0,20"
-                                />
+                                Style="{StaticResource HoverWhiteButtonStyle}"
+                                Margin="155,10,1453,10"
+                                Click="BtnSeeAllArtists_Click" Cursor="Hand"/>
                             <Button
                                 VerticalAlignment="Center"
                                 DockPanel.Dock="Top"
@@ -690,21 +694,44 @@
                                      Margin="0,0,0,0"/>
             </Border>
         </Grid>
+        
         <Grid
             Width="1920"
             Height="85"
             VerticalAlignment="Top">
-            <Button  
-                HorizontalAlignment="Left" 
-                Height="33" 
-                Margin="1750,0,0,0" 
-                VerticalAlignment="Center" 
-                Width="28"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                Style="{StaticResource IconButtonStyle}" >
-
+            <Button x:Name="NotificationButton"
+            HorizontalAlignment="Left" 
+            Height="33" 
+            Margin="1750,0,0,0" 
+            VerticalAlignment="Center" 
+            Width="28"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            Style="{StaticResource IconButtonStyle}"
+            Click="NotificationButton_Click">
             </Button>
+
+            <!-- Popup de notificaciones -->
+            <Popup x:Name="NotificationPopup"
+               PlacementTarget="{Binding ElementName=NotificationButton}"
+               Placement="Bottom"
+               AllowsTransparency="True"
+               StaysOpen="False"
+               PopupAnimation="Fade">
+                <Border Width="400" Height="560"
+                    Background="#202123"
+                    CornerRadius="8"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Padding="10"
+                    SnapsToDevicePixels="True"
+                    Effect="{DynamicResource MaterialDesignElevation3}">
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                        <StackPanel x:Name="NotificationList" />
+                    </ScrollViewer>
+                </Border>
+            </Popup>
+            
             <Button 
                 HorizontalAlignment="Left" 
                 Height="33" Margin="1793,0,0,0" 
@@ -712,7 +739,8 @@
                 Width="38"
                 Background="Transparent"
                 BorderBrush="Transparent"
-                Style="{StaticResource IconPlusButtonStyle}"/>
+                Style="{StaticResource IconPlusButtonStyle}"
+                Click="BtnGoToCreatePlaylist_Click"/>
             <TextBox
                 Style="{StaticResource TextBoxWithIconStyle}"
                 HorizontalAlignment="Left" 
