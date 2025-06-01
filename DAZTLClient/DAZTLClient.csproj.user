@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Windows\GUI_ListenersPlaylist.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\GUI_LogIn.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,8 +31,14 @@
     <Compile Update="Windows\UserControllers\SingUp.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\UserControllers\SongPlayingNow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Windows\GUI_ListenersPlaylist.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -52,6 +61,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\UserControllers\SingUp.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\UserControllers\SongPlayingNow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

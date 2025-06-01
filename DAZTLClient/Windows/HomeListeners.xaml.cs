@@ -109,5 +109,27 @@ namespace DAZTLClient.Windows {
 
         private void btnRecentSong_Click(object sender, RoutedEventArgs e) {
         }
+
+        private void AccountButton_Click(object sender, RoutedEventArgs e) {
+            var button = sender as Button;
+            if(button?.ContextMenu != null) {
+                button.ContextMenu.PlacementTarget = button;
+                button.ContextMenu.IsOpen = true;
+            }
+        }
+
+        private void Cuenta_Click(object sender, RoutedEventArgs e) {
+            MessageBox.Show("Ir a la página de cuenta.");
+        }
+
+        private void CerrarSesion_Click(object sender, RoutedEventArgs e) {
+            MessageBox.Show("Cerrar sesión...");
+        }
+
+        private void BtnSeeAllPlaylist_Click(object sender, RoutedEventArgs e) {
+            if(this.NavigationService != null) {
+                NavigationService.Navigate(new GUI_ListenersPlaylist());
+            }
+        }
     }
 }

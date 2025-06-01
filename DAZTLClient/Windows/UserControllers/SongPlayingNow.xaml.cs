@@ -16,22 +16,13 @@ using System.Windows.Shapes;
 namespace DAZTLClient.Windows.UserControllers
 {
     /// <summary>
-    /// Lógica de interacción para LogIn.xaml
+    /// Lógica de interacción para SongPlayingNow.xaml
     /// </summary>
-    public partial class LogIn : UserControl {
-        public event EventHandler SignUpRequested;
-
-        public LogIn() {
+    public partial class SongPlayingNow : UserControl
+    {
+        public SongPlayingNow()
+        {
             InitializeComponent();
         }
-
-        private void SignUpButton_Click(object sender, RoutedEventArgs e) {
-            SignUpRequested?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e) {
-
-        }
     }
-
 }

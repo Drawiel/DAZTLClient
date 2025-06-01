@@ -10,9 +10,11 @@
 
   <ItemGroup>
     <None Remove="Multimedia\HomeListeners.png" />
+    <None Remove="Multimedia\Hovers\Hover_btn_Home.png" />
     <None Remove="Multimedia\Hovers\Hover_btn_LogIn.png" />
     <None Remove="Multimedia\Hovers\Hover_btn_SignUp.png" />
     <None Remove="Multimedia\Icons\keyboard_arrow_right.png" />
+    <None Remove="Multimedia\ListenersBackground.png" />
     <None Remove="Multimedia\LogIn.png" />
     <None Remove="Multimedia\passwordBox.png" />
     <None Remove="Multimedia\passwordBoxHover.png" />
@@ -26,6 +28,7 @@
 
   <ItemGroup>
     <Resource Include="Multimedia\HomeListeners.png" />
+    <Resource Include="Multimedia\Hovers\Hover_btn_Home.png" />
     <Resource Include="Multimedia\Hovers\Hover_btn_LogIn.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -34,6 +37,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Multimedia\image6.png" />
+    <Resource Include="Multimedia\ListenersBackground.png" />
     <Resource Include="Multimedia\LogIn.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

@@ -50,7 +50,6 @@
 
                 </Grid.ColumnDefinitions>
 
-                <!-- Imagen del álbum -->
                 <Image Source="{Binding AlbumCover, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                    Width="270" 
                    Height="270" 
@@ -61,22 +60,24 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"/>
 
-                <!-- Información de la canción -->
                 <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,0,7,0">
                     <TextBlock 
                         Text="{Binding SongTitle, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        TextWrapping="NoWrap"
                         d:Text="Anxiety"
                         FontSize="16"
                         FontWeight="Light"
                         Foreground="White"
-                        FontFamily="Nunito"/>
+                        FontFamily="Nunito"
+                        Margin="10,0,0,0"/>
                     <TextBlock 
                         Text="{Binding ArtistName, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        TextWrapping="NoWrap"
                         d:Text="Doechii"
                         FontSize="16"
                         FontWeight="Light"
                         Foreground="White"
-                        Margin="0,5,0,0"/>
+                        Margin="10,5,0,0"/>
                 </StackPanel>
             </Grid>
 

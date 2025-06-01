@@ -18,7 +18,7 @@
             Height="66" 
             Margin="159,661,0,0" 
             VerticalAlignment="Top"
-            Width="380">
+            Width="380" Click="Button_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
