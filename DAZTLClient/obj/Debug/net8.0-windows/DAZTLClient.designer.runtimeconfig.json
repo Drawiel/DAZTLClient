@@ -12,8 +12,13 @@
       }
     ],
     "additionalProbingPaths": [
+<<<<<<< HEAD
       "C:\\Users\\chuch\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\chuch\\.nuget\\packages"
+=======
+      "C:\\Users\\daur0\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\daur0\\.nuget\\packages"
+>>>>>>> origin/feature/login-signup
     ],
     "configProperties": {
       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": true,

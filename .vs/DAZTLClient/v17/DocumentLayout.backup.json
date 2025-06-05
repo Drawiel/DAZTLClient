@@ -1,69 +1,68 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\isabe\\source\\repos\\DAZTLClient\\",
+  "WorkspaceRootPath": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\isabe\\source\\repos\\daztlclient\\daztlclient\\windows\\usercontrollers\\login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\usercontrollers\\login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\daur0\\source\\repos\\drawiel\\daztlclient\\daztlclient\\models\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\models\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\isabe\\source\\repos\\daztlclient\\daztlclient\\windows\\usercontrollers\\singup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\daur0\\source\\repos\\drawiel\\daztlclient\\daztlclient\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\daur0\\source\\repos\\drawiel\\daztlclient\\daztlclient\\windows\\usercontrollers\\singup.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\usercontrollers\\singup.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\daur0\\source\\repos\\drawiel\\daztlclient\\daztlclient\\models\\registerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\models\\registerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\daur0\\source\\repos\\drawiel\\daztlclient\\daztlclient\\models\\loginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\models\\loginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\daur0\\source\\repos\\drawiel\\daztlclient\\daztlclient\\windows\\usercontrollers\\singup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\usercontrollers\\singup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\isabe\\source\\repos\\daztlclient\\daztlclient\\windows\\homelisteners.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\daur0\\source\\repos\\drawiel\\daztlclient\\daztlclient\\windows\\gui_login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\gui_login.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\daur0\\source\\repos\\drawiel\\daztlclient\\daztlclient\\windows\\homelisteners.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\homelisteners.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\isabe\\source\\repos\\daztlclient\\daztlclient\\windows\\homelisteners.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\homelisteners.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\daur0\\source\\repos\\drawiel\\daztlclient\\daztlclient\\windows\\usercontrollers\\recentsong.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\usercontrollers\\recentsong.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\daur0\\source\\repos\\drawiel\\daztlclient\\daztlclient\\windows\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 1,
+      "Orientation": 0,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 119,
+          "DockedWidth": 200,
           "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HomeListeners.xaml",
-              "DocumentMoniker": "C:\\Users\\isabe\\source\\repos\\DAZTLClient\\DAZTLClient\\Windows\\HomeListeners.xaml",
-              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\HomeListeners.xaml",
-              "ToolTip": "C:\\Users\\isabe\\source\\repos\\DAZTLClient\\DAZTLClient\\Windows\\HomeListeners.xaml",
-              "RelativeToolTip": "DAZTLClient\\Windows\\HomeListeners.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-26T04:00:27.955Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HomeListeners.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\isabe\\source\\repos\\DAZTLClient\\DAZTLClient\\Windows\\HomeListeners.xaml.cs",
-              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\HomeListeners.xaml.cs",
-              "ToolTip": "C:\\Users\\isabe\\source\\repos\\DAZTLClient\\DAZTLClient\\Windows\\HomeListeners.xaml.cs",
-              "RelativeToolTip": "DAZTLClient\\Windows\\HomeListeners.xaml.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAFUAAAAmAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "DAZTLClient\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Services\\UserService.cs",
+              "RelativeToolTip": "DAZTLClient\\Services\\UserService.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAQwBgAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T15:18:16.475Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LogIn.xaml",
-              "DocumentMoniker": "C:\\Users\\isabe\\source\\repos\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\LogIn.xaml",
-              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\UserControllers\\LogIn.xaml",
-              "ToolTip": "C:\\Users\\isabe\\source\\repos\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\LogIn.xaml*",
-              "RelativeToolTip": "DAZTLClient\\Windows\\UserControllers\\LogIn.xaml*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-29T03:36:02.545Z",
+              "WhenOpened": "2025-05-31T06:34:52.122Z",
               "EditorCaption": ""
             },
             {
@@ -71,19 +70,115 @@
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginRequest.cs",
+              "DocumentMoniker": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Models\\LoginRequest.cs",
+              "RelativeDocumentMoniker": "DAZTLClient\\Models\\LoginRequest.cs",
+              "ToolTip": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Models\\LoginRequest.cs",
+              "RelativeToolTip": "DAZTLClient\\Models\\LoginRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T06:40:47.034Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
+              "Title": "LoginResponse.cs",
+              "DocumentMoniker": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Models\\LoginResponse.cs",
+              "RelativeDocumentMoniker": "DAZTLClient\\Models\\LoginResponse.cs",
+              "ToolTip": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Models\\LoginResponse.cs",
+              "RelativeToolTip": "DAZTLClient\\Models\\LoginResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T06:40:45.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RegisterRequest.cs",
+              "DocumentMoniker": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Models\\RegisterRequest.cs",
+              "RelativeDocumentMoniker": "DAZTLClient\\Models\\RegisterRequest.cs",
+              "ToolTip": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Models\\RegisterRequest.cs",
+              "RelativeToolTip": "DAZTLClient\\Models\\RegisterRequest.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T06:39:05.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "SingUp.xaml",
-              "DocumentMoniker": "C:\\Users\\isabe\\source\\repos\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\SingUp.xaml",
+              "DocumentMoniker": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\SingUp.xaml",
               "RelativeDocumentMoniker": "DAZTLClient\\Windows\\UserControllers\\SingUp.xaml",
-              "ToolTip": "C:\\Users\\isabe\\source\\repos\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\SingUp.xaml*",
-              "RelativeToolTip": "DAZTLClient\\Windows\\UserControllers\\SingUp.xaml*",
+              "ToolTip": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\SingUp.xaml",
+              "RelativeToolTip": "DAZTLClient\\Windows\\UserControllers\\SingUp.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-27T18:34:56.501Z",
+              "WhenOpened": "2025-05-31T06:32:32.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SingUp.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\SingUp.xaml.cs",
+              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\UserControllers\\SingUp.xaml.cs",
+              "ToolTip": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\SingUp.xaml.cs",
+              "RelativeToolTip": "DAZTLClient\\Windows\\UserControllers\\SingUp.xaml.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAgwDwAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T06:32:13.273Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RecentSong.xaml",
+              "DocumentMoniker": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\RecentSong.xaml",
+              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\UserControllers\\RecentSong.xaml",
+              "ToolTip": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\RecentSong.xaml",
+              "RelativeToolTip": "DAZTLClient\\Windows\\UserControllers\\RecentSong.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-31T06:30:09.067Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GUI_LogIn.xaml",
+              "DocumentMoniker": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Windows\\GUI_LogIn.xaml",
+              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\GUI_LogIn.xaml",
+              "ToolTip": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Windows\\GUI_LogIn.xaml",
+              "RelativeToolTip": "DAZTLClient\\Windows\\GUI_LogIn.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-31T06:29:57.73Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HomeListeners.xaml",
+              "DocumentMoniker": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Windows\\HomeListeners.xaml",
+              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\HomeListeners.xaml",
+              "ToolTip": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Windows\\HomeListeners.xaml",
+              "RelativeToolTip": "DAZTLClient\\Windows\\HomeListeners.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-31T06:29:56.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Windows\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\daur0\\source\\repos\\Drawiel\\DAZTLClient\\DAZTLClient\\Windows\\MainWindow.xaml",
+              "RelativeToolTip": "DAZTLClient\\Windows\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-31T06:29:42.827Z",
               "EditorCaption": ""
             }
           ]

@@ -28,7 +28,7 @@
         </Border>
 
         <Border x:Name="SignUp"
-                Visibility="Visible"
+                Visibility="Collapsed"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Panel.ZIndex="100"

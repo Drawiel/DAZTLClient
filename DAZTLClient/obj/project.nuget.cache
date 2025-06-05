@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "MI0lRtV5Bww=",
   "success": true,
   "projectFilePath": "C:\\Users\\chuch\\OneDrive\\Desktop\\LIS-UV\\6to-Semestre\\Desarrollo de sistemas en red\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
@@ -7,6 +8,15 @@
     "C:\\Users\\chuch\\.nuget\\packages\\materialdesigncolors\\5.2.1\\materialdesigncolors.5.2.1.nupkg.sha512",
     "C:\\Users\\chuch\\.nuget\\packages\\materialdesignthemes\\5.2.1\\materialdesignthemes.5.2.1.nupkg.sha512",
     "C:\\Users\\chuch\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+=======
+  "dgSpecHash": "5Gd5REzkXXI=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\daur0\\Source\\Repos\\Drawiel\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\daur0\\.nuget\\packages\\materialdesigncolors\\5.2.1\\materialdesigncolors.5.2.1.nupkg.sha512",
+    "C:\\Users\\daur0\\.nuget\\packages\\materialdesignthemes\\5.2.1\\materialdesignthemes.5.2.1.nupkg.sha512",
+    "C:\\Users\\daur0\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+>>>>>>> origin/feature/login-signup
   ],
   "logs": []
 }
