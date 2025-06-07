@@ -34,15 +34,13 @@ namespace DAZTLClient.Windows.UserControllers
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            var request = new LoginRequest
-            {
-                Username = txtBoxEmail.Text.Trim(),
-                Password = pssBoxPassword.Password
-            };
+               
 
             try
             {
-                var result = await _userService.LoginAsync(request);
+                var username = txtBoxEmail.Text.Trim();
+                var password = pssBoxPassword.Password;
+                var result = await _userService.LoginAsync(username, password);
                 MessageBox.Show(result, "Inicio de Sesion", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 if (result.Contains("exisoto"))

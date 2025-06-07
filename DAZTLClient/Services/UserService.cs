@@ -1,59 +1,64 @@
-﻿using DAZTLClient.Models;
+﻿using Grpc.Net.Client;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
+using Daztl;
+using DAZTLClient.Models; // Usamos las clases generadas por gRPC
 
 namespace DAZTLClient.Services
 {
     public class UserService
     {
-        private readonly HttpClient _httpClient;
-        public UserService() { 
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("http://localhost:8000");
+        private readonly MusicService.MusicServiceClient _client;
+
+        public UserService()
+        {
+            var channel = GrpcChannel.ForAddress("http://localhost:50051");
+            _client = new MusicService.MusicServiceClient(channel);
         }
 
-        public async Task<string> RegisterAsync(RegisterRequest request)
+        public async Task<string> LoginAsync(string username, string password)
         {
-            var json = JsonSerializer.Serialize(request);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await _httpClient.PostAsync("/api/register/", content);
-
-            if(response.IsSuccessStatusCode) {
-                return "Usuario registrado correctamente";
-            }
-
-            string error = await response.Content.ReadAsStringAsync();
-            return $"Error en el registro {error}";
-        }
-
-        public async Task<string> LoginAsync(LoginRequest request)
-        {
-            var json = JsonSerializer.Serialize(request);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await _httpClient.PostAsync("/api/login/", content);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonSerializer.Deserialize<LoginResponse>(responseContent, new JsonSerializerOptions
+                var grpcRequest = new LoginRequest
                 {
-                    PropertyNameCaseInsensitive = true
-                });
+                    Username = username,
+                    Password = password
+                };
 
-                App.Current.Properties["auth_token"] = loginResponse.Token;
+                var response = await _client.LoginUserAsync(grpcRequest);
 
-                return "Inicio de sesion exitoso.";
+
+                // Guardar el token
+                App.Current.Properties["auth_token"] = response.AccessToken;
+
+                return "Inicio de sesión exitoso.";
             }
+            catch (Grpc.Core.RpcException ex)
+            {
+                return $"Error en el login: {ex.Status.Detail}";
+            }
+        }
 
-            var error = await response.Content.ReadAsStringAsync();
-            return $"Error en el login: {error}";
+        public async Task<string> RegisterAsync(Models.RegisterRequest request)
+        {
+            try
+            {
+                var grpcRequest = new Daztl.RegisterRequest
+                {
+                    Username = request.Username,
+                    Email = request.Email,
+                    Password = request.Password
+                };
+                var response = await _client.RegisterUserAsync(grpcRequest);
+
+
+                return "Usuario registrado correctamente.";
+            }
+            catch (Grpc.Core.RpcException ex)
+            {
+                return $"Error en el registro: {ex.Status.Detail}";
+            }
         }
     }
 }

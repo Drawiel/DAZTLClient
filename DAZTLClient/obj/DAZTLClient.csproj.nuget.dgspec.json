@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "C:\\Users\\chuch\\OneDrive\\Desktop\\LIS-UV\\6to-Semestre\\Desarrollo de sistemas en red\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj": {}
   },
   "projects": {
@@ -16,22 +15,6 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chuch\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-    "C:\\Users\\daur0\\Source\\Repos\\Drawiel\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\daur0\\Source\\Repos\\Drawiel\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\daur0\\Source\\Repos\\Drawiel\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
-        "projectName": "DAZTLClient",
-        "projectPath": "C:\\Users\\daur0\\Source\\Repos\\Drawiel\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
-        "packagesPath": "C:\\Users\\daur0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\daur0\\Source\\Repos\\Drawiel\\DAZTLClient\\DAZTLClient\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\daur0\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> origin/feature/login-signup
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -63,6 +46,20 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "Google.Protobuf": {
+              "target": "Package",
+              "version": "[3.31.1, )"
+            },
+            "Grpc.Net.Client": {
+              "target": "Package",
+              "version": "[2.71.0, )"
+            },
+            "Grpc.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.72.0, )"
+            },
             "MaterialDesignThemes": {
               "target": "Package",
               "version": "[5.2.1, )"
