@@ -13,24 +13,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static DAZTLClient.Windows.HomeListeners;
 
-
-namespace DAZTLClient.Windows
-{
+namespace DAZTLClient.Windows {
     /// <summary>
-    /// Lógica de interacción para GUI_ListenersPlaylist.xaml
+    /// Lógica de interacción para GUI_ListenersArtists.xaml
     /// </summary>
-    public partial class GUI_ListenersPlaylist : Page {
+    public partial class GUI_ListenersArtists : Page {
         private List<Notification> notifications = new List<Notification>();
-        public GUI_ListenersPlaylist() {
+        public GUI_ListenersArtists() {
             InitializeComponent();
             SimulateNotifications();
 
             for(int i = 0; i < 20; i++) {
-                var card = new PlaylistCover();
+                var card = new ArtistCover();
                 card.Margin = new Thickness(0, 0, 0, 15);
-                PlaylistItemsControl.Items.Add(card);
+                ArtistItemsControl.Items.Add(card);
             }
         }
         private void AccountButton_Click(object sender, RoutedEventArgs e) {
@@ -104,13 +101,16 @@ namespace DAZTLClient.Windows
         }
 
 
+        private void BtnSeeAllPlaylists_Click(object sender, RoutedEventArgs e) {
+            if(this.NavigationService != null) {
+                NavigationService.Navigate(new GUI_ListenersPlaylist());
+            }
+        }
+
         private void BtnSeeAllAlbums_Click(object sender, RoutedEventArgs e) {
             if(this.NavigationService != null) {
                 NavigationService.Navigate(new GUI_ListenersAlbums());
             }
-        }
-
-        private void BtnSeeAllArtists_Click(object sender, RoutedEventArgs e) {
 
         }
 
@@ -119,4 +119,3 @@ namespace DAZTLClient.Windows
         }
     }
 }
-

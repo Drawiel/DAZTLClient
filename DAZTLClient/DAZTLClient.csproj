@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Multimedia\HomeArtist.png" />
     <None Remove="Multimedia\HomeListeners.png" />
     <None Remove="Multimedia\Hovers\Hover_btn_Home.png" />
     <None Remove="Multimedia\Hovers\Hover_btn_LogIn.png" />
@@ -18,8 +19,13 @@
     <None Remove="Multimedia\LogIn.png" />
     <None Remove="Multimedia\passwordBox.png" />
     <None Remove="Multimedia\passwordBoxHover.png" />
+    <None Remove="Multimedia\ProfileListener.png" />
     <None Remove="Multimedia\SignUp.png" />
     <None Remove="Multimedia\SingUp.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Multimedia\ProfileListener.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Multimedia\HomeArtist.png" />
     <Resource Include="Multimedia\HomeListeners.png" />
     <Resource Include="Multimedia\Hovers\Hover_btn_Home.png" />
     <Resource Include="Multimedia\Hovers\Hover_btn_LogIn.png">

@@ -13,25 +13,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static DAZTLClient.Windows.HomeListeners;
 
-
-namespace DAZTLClient.Windows
-{
+namespace DAZTLClient.Windows {
     /// <summary>
-    /// Lógica de interacción para GUI_ListenersPlaylist.xaml
+    /// Lógica de interacción para GUI_ListenersProfile.xaml
     /// </summary>
-    public partial class GUI_ListenersPlaylist : Page {
+    public partial class GUI_ListenersProfile : Page {
         private List<Notification> notifications = new List<Notification>();
-        public GUI_ListenersPlaylist() {
+
+        public GUI_ListenersProfile() {
             InitializeComponent();
             SimulateNotifications();
 
-            for(int i = 0; i < 20; i++) {
-                var card = new PlaylistCover();
-                card.Margin = new Thickness(0, 0, 0, 15);
-                PlaylistItemsControl.Items.Add(card);
-            }
+
         }
         private void AccountButton_Click(object sender, RoutedEventArgs e) {
             var button = sender as Button;
@@ -41,9 +35,6 @@ namespace DAZTLClient.Windows
             }
         }
 
-        private void Cuenta_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show("Ir a la página de cuenta.");
-        }
 
         private void CerrarSesion_Click(object sender, RoutedEventArgs e) {
             MessageBox.Show("Cerrar sesión...");
@@ -78,13 +69,13 @@ namespace DAZTLClient.Windows
                     Background = (Brush)new BrushConverter().ConvertFromString("#202123"),
                     BorderBrush = Brushes.Gray,
                     BorderThickness = new Thickness(1),
-                    Tag = notification // Guardamos la referencia
+                    Tag = notification 
                 };
 
                 btn.Click += (s, e) => {
                     var noti = (Notification)((Button)s).Tag;
                     MessageBox.Show($"Navegar a: {noti.Title}");
-                    LoadNotifications(); // Refrescar UI
+                    LoadNotifications(); 
                 };
 
                 NotificationList.Children.Add(btn);
@@ -104,19 +95,20 @@ namespace DAZTLClient.Windows
         }
 
 
-        private void BtnSeeAllAlbums_Click(object sender, RoutedEventArgs e) {
-            if(this.NavigationService != null) {
-                NavigationService.Navigate(new GUI_ListenersAlbums());
-            }
-        }
-
-        private void BtnSeeAllArtists_Click(object sender, RoutedEventArgs e) {
-
-        }
-
         private void BtnGoToCreatePlaylist_Click(object sender, RoutedEventArgs e) {
 
         }
+        private void BtnEditUsername_Click(object sender, RoutedEventArgs e) {
+            txtUsername.IsReadOnly = false;
+            txtUsername.Focus();
+            txtImage.IsReadOnly = false;
+            txtPassword.IsReadOnly = false;
+            btnSave.Visibility = Visibility.Visible;
+            btnCancel.Visibility = Visibility.Visible;
+        }
+
     }
 }
+
+
 

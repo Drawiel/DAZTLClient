@@ -124,6 +124,12 @@ namespace DAZTLClient.Windows {
             }
         }
 
+        private void BtnGoToProfileListener_Click(object sender, RoutedEventArgs e) {
+            if(this.NavigationService != null) {
+                NavigationService.Navigate(new GUI_ListenersProfile());
+            }
+        }
+
         private void Cuenta_Click(object sender, RoutedEventArgs e) {
             MessageBox.Show("Ir a la página de cuenta.");
         }

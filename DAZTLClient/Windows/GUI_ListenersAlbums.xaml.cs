@@ -13,17 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static DAZTLClient.Windows.HomeListeners;
 
-
-namespace DAZTLClient.Windows
-{
+namespace DAZTLClient.Windows {
     /// <summary>
-    /// Lógica de interacción para GUI_ListenersPlaylist.xaml
+    /// Lógica de interacción para GUI_ListenersAlbums.xaml
     /// </summary>
-    public partial class GUI_ListenersPlaylist : Page {
+    public partial class GUI_ListenersAlbums : Page {
         private List<Notification> notifications = new List<Notification>();
-        public GUI_ListenersPlaylist() {
+        public GUI_ListenersAlbums() {
             InitializeComponent();
             SimulateNotifications();
 
@@ -104,14 +101,16 @@ namespace DAZTLClient.Windows
         }
 
 
-        private void BtnSeeAllAlbums_Click(object sender, RoutedEventArgs e) {
+        private void BtnSeeAllPlaylists_Click(object sender, RoutedEventArgs e) {
             if(this.NavigationService != null) {
-                NavigationService.Navigate(new GUI_ListenersAlbums());
+                NavigationService.Navigate(new GUI_ListenersPlaylist());
             }
         }
 
         private void BtnSeeAllArtists_Click(object sender, RoutedEventArgs e) {
-
+            if(this.NavigationService != null) {
+                NavigationService.Navigate(new GUI_ListenersArtists());
+            }
         }
 
         private void BtnGoToCreatePlaylist_Click(object sender, RoutedEventArgs e) {
@@ -119,4 +118,3 @@ namespace DAZTLClient.Windows
         }
     }
 }
-

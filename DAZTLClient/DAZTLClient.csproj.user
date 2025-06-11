@@ -7,7 +7,19 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Windows\GUI_HomeArtist.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\GUI_ListenersAlbums.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\GUI_ListenersArtists.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\GUI_ListenersPlaylist.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\GUI_ListenersProfile.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Windows\GUI_LogIn.xaml.cs">
@@ -36,7 +48,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Windows\GUI_HomeArtist.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\GUI_ListenersAlbums.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\GUI_ListenersArtists.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Windows\GUI_ListenersPlaylist.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\GUI_ListenersProfile.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\MainWindow.xaml">
