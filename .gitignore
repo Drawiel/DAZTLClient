@@ -361,9 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/DAZTLClient/obj/Debug/net8.0-windows/DAZTLClient.AssemblyInfo.cs
-/DAZTLClient/obj/Debug/net8.0-windows/DAZTLClient.AssemblyInfoInputs.cache
-/DAZTLClient/obj/Debug/net8.0-windows/DAZTLClient.assets.cache
-/DAZTLClient/obj/Debug/net8.0-windows/DAZTLClient.designer.deps.json
-/DAZTLClient/obj/Debug/net8.0-windows/DAZTLClient.designer.runtimeconfig.json
-/DAZTLClient/obj/Debug/net8.0-windows/DAZTLClient.GeneratedMSBuildEditorConfig.editorconfig
+/DAZTLClient/obj/Debug/net8.0-windows
