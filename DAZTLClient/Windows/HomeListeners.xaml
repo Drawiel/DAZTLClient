@@ -4,10 +4,313 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DAZTLClient.Windows"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:controls="clr-namespace:DAZTLClient.Windows.UserControllers"
 
       mc:Ignorable="d" 
       Title="HomeListeners">
+
+    <Page.Resources>
+        <!-- BooleanToVisibilityConverter para que funcione el HintText -->
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+        <Style x:Key="HoverWhiteButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#8B8D90"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Nunito"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Width" Value="102"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Estilo genérico para los botones -->
+        <Style x:Key="MediaToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Foreground" Value="#595E63"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Hover -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#56CDE8"/>
+                            </Trigger>
+
+                            <!-- Clickado / activo -->
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Foreground" Value="#56CDE8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MediaButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="#595E63"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#56CDE8"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Foreground" Value="#56CDE8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <!-- Estilo para el botón de reproducción/pausa (ToggleButton) -->
+        <Style x:Key="PlayPauseButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="20"
+                        RenderTransformOrigin="0.5,0.5"
+                        RenderTransform="{TemplateBinding RenderTransform}">
+                            <materialDesign:PackIcon x:Name="icon"
+                                             Kind="Play"
+                                             Width="24"
+                                             Height="24"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"
+                                             Foreground="{TemplateBinding Foreground}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Hover -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#56CDE8"/>
+                                <Setter TargetName="icon" Property="Foreground" Value="White"/>
+                            </Trigger>
+
+                            <!-- Checked = Reproduciendo -->
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="icon" Property="Kind" Value="Pause"/>
+                                <Setter TargetName="border" Property="Background" Value="#56CDE8"/>
+                                <Setter TargetName="icon" Property="Foreground" Value="White"/>
+                            </Trigger>
+
+                            <!-- Unchecked = Pausado -->
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="icon" Property="Kind" Value="Play"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Botón de notis-->
+        <Style x:Key="IconButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="28"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#6D7277"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <materialDesign:PackIcon x:Name="icon"
+                                                 Kind="Bell"
+                                                 Width="{TemplateBinding Width}"
+                                                 Height="{TemplateBinding Height}"
+                                                 Foreground="{TemplateBinding Foreground}"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="icon" Property="Foreground" Value="#56CDE8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--Boton de mas-->
+        <Style x:Key="IconPlusButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="28"/>
+            <Setter Property="Height" Value="33"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#6D7277"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <materialDesign:PackIcon x:Name="icon"
+                                             Kind="Plus"
+                                             Width="{TemplateBinding Width}"
+                                             Height="{TemplateBinding Height}"
+                                             Foreground="{TemplateBinding Foreground}"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="icon" Property="Foreground" Value="#56CDE8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TextBoxWithIconStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Padding" Value="60,0,10,0"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="FontFamily" Value="Nunito"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="0"
+                            CornerRadius="4"/>
+
+                            <materialDesign:PackIcon x:Name="icon"
+                                             Kind="Magnify"
+                                             Width="50"
+                                             Height="50"
+                                             Margin="7,0,0,0"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Left"
+                                             Foreground="#6D7277"/>
+
+                            <ScrollViewer Margin="60,0,0,0"
+                                  x:Name="PART_ContentHost"
+                                  VerticalAlignment="Center"/>
+
+                            <TextBlock x:Name="HintText"
+                               Text="{TemplateBinding Tag}"
+                               Foreground="#6D7277"
+                               Margin="60,0,10,0"
+                               VerticalAlignment="Center"
+                               FontFamily="Nunito"
+                               FontSize="24"
+                               IsHitTestVisible="False"
+                               Visibility="{Binding Text.IsEmpty, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            <Button Content="Button" HorizontalAlignment="Left" Height="57" Margin="1476,0,0,0" VerticalAlignment="Center" Width="58"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#66222224"/>
+                            </Trigger>
+
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#9F222224"/>
+                                <Setter TargetName="icon" Property="Foreground" Value="White"/>
+                                <Setter TargetName="HintText" Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--botón cuenta-->
+        <Style x:Key="AccountButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="57"/>
+            <Setter Property="Height" Value="57"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="#6D7277"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                        CornerRadius="28.5"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <materialDesign:PackIcon x:Name="icon"
+                                             Kind="Account"
+                                             Width="45"
+                                             Height="45"
+                                             Foreground="#6D7277"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="icon" Property="Foreground" Value="#56CDE8"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#56CDE8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+    </Page.Resources>
+
     <Page.Background>
         <ImageBrush ImageSource="pack://application:,,,/Multimedia/HomeListeners.png"/>
     </Page.Background>
@@ -229,18 +532,9 @@
                             Margin="0,0,0,20"
                             />
                             <Button Content="Ver todo"
-                                Background="Transparent"
-                                Foreground="#8B8D90"
-                                BorderBrush="Transparent"
-                                VerticalContentAlignment="Bottom"
-                                FontFamily="Nunito"    
-                                DockPanel.Dock="Top"
-                                VerticalAlignment="Bottom"
-                                Height="30"
-                                Width="87"
-                                HorizontalAlignment="Left"
-                                Margin="130,0,0,20"
-                                />
+                                Style="{StaticResource HoverWhiteButtonStyle}"
+                                Margin="155,10,1453,10"
+                                Click="BtnSeeAllPlaylist_Click"/>
                             <Button
                                 VerticalAlignment="Center"
                                 DockPanel.Dock="Top"
@@ -285,17 +579,9 @@
                             Margin="0,0,0,20"
                             />
                             <Button Content="Ver todo"
-                                Background="Transparent"
-                                Foreground="#8B8D90"
-                                BorderBrush="Transparent"
-                                VerticalContentAlignment="Bottom"
-                                FontFamily="Nunito"    
-                                DockPanel.Dock="Top"
-                                VerticalAlignment="Bottom"
-                                Height="30"
-                                Width="87"
-                                HorizontalAlignment="Left"
-                                Margin="130,0,0,20"
+                                Style="{StaticResource HoverWhiteButtonStyle}"
+                                Margin="155,10,1453,10"
+                                Click="BtnSeeAllAlbums_Click"
                                 />
                             <Button
                                 VerticalAlignment="Center"
@@ -338,21 +624,11 @@
                                 FontFamily="Nunito"
                                 FontSize="40"
                                 Foreground="White"
-                                Margin="0,0,0,20"
-                                />
+                                Margin="0,0,0,20"/>
                             <Button Content="Ver todo"
-                                Background="Transparent"
-                                Foreground="#8B8D90"
-                                BorderBrush="Transparent"
-                                VerticalContentAlignment="Bottom"
-                                FontFamily="Nunito"    
-                                DockPanel.Dock="Top"
-                                VerticalAlignment="Bottom"
-                                Height="30"
-                                Width="87"
-                                HorizontalAlignment="Left"
-                                Margin="140,0,0,20"
-                                />
+                                Style="{StaticResource HoverWhiteButtonStyle}"
+                                Margin="155,10,1453,10"
+                                Click="BtnSeeAllArtists_Click" Cursor="Hand"/>
                             <Button
                                 VerticalAlignment="Center"
                                 DockPanel.Dock="Top"
@@ -388,6 +664,108 @@
             VerticalAlignment="Bottom"
             Background="#101011">
 
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Height="100">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <ToggleButton Style="{StaticResource MediaToggleButtonStyle}" Content="🔁" Margin="10,0"/>
+                    <Button Style="{StaticResource MediaButtonStyle}" Content="⏮️" Margin="10,0"/>
+                    <ToggleButton Style="{StaticResource PlayPauseButtonStyle}" Margin="10"/>
+                    <Button Style="{StaticResource MediaButtonStyle}" Content="⏭️" Margin="10,0"/>
+                    <ToggleButton Style="{StaticResource MediaToggleButtonStyle}" Content="🔀" Margin="10,0"/>
+                </StackPanel>
+
+                <ProgressBar Width="750
+                             " Height="4" Value="40" Maximum="100" Foreground="Gray" Background="#333333"/>
+            </StackPanel>
+            <Border 
+                    Grid.Column="1"
+                    Grid.Row="5"
+                    x:Name="BrdSongPlayingNow"
+                    Background="Transparent"
+                    Visibility="Visible"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                Margin="20,0,0,0">
+
+                <controls:SongPlayingNow x:Name="SongPlayingNow3"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     Width="560"
+                                     Height="120"
+                                     Margin="0,0,0,0"/>
+            </Border>
         </Grid>
+        
+        <Grid
+            Width="1920"
+            Height="85"
+            VerticalAlignment="Top">
+            <Button x:Name="NotificationButton"
+            HorizontalAlignment="Left" 
+            Height="33" 
+            Margin="1750,0,0,0" 
+            VerticalAlignment="Center" 
+            Width="28"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            Style="{StaticResource IconButtonStyle}"
+            Click="NotificationButton_Click">
+            </Button>
+
+            <!-- Popup de notificaciones -->
+            <Popup x:Name="NotificationPopup"
+               PlacementTarget="{Binding ElementName=NotificationButton}"
+               Placement="Bottom"
+               AllowsTransparency="True"
+               StaysOpen="False"
+               PopupAnimation="Fade">
+                <Border Width="400" Height="560"
+                    Background="#202123"
+                    CornerRadius="8"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Padding="10"
+                    SnapsToDevicePixels="True"
+                    Effect="{DynamicResource MaterialDesignElevation3}">
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                        <StackPanel x:Name="NotificationList" />
+                    </ScrollViewer>
+                </Border>
+            </Popup>
+            
+            <Button 
+                HorizontalAlignment="Left" 
+                Height="33" Margin="1793,0,0,0" 
+                VerticalAlignment="Center" 
+                Width="38"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Style="{StaticResource IconPlusButtonStyle}"
+                Click="BtnGoToCreatePlaylist_Click"/>
+            <TextBox
+                Style="{StaticResource TextBoxWithIconStyle}"
+                HorizontalAlignment="Left" 
+                Height="70" 
+                Margin="359,0,0,0" 
+                TextWrapping="NoWrap"
+                Tag="Buscar..." 
+                VerticalAlignment="Center" 
+                Width="1251"/>
+            <Button Style="{StaticResource AccountButtonStyle}" 
+                HorizontalAlignment="Left" 
+                Margin="1853,0,0,0" 
+                VerticalAlignment="Center"
+                Click="AccountButton_Click">
+                <Button.ContextMenu>
+                    <ContextMenu x:Name="AccountContextMenu" Placement="Bottom">
+                        <MenuItem Header="Cuenta" Click="BtnGoToProfileListener_Click"/>
+                        <MenuItem Header="Cerrar sesión" Click="CerrarSesion_Click"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+
+
+        </Grid>
+
+
     </Grid>
 </Page>
