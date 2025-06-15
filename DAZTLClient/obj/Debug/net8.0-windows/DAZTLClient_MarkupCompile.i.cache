@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\isabe\source\repos\DAZTLClient\DAZTLClient\App.xaml
-14657515306
+16-1675589864
 
-191568854118
-201-430541996
-Windows\GUI_HomeArtist.xaml;Windows\GUI_ListenersAlbums.xaml;Windows\GUI_ListenersArtists.xaml;Windows\GUI_ListenersPlaylist.xaml;Windows\GUI_ListenersProfile.xaml;Windows\GUI_LogIn.xaml;Windows\HomeListeners.xaml;Windows\MainWindow.xaml;Windows\UserControllers\ArtistCover.xaml;Windows\UserControllers\LogIn.xaml;Windows\UserControllers\PlaylistCover.xaml;Windows\UserControllers\RecentSong.xaml;Windows\UserControllers\SingUp.xaml;Windows\UserControllers\SongPlayingNow.xaml;
+231512876443
+206-626497404
+Windows\GUI_ArtistAlbum.xaml;Windows\GUI_ArtistProfile.xaml;Windows\GUI_HomeArtist.xaml;Windows\GUI_ListenersAlbums.xaml;Windows\GUI_ListenersArtists.xaml;Windows\GUI_ListenersPlaylist.xaml;Windows\GUI_ListenersProfile.xaml;Windows\GUI_LogIn.xaml;Windows\HomeListeners.xaml;Windows\MainWindow.xaml;Windows\UserControllers\ArtistCover.xaml;Windows\UserControllers\LogIn.xaml;Windows\UserControllers\PlaylistCover.xaml;Windows\UserControllers\RecentSong.xaml;Windows\UserControllers\SingUp.xaml;Windows\UserControllers\SongPlayingNow.xaml;
 
-True
+False
 

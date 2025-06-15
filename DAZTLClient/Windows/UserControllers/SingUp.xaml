@@ -157,6 +157,20 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <RadioButton 
+            Content="Oyente" 
+            FontSize="24"
+            Foreground="White"
+            HorizontalAlignment="Left" 
+            Margin="498,151,0,0" 
+            VerticalAlignment="Top"/>
+        <RadioButton 
+            Content="Artista" 
+            FontSize="24"
+            Foreground="White"
+            HorizontalAlignment="Left" 
+            Margin="498,190,0,0" 
+            VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>
