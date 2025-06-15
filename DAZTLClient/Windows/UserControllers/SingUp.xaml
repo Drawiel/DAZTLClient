@@ -19,7 +19,7 @@
             Height="68"
             materialDesign:ButtonAssist.CornerRadius="100 100 0 0"
             Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-            Click="SignUpButton_Click"
+            Click="LogInButton_Click"
             Background="Transparent"
             BorderBrush="Transparent"
             RenderTransformOrigin="0.5,0.5" Margin="633,407,-5,408">
@@ -122,7 +122,7 @@
             VerticalAlignment="Top" 
             Width="490" 
             Height="76"
-            materialDesign:HintAssist.Hint="Password"
+            materialDesign:HintAssist.Hint="Confirm Password"
             materialDesign:PasswordBoxAssist.Password="{Binding Password1, Mode=TwoWay}"
             materialDesign:TextFieldAssist.HasClearButton="True"
             IsEnabled="{Binding IsChecked, ElementName=RevealPasswordDefaultEnabled}"
@@ -133,7 +133,7 @@
 
 
         <Button 
-            Click="btnHomeListener_Click"
+            Click="SignUpButton_Click"
             HorizontalAlignment="Left" 
             Height="66" 
             Margin="159,765,0,0" 
@@ -157,6 +157,22 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <RadioButton 
+            x:Name="rdBtnListener"
+            Content="Oyente" 
+            FontSize="24"
+            Foreground="White"
+            HorizontalAlignment="Left" 
+            Margin="498,151,0,0" 
+            VerticalAlignment="Top"/>
+        <RadioButton 
+            x:Name="rdBtnArtist"
+            Content="Artista" 
+            FontSize="24"
+            Foreground="White"
+            HorizontalAlignment="Left" 
+            Margin="498,190,0,0" 
+            VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>

@@ -1,0 +1,229 @@
+syntax = "proto3";
+
+package daztl;
+option java_package = "daztl";
+option java_outer_classname = "DaztlServiceOuterClass";
+
+
+service MusicService {
+    rpc RegisterUser (RegisterRequest) returns (GenericResponse);
+    rpc UpdateProfile (UpdateProfileRequest) returns (GenericResponse);
+    rpc LoginUser (LoginRequest) returns (LoginResponse);
+    rpc RegisterArtist(RegisterArtistRequest) returns (GenericResponse);
+
+    rpc ListSongs (Empty) returns (SongListResponse);
+    rpc GetSong (SongIdRequest) returns (SongResponse);
+    rpc ListAlbums (Empty) returns (AlbumListResponse);
+    rpc ListArtists (Empty) returns (ArtistListResponse);
+
+    rpc CreatePlaylist (CreatePlaylistRequest) returns (GenericResponse);
+    rpc GetPlaylist (PlaylistIdRequest) returns (PlaylistResponse);
+    rpc AddSongToPlaylist (AddSongToPlaylistRequest) returns (GenericResponse);
+    rpc GetPlaylistDetail(PlaylistDetailRequest) returns (PlaylistDetailResponse);
+    rpc ListPlaylists (PlaylistListRequest) returns (PlaylistListResponse);
+
+    rpc UploadSong (UploadSongRequest) returns (GenericResponse);
+    rpc UploadAlbum (UploadAlbumRequest) returns (GenericResponse);
+
+    rpc ArtistReport (Empty) returns (ReportResponse);
+    rpc SystemReport (Empty) returns (ReportResponse);
+
+    rpc ListChatMessages (ChatMessageRequest) returns (ChatListResponse);
+    rpc SendChatMessage (SendChatRequest) returns (GenericResponse);
+
+    rpc LikeArtist (ArtistIdRequest) returns (GenericResponse);
+    rpc IsArtistLiked (ArtistIdRequest) returns (LikeStatusResponse);
+    rpc SearchSongs (SearchRequest) returns (SongListResponse);
+    rpc GetProfile (Empty) returns (UserProfileResponse);
+    rpc RefreshToken (RefreshTokenRequest) returns (LoginResponse);
+}
+
+message Empty {}
+
+message RegisterRequest {
+    string username = 1;
+    string password = 2;
+    string email = 3;
+    string first_name = 4;
+    string last_name = 5;
+}
+
+message RegisterArtistRequest {
+    string username = 1;
+    string email = 2;
+    string password = 3;
+    string first_name = 4;
+    string last_name = 5;
+    string bio = 6;
+}
+
+message UpdateProfileRequest {
+    string token = 1;
+    string email = 2;
+    string first_name = 3;
+    string last_name = 4;
+    string username = 5;
+    string password = 6;
+}
+
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginResponse {
+    string access_token = 1;
+    string refresh_token = 2;
+    string role = 3;
+    bool is_artist = 4;
+    int32 user_id = 5;
+    string username =6;
+    int32 artist_id = 7;
+}
+
+message SongIdRequest {
+    int32 id = 1;
+}
+
+message SongResponse {
+    int32 id = 1;
+    string title = 2;
+    string artist = 3;
+    string audio_url = 4;
+    string cover_url = 5;
+    string release_date = 6;
+}
+
+message SearchRequest {
+    string query = 1;
+}
+
+message SongListResponse {
+    repeated SongResponse songs = 1;
+}
+
+message AlbumListResponse {
+    repeated AlbumResponse albums = 1;
+}
+
+message AlbumResponse {
+    int32 id = 1;
+    string title = 2;
+}
+
+message ArtistListResponse {
+    repeated ArtistResponse artists = 1;
+}
+
+message ArtistResponse {
+    int32 id = 1;
+    string name = 2;
+}
+
+message CreatePlaylistRequest {
+    string token = 1;
+    string name = 2;
+}
+
+message PlaylistIdRequest {
+    int32 id = 1;
+}
+
+message PlaylistDetailRequest {
+  string token = 1;
+  int32 playlist_id = 2;
+}
+
+message PlaylistDetailResponse {
+  int32 id = 1;
+  string name = 2;
+  repeated SongResponse songs = 3;
+  string status = 4;
+  string message = 5;
+}
+
+message PlaylistResponse {
+    int32 id = 1;
+    string name = 2;
+    repeated SongResponse songs = 3;
+}
+
+message AddSongToPlaylistRequest {
+    string token = 1;
+    int32 playlist_id = 2;
+    int32 song_id = 3;
+}
+
+message PlaylistListRequest {
+  string token = 1;
+}
+
+message PlaylistListResponse {
+  repeated PlaylistResponse playlists = 1;
+}
+
+message UploadSongRequest {
+    string token = 1;
+    string title = 2;
+    string file_url = 3;
+}
+
+message UploadAlbumRequest {
+    string token = 1;
+    string title = 2;
+}
+
+message ReportResponse {
+    string data = 1;
+}
+
+message ChatMessageRequest {
+    int32 song_id = 1;
+}
+
+message ChatListResponse {
+    repeated ChatMessage messages = 1;
+}
+
+message ChatMessage {
+    string user = 1;
+    string message = 2;
+    string timestamp = 3;
+}
+
+message SendChatRequest {
+    int32 song_id = 1;
+    string token = 2;
+    string message = 3;
+}
+
+message ArtistIdRequest {
+    int32 artist_id = 1;
+    string token = 2;
+}
+
+message LikeStatusResponse {
+    bool is_liked = 1;
+}
+
+message TokenRequest {
+    string token = 1;
+}
+
+message UserProfileResponse {
+    string username = 1;
+    string email = 2;
+    string first_name = 3;
+    string last_name = 4;
+    string profile_image_url = 5;
+}
+
+message RefreshTokenRequest {
+    string refresh_token = 1;
+}
+
+message GenericResponse {
+    string status = 1;
+    string message = 2;
+}
+

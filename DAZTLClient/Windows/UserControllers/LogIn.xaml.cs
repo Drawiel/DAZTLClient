@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAZTLClient.Models;
+using DAZTLClient.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,9 @@ namespace DAZTLClient.Windows.UserControllers
     /// </summary>
     public partial class LogIn : UserControl {
         public event EventHandler SignUpRequested;
+        private readonly UserService _userService = new UserService();
+        public event EventHandler LoginListenerSuccessful;
+        public event EventHandler LoginArtistSuccessful;
 
         public LogIn() {
             InitializeComponent();
@@ -29,6 +34,29 @@ namespace DAZTLClient.Windows.UserControllers
             SignUpRequested?.Invoke(this, EventArgs.Empty);
         }
 
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+               
+
+            try
+            {
+                var username = txtBoxUsername.Text.Trim();
+                var password = pssBoxPassword.Password;
+                var result = await _userService.LoginAsync(username, password);
+                
+
+                if (result == "Inicio de sesion de artista")
+                {
+                    LoginArtistSuccessful?.Invoke(this, EventArgs.Empty);
+                } else if (result == "Inicio de sesion de oyente")
+                {
+                    LoginListenerSuccessful?.Invoke(this, EventArgs.Empty);
+                }
+            }
+            catch (Exception ex) { 
+                MessageBox.Show($"Error de conexion {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 
 }

@@ -1,0 +1,324 @@
+﻿<Page x:Class="DAZTLClient.Windows.GUI_ArtistProfile"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DAZTLClient.Windows"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:controls="clr-namespace:DAZTLClient.Windows.UserControllers"
+      mc:Ignorable="d" 
+      Title="GUI_ArtistProfile">
+    <Page.Resources>
+
+        <Style x:Key="UnderlineHoverButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <TextBlock x:Name="ButtonText"
+                               Text="{TemplateBinding Content}"
+                               Foreground="#595E63"
+                               FontSize="20"
+                               FontFamily="Nunito"
+                               HorizontalAlignment="Center"/>
+
+                            <Rectangle x:Name="Underline"
+                               Height="2"
+                               Width="{Binding ActualWidth, ElementName=ButtonText}"
+                               Fill="#595E63"
+                               HorizontalAlignment="Center"
+                               Margin="0,2,0,0"/>
+                        </StackPanel>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonText" Property="Foreground" Value="#56CDE8"/>
+                                <Setter TargetName="Underline" Property="Fill" Value="#56CDE8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="HoverWhiteButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#64676A"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Nunito"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Width" Value="102"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="HoverEditButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#8B8D90"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Width" Value="35"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+                            <materialDesign:PackIcon 
+                Kind="Pencil"
+                Foreground="{TemplateBinding Foreground}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="28"
+                Height="28"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#56CDE8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ShowOnHoverButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="#9FA3A6"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="#9FA3A6"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                CornerRadius="10"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                Background="{TemplateBinding Background}">
+                            <ContentPresenter
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#56CDE8"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Width" Value="670"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#9FA3A6"/>
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="BorderBrush" Value="#9FA3A6"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="10">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsReadOnly" Value="False"/>
+                                    <Condition Property="IsKeyboardFocused" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#56CDE8"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
+    </Page.Resources>
+
+    <Page.Background>
+        <ImageBrush ImageSource="pack://application:,,,/Multimedia/ProfileArtist.png"/>
+    </Page.Background>
+
+    <Grid
+        Height="1080"
+        Width="1920">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="268"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid
+            Grid.Column="0"
+            Width="268"
+            Height="1080">
+            <Button Content="Mi perfil" 
+                    Style="{StaticResource UnderlineHoverButtonStyle}"
+                    HorizontalAlignment="Center"
+                    Margin="0,300,0,732"
+                    IsEnabled="False"/>
+            <Button Content="Agregar canción" 
+                    Style="{StaticResource UnderlineHoverButtonStyle}"
+                    HorizontalAlignment="Center"
+                    Margin="0,390,0,647"
+                    Click="BtnGotoAddSong_Click"/>
+            <Button Content="Agregar Album" 
+                    Style="{StaticResource UnderlineHoverButtonStyle}"
+                    HorizontalAlignment="Center"
+                    Margin="0,480,0,557"
+                    Click="BtnGotoAddAlbum_Click"/>
+            <Button 
+                    HorizontalAlignment="Center" 
+                    Height="145" Margin="0,63,0,0" 
+                    VerticalAlignment="Top" 
+                    Width="124"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Click="BtnGoToHome_Click_"/>
+
+        </Grid>
+        <Grid
+            Grid.Column="1">
+            <Button Content="Albums"
+            Style="{StaticResource HoverWhiteButtonStyle}"
+            Margin="397,63,1153,977"
+            Click="BtnSeeAlbumsArtist_Click"/>
+
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="310,165,0,20">
+                    <TextBox
+                        Name="txtUsername"
+                        Text="{Binding Usuario.NombreUsuario}" 
+                        FontFamily="Nunito"
+                        FontSize="110"
+                        Foreground="White"
+                        VerticalAlignment="Center"
+                        IsReadOnly="True"
+                        BorderThickness="0"
+                        Background="Transparent"
+                        HorizontalAlignment="Left"
+                        MinWidth="50">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="TextBox">
+                                            <ScrollViewer x:Name="PART_ContentHost"
+                                  HorizontalScrollBarVisibility="Hidden"
+                                  VerticalScrollBarVisibility="Hidden"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <Button Style="{StaticResource HoverEditButtonStyle}"
+                        VerticalAlignment="Bottom"
+                        Margin="10,0,0,0"
+                        Click="BtnEditUsername_Click"/>
+                </StackPanel>
+
+            </StackPanel>
+
+            <TextBlock TextWrapping="Wrap" 
+               Text="Imagen:" 
+               Foreground="#8B8D90"
+               Margin="72,471,1401,539"
+               FontSize="40"/>
+            <TextBox 
+                Name="txtImage"
+                TextWrapping="Wrap"   
+                Margin="296,471,686,539"
+                Style="{StaticResource CustomTextBoxStyle}"/>
+            <TextBlock TextWrapping="Wrap" 
+                   Text="Contraseña:" 
+                   Foreground="#8B8D90"
+                   Margin="72,611,1356,399"
+                   FontSize="40"/>
+            <TextBox 
+                Name="txtPassword"
+                TextWrapping="Wrap"   
+                Margin="296,611,686,399"
+                Style="{StaticResource CustomTextBoxStyle}"/>
+            <TextBlock
+                Text="Biografia:"
+                Foreground="#8B8D90"
+                Margin="72,741,1362,269"
+                FontSize="40"/>
+            <TextBox 
+                Name="txtBio"
+                TextWrapping="NoWrap"
+                Height="NaN"
+                Margin="296,741,686,137"
+                Style="{StaticResource CustomTextBoxStyle}"/>
+
+
+            <Button 
+                Name="btnSave"
+                Content="Guardar" 
+                Height="60"
+                Margin="836,968,686,52"
+                Style="{StaticResource ShowOnHoverButtonStyle}"/>
+            <Button 
+                Name="btnCancel"
+                Content="Cancelar" 
+                Height="60"
+                Width="110"
+                Margin="698,968,844,52"
+                Style="{StaticResource ShowOnHoverButtonStyle}"/>
+
+
+        </Grid>
+
+
+    </Grid>
+</Page>
+

@@ -24,6 +24,8 @@ namespace DAZTLClient.Windows {
 
             LoginPage.SignUpRequested += (s, e) => ShowSignUp();
             SignupPage.LogInRequested += (s, e) => ShowLogIn();
+            LoginPage.LoginListenerSuccessful += (s, e) => NavigateToHomeListener();
+            LoginPage.LoginArtistSuccessful += (s, e) => NavigateToHomeArtist();
         }
 
         private void ShowSignUp() {
@@ -50,6 +52,16 @@ namespace DAZTLClient.Windows {
             };
 
             SignUp.BeginAnimation(OpacityProperty, fadeOut);
+        }
+
+        private void NavigateToHomeListener()
+        {
+            this.NavigationService.Navigate(new HomeListeners());
+        }
+
+        private void NavigateToHomeArtist()
+        {
+            this.NavigationService.Navigate(new GUI_HomeArtist());
         }
     }
 

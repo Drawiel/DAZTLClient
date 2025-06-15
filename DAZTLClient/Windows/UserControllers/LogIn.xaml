@@ -18,7 +18,8 @@
             Height="66" 
             Margin="159,661,0,0" 
             VerticalAlignment="Top"
-            Width="380">
+            Width="380"
+            Click="LoginButton_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
@@ -38,8 +39,9 @@
             </Button.Template>
         </Button>
         <TextBox
+            x:Name="txtBoxUsername"
             materialDesign:HintAssist.HelperTextFontSize="60"
-            materialDesign:HintAssist.Hint="Correo"
+            materialDesign:HintAssist.Hint="Username"
             materialDesign:HintAssist.Foreground="White"
             HorizontalAlignment="Left" 
             Height="76" 
@@ -79,6 +81,7 @@
             VerticalAlignment="Top" 
             Width="490" 
             Height="76"
+            x:Name="pssBoxPassword"
             materialDesign:HintAssist.Hint="Password"
             materialDesign:PasswordBoxAssist.Password="{Binding Password1, Mode=TwoWay}"
             materialDesign:TextFieldAssist.HasClearButton="True"
