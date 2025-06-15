@@ -23,6 +23,8 @@ namespace DAZTLClient.Windows.UserControllers
     public partial class LogIn : UserControl {
         public event EventHandler SignUpRequested;
         private readonly UserService _userService = new UserService();
+        public event EventHandler LoginListenerSuccessful;
+        public event EventHandler LoginArtistSuccessful;
 
         public LogIn() {
             InitializeComponent();
@@ -41,11 +43,14 @@ namespace DAZTLClient.Windows.UserControllers
                 var username = txtBoxUsername.Text.Trim();
                 var password = pssBoxPassword.Password;
                 var result = await _userService.LoginAsync(username, password);
-                MessageBox.Show(result, "Inicio de Sesion", MessageBoxButton.OK, MessageBoxImage.Information);
+                
 
-                if (result.Contains("exisoto"))
+                if (result == "Inicio de sesion de artista")
                 {
-                    //Manejar situacion de exito
+                    LoginArtistSuccessful?.Invoke(this, EventArgs.Empty);
+                } else if (result == "Inicio de sesion de oyente")
+                {
+                    LoginListenerSuccessful?.Invoke(this, EventArgs.Empty);
                 }
             }
             catch (Exception ex) { 

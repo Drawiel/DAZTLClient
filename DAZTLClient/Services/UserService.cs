@@ -2,7 +2,8 @@
 using System;
 using System.Threading.Tasks;
 using Daztl;
-using DAZTLClient.Models; // Usamos las clases generadas por gRPC
+using DAZTLClient.Models;
+using System.Windows; // Usamos las clases generadas por gRPC
 
 namespace DAZTLClient.Services
 {
@@ -31,8 +32,16 @@ namespace DAZTLClient.Services
 
                 // Guardar el token
                 App.Current.Properties["auth_token"] = response.AccessToken;
-
-                return "Inicio de sesión exitoso.";
+                if (response.Role == "artist")
+                {
+                    return "Inicio de sesion de artista";
+                } else if (response.Role == "listener")
+                {
+                    return "Inicio de sesion de oyente";
+                } else
+                {
+                    return "No se reconocio el rol";
+                }
             }
             catch (Grpc.Core.RpcException ex)
             {
