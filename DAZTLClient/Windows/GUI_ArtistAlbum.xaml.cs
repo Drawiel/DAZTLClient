@@ -39,5 +39,10 @@ namespace DAZTLClient.Windows {
                 NavigationService.Navigate(new GUI_HomeArtist());
             }
         }
+
+        private void BtnGotoAddSong_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

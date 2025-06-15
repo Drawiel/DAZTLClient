@@ -39,9 +39,9 @@
             </Button.Template>
         </Button>
         <TextBox
-            x:Name="txtBoxEmail"
+            x:Name="txtBoxUsername"
             materialDesign:HintAssist.HelperTextFontSize="60"
-            materialDesign:HintAssist.Hint="Correo"
+            materialDesign:HintAssist.Hint="Username"
             materialDesign:HintAssist.Foreground="White"
             HorizontalAlignment="Left" 
             Height="76" 

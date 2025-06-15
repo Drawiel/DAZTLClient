@@ -38,7 +38,7 @@ namespace DAZTLClient.Windows.UserControllers
 
             try
             {
-                var username = txtBoxEmail.Text.Trim();
+                var username = txtBoxUsername.Text.Trim();
                 var password = pssBoxPassword.Password;
                 var result = await _userService.LoginAsync(username, password);
                 MessageBox.Show(result, "Inicio de Sesion", MessageBoxButton.OK, MessageBoxImage.Information);

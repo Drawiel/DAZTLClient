@@ -15,31 +15,39 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DAZTLClient.Windows.UserControllers {
+namespace DAZTLClient.Windows.UserControllers
+{
     /// <summary>
     /// Lógica de interacción para SingUp.xaml
     /// </summary>
-    public partial class SingUp : UserControl {
+    public partial class SingUp : UserControl
+    {
         public event EventHandler LogInRequested;
         private readonly UserService _userService = new UserService();
 
-        public SingUp() {
+        public SingUp()
+        {
             InitializeComponent();
 
         }
 
-        private void LogInButton_Click(object sender, RoutedEventArgs e) {
+        private void LogInButton_Click(object sender, RoutedEventArgs e)
+        {
             LogInRequested?.Invoke(this, EventArgs.Empty);
         }
 
-        private void btnHomeListener_Click(object sender, RoutedEventArgs e) {
+        private void btnHomeListener_Click(object sender, RoutedEventArgs e)
+        {
             var homePage = new HomeListeners();
 
             NavigationService navigationService = NavigationService.GetNavigationService(this);
 
-            if(navigationService != null) {
+            if (navigationService != null)
+            {
                 navigationService.Navigate(homePage);
-            } else {
+            }
+            else
+            {
                 MessageBox.Show("No se encontró el servicio de navegación.");
             }
         }
@@ -49,26 +57,72 @@ namespace DAZTLClient.Windows.UserControllers {
             var password = pssBoxPaswordOne.Password;
             var confirmPassword = pssBoxPaswordTwo.Password;
 
-            if (password != confirmPassword) { 
+            if (password != confirmPassword)
+            {
                 MessageBox.Show("Las contraseñas no coinciden.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            var request = new RegisterRequest
+            string selectedRole = null;
+            if (rdBtnListener.IsChecked == true)
             {
-                Username = txtBoxUsername.Text.Trim(),
-                Email = txtBoxEmail.Text.Trim(),
-                Password = password,
-                FirstName = txtBoxName.Text.Trim(),
-                LastName = txtBoxLastName.Text.Trim(),
-                Role = "listener" //TODO: Revisar para ver cual tipo de usuario se va a escoger
+                selectedRole = "listener";
+            }
+            else if (rdBtnArtist.IsChecked == true)
+            {
+                selectedRole = "artist";
+            }
 
-            };
+            if (string.IsNullOrEmpty(selectedRole))
+            {
+                MessageBox.Show("Por favor, selecciona un tipo de usuario.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtBoxUsername.Text) ||
+                string.IsNullOrWhiteSpace(txtBoxEmail.Text) ||
+                string.IsNullOrWhiteSpace(txtBoxName.Text) ||
+                string.IsNullOrWhiteSpace(txtBoxLastName.Text))
+            {
+                MessageBox.Show("Por favor, completa todos los campos obligatorios.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            
 
             try
             {
-                var result = await _userService.RegisterAsync(request);
-                MessageBox.Show(result, "Registro", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (rdBtnListener.IsChecked == true)
+                {
+                    var request = new RegisterRequest
+                    {
+                        Username = txtBoxUsername.Text.Trim(),
+                        Email = txtBoxEmail.Text.Trim(),
+                        Password = password,
+                        FirstName = txtBoxName.Text.Trim(),
+                        LastName = txtBoxLastName.Text.Trim(),
+                        Role = selectedRole
+
+                    };
+                    var result = await _userService.RegisterAsync(request);
+                    MessageBox.Show(result, "Registro", MessageBoxButton.OK, MessageBoxImage.Information);
+                } else if (rdBtnArtist.IsChecked == true)
+                {
+                    var request = new RegisterArtistRequest
+                    {
+                        Username = txtBoxUsername.Text.Trim(),
+                        Email = txtBoxEmail.Text.Trim(),
+                        Password = password,
+                        FirstName = txtBoxName.Text.Trim(),
+                        LastName = txtBoxLastName.Text.Trim(),
+                        Bio = "Nueva biografia"
+
+                    };
+
+                    var result = await _userService.RegisterArtistAsync(request);
+                    MessageBox.Show(result, "Registro", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                
             }
             catch (Exception ex)
             {

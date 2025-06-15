@@ -158,6 +158,7 @@
             </Button.Template>
         </Button>
         <RadioButton 
+            x:Name="rdBtnListener"
             Content="Oyente" 
             FontSize="24"
             Foreground="White"
@@ -165,6 +166,7 @@
             Margin="498,151,0,0" 
             VerticalAlignment="Top"/>
         <RadioButton 
+            x:Name="rdBtnArtist"
             Content="Artista" 
             FontSize="24"
             Foreground="White"

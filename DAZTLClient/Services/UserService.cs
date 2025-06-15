@@ -60,5 +60,30 @@ namespace DAZTLClient.Services
                 return $"Error en el registro: {ex.Status.Detail}";
             }
         }
+
+        public async Task<string> RegisterArtistAsync(Models.RegisterArtistRequest request)
+        {
+            try
+            {
+                var grpcRequest = new Daztl.RegisterArtistRequest
+                {
+                    Username = request.Username,
+                    Email = request.Email,
+                    Password = request.Password,
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    Bio = request.Bio
+                };
+
+                var response = await _client.RegisterArtistAsync(grpcRequest);
+
+                return "Artista registrado correctamente.";
+            }
+            catch (Grpc.Core.RpcException ex)
+            {
+                return $"Error en el registro de artista: {ex.Status.Detail}";
+            }
+        }
+
     }
 }
