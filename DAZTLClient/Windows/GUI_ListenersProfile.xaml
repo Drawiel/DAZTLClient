@@ -489,9 +489,9 @@
                         Margin="10,0,0,0"
                         Click="BtnEditUsername_Click"/>
                 </StackPanel>
-                
+
             </StackPanel>
-            
+
             <TextBlock TextWrapping="Wrap" 
                        Text="Imagen:" 
                        Foreground="#8B8D90"
@@ -512,7 +512,7 @@
                 TextWrapping="Wrap"   
                 Margin="290,650,960,360"
                 Style="{StaticResource CustomTextBoxStyle}"/>
-            
+
             <Button 
                 Name="btnSave"
                 Content="Guardar" 
@@ -527,6 +527,21 @@
                     Width="110"
                     Margin="580,730,960,220"
                     Style="{StaticResource ShowOnHoverButtonStyle}"/>
+
+            <Image
+                x:Name="imgProfilePicture"
+                Width="260" 
+                Height="260" 
+                Stretch="Uniform" 
+                Margin="58,154,0,0" 
+                Grid.Column="0"
+                Grid.Row="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" RenderTransformOrigin="0.796,1.174">
+                <Image.Clip>
+                    <EllipseGeometry Center="120,120" RadiusX="120" RadiusY="120"/>
+                </Image.Clip>
+            </Image>
 
         </Grid>
 

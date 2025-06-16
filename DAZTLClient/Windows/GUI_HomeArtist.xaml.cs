@@ -21,5 +21,13 @@ namespace DAZTLClient.Windows {
         public GUI_HomeArtist() {
             InitializeComponent();
         }
+
+        private void BtnGoToProfile_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ArtistProfile());
+            }
+        }
     }
 }

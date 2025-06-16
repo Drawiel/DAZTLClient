@@ -110,7 +110,7 @@
             <Button Content="Mi perfil" 
                     Style="{StaticResource UnderlineHoverButtonStyle}"
                     HorizontalAlignment="Center"
-                    Margin="0,300,0,732"/>
+                    Margin="0,300,0,732" Click="BtnGoToProfile_Click"/>
             <Button Content="Agregar canción" 
                     Style="{StaticResource UnderlineHoverButtonStyle}"
                     HorizontalAlignment="Center"

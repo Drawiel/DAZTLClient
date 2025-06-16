@@ -1,8 +1,9 @@
-﻿using Grpc.Net.Client;
+﻿using Daztl;
+using DAZTLClient.Models;
+using Grpc.Core;
+using Grpc.Net.Client;
 using System;
 using System.Threading.Tasks;
-using Daztl;
-using DAZTLClient.Models;
 using System.Windows; // Usamos las clases generadas por gRPC
 
 namespace DAZTLClient.Services
@@ -93,6 +94,35 @@ namespace DAZTLClient.Services
             catch (Grpc.Core.RpcException ex)
             {
                 return $"Error en el registro de artista: {ex.Status.Detail}";
+            }
+        }
+
+        public async Task<Daztl.ArtistProfileResponse> GetArtistProfileAsync(string token)
+        {
+            try
+            {
+                // Crear metadata para autenticación
+                var headers = new Metadata();
+                headers.Add("Authorization", $"Bearer {token}");
+
+                var grpcRequest = new Daztl.Empty();
+
+                var response = await _client.GetArtistProfileAsync(grpcRequest, headers);
+
+                return new Daztl.ArtistProfileResponse
+                {
+                    Username = response.Username,
+                    Email = response.Email,
+                    FirstName = response.FirstName,
+                    LastName = response.LastName,
+                    ProfileImageUrl = response.ProfileImageUrl,
+                    Bio = response.Bio,
+                    ArtistProfileId = (int)response.ArtistProfileId
+                };
+            }
+            catch (Grpc.Core.RpcException ex)
+            {
+                throw new Exception($"Error al obtener perfil de artista: {ex.Status.Detail}");
             }
         }
 

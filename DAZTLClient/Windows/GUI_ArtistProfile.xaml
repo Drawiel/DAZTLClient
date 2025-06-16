@@ -221,7 +221,9 @@
                     Width="124"
                     Background="Transparent"
                     BorderBrush="Transparent"
-                    Click="BtnGoToHome_Click_"/>
+                    Click="BtnGoToHome_Click"/>
+
+            
 
         </Grid>
         <Grid
@@ -269,35 +271,25 @@
             </StackPanel>
 
             <TextBlock TextWrapping="Wrap" 
-               Text="Imagen:" 
-               Foreground="#8B8D90"
-               Margin="72,471,1401,539"
-               FontSize="40"/>
-            <TextBox 
-                Name="txtImage"
-                TextWrapping="Wrap"   
-                Margin="296,471,686,539"
-                Style="{StaticResource CustomTextBoxStyle}"/>
-            <TextBlock TextWrapping="Wrap" 
                    Text="Contraseña:" 
                    Foreground="#8B8D90"
-                   Margin="72,611,1356,399"
+                   Margin="72,411,1356,599"
                    FontSize="40"/>
             <TextBox 
                 Name="txtPassword"
                 TextWrapping="Wrap"   
-                Margin="296,611,686,399"
+                Margin="296,411,686,599"
                 Style="{StaticResource CustomTextBoxStyle}"/>
             <TextBlock
                 Text="Biografia:"
                 Foreground="#8B8D90"
-                Margin="72,741,1362,269"
+                Margin="72,541,1362,469"
                 FontSize="40"/>
             <TextBox 
                 Name="txtBio"
                 TextWrapping="NoWrap"
                 Height="NaN"
-                Margin="296,741,686,137"
+                Margin="296,541,686,337"
                 Style="{StaticResource CustomTextBoxStyle}"/>
 
 
@@ -306,6 +298,7 @@
                 Content="Guardar" 
                 Height="60"
                 Margin="836,968,686,52"
+                Click="BtnSaveChanges_Click"
                 Style="{StaticResource ShowOnHoverButtonStyle}"/>
             <Button 
                 Name="btnCancel"
@@ -314,6 +307,29 @@
                 Width="110"
                 Margin="698,968,844,52"
                 Style="{StaticResource ShowOnHoverButtonStyle}"/>
+            <Button 
+                Name="btnUploadPhoto"
+                Content="Subir Foto" 
+                Height="60"
+                Width="150"
+                Margin="505,968,997,52"
+                Click="BtnUploadPhoto_Click"
+                Style="{StaticResource ShowOnHoverButtonStyle}"/>
+
+            <Image
+                x:Name="imgProfilePicture"
+                Width="260" 
+                Height="260" 
+                Stretch="Uniform" 
+                Margin="30,89,0,0" 
+                Grid.Column="0"
+                Grid.Row="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" RenderTransformOrigin="0.796,1.174">
+                <Image.Clip>
+                    <EllipseGeometry Center="120,120" RadiusX="120" RadiusY="120"/>
+                </Image.Clip>
+            </Image>
 
 
         </Grid>
