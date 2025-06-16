@@ -23,10 +23,8 @@ namespace DAZTLClient.Windows.UserControllers
         public PlaylistCover()
         {
             InitializeComponent();
-            this.DataContext = this;
         }
         private void btnRecentSong_Click(object sender, RoutedEventArgs e) {
-            // Acción al hacer clic
             MessageBox.Show("Botón clickeado");
         }
         public static readonly DependencyProperty SongTitleProperty =
@@ -52,6 +50,19 @@ namespace DAZTLClient.Windows.UserControllers
             get => (string)GetValue(AlbumCoverProperty);
             set => SetValue(AlbumCoverProperty, value);
         }
-    }
 
+        private void btnPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is PlaylistViewModel vm)
+            {
+                MessageBox.Show($"Clic en playlist: {vm.Name} (ID: {vm.Id})");
+            }
+        }
+    }
+        public class PlaylistViewModel
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string CoverUrl { get; set; }
+        }
 }

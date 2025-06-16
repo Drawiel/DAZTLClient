@@ -22,7 +22,6 @@
 
 
     </UserControl.Resources>
-
     <Border
         Style="{StaticResource HoverBorderStyle}"
         Width="287"
@@ -30,58 +29,25 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center">
         <Button
-
-                Click="btnRecentSong_Click"
-                Background="Transparent"
-                x:Name="btnAccept"
-                HorizontalAlignment="Left" 
-                Height="350"
-                Margin="0"
-                VerticalAlignment="Top" 
-                Width="287"
-                BorderBrush="Transparent">
-            <Grid Margin="0" Width="287" Height="350" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-
-                </Grid.ColumnDefinitions>
-
-                <Image Source="{Binding AlbumCover, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                   Width="270" 
-                   Height="270" 
-                   Stretch="UniformToFill" 
-                   Margin="7,7,0,0" 
-                   Grid.Column="0"
-                   Grid.Row="0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"/>
-
-                <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,0,7,0">
-                    <TextBlock 
-                        Text="{Binding SongTitle, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                        TextWrapping="NoWrap"
-                        d:Text="Anxiety"
-                        FontSize="16"
-                        FontWeight="Light"
-                        Foreground="White"
-                        FontFamily="Nunito"
-                        Margin="10,0,0,0"/>
-                    <TextBlock 
-                        Text="{Binding ArtistName, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                        TextWrapping="NoWrap"
-                        d:Text="Doechii"
-                        FontSize="16"
-                        FontWeight="Light"
-                        Foreground="White"
-                        Margin="10,5,0,0"/>
-                </StackPanel>
-            </Grid>
-
+            Background="Transparent"
+            Click="btnPlaylist_Click"
+            BorderBrush="Transparent"
+            Width="287"
+            Height="350">
+            <StackPanel>
+                <Image Source="{Binding CoverUrl}"
+                       Width="270"
+                       Height="270"
+                       Stretch="UniformToFill"
+                       Margin="7" />
+                <TextBlock Text="{Binding Name}"
+                           Foreground="White"
+                           FontSize="16"
+                           FontFamily="Nunito"
+                           TextAlignment="Center"
+                           Margin="7,5,7,0" />
+            </StackPanel>
         </Button>
-
     </Border>
+
 </UserControl>
