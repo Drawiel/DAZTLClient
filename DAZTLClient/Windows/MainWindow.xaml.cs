@@ -24,7 +24,7 @@ namespace DAZTLClient
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
-            MainFrame.Navigate(new GUI_LogIn());
+            MainFrame.Navigate(new GUI_ArtistAddAlbum());
         }
     }
 
