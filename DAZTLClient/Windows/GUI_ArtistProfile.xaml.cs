@@ -57,6 +57,9 @@ namespace DAZTLClient.Windows {
         private void BtnGotoAddAlbum_Click(object sender, RoutedEventArgs e) {
 
         }
+        private void BtnSeeAlbumsArtist_Click(object sender, RoutedEventArgs e) {
+
+        }
     }
 }
 
