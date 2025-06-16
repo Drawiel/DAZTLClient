@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DAZTLClient")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38b3f1f061de5eb6f7b2d2f1dd7af5775c0678bf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27b3a51754b7a91594fe0932a38a2fe3ad5fdfb1")]
 [assembly: System.Reflection.AssemblyProductAttribute("DAZTLClient")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DAZTLClient")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

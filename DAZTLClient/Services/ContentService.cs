@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Daztl;
 using Grpc.Core;
 using Google.Protobuf.WellKnownTypes;
+using System.IO;
 
 namespace DAZTLClient.Services
 {
@@ -71,6 +72,31 @@ namespace DAZTLClient.Services
         {
             var request = new Daztl.Empty();
             return await _client.ListArtistsAsync(request);
+        }
+        public async Task<GenericResponse> CreatePlaylistAsync(string name, string imagePath)
+        {
+            string base64Image = null;
+
+            if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
+            {
+                byte[] imageBytes = File.ReadAllBytes(imagePath);
+                base64Image = Convert.ToBase64String(imageBytes);
+            }
+
+            var request = new CreatePlaylistRequest
+            {
+                Name = name,
+                CoverUrl = base64Image ?? "",
+                Token = SessionManager.Instance.AccessToken
+            };
+
+            var response = await _client.CreatePlaylistAsync(request);
+
+            return new GenericResponse
+            {
+                Status = response.Status,
+                Message = response.Message
+            };
         }
 
     }

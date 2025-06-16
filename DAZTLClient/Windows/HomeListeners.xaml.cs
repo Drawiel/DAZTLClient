@@ -41,6 +41,7 @@ namespace DAZTLClient.Windows {
 
         public HomeListeners() {
             InitializeComponent();
+            PlayPauseToggle.IsChecked = MusicPlayerService.Instance.IsPlaying();
             MusicPlayerService.Instance.PlaybackPositionChanged += progress =>
             {
                 if (!_isUserDraggingSlider)
@@ -290,8 +291,13 @@ namespace DAZTLClient.Windows {
             MessageBox.Show("Ir a la página de cuenta.");
         }
 
-        private void CerrarSesion_Click(object sender, RoutedEventArgs e) {
-            MusicPlayerService.Instance.Stop();
+        private void Logout_Click(object sender, RoutedEventArgs e) {
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_LogIn());
+                SessionManager.Instance.EndSession();
+                MusicPlayerService.Instance.Stop();
+            }
         }
 
         private void BtnSeeAllPlaylist_Click(object sender, RoutedEventArgs e) {
@@ -349,11 +355,17 @@ namespace DAZTLClient.Windows {
         }
 
         private void BtnSeeAllAlbums_Click(object sender, RoutedEventArgs e) {
-
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ListenersAlbums());
+            }
         }
 
         private void BtnSeeAllArtists_Click(object sender, RoutedEventArgs e) {
-
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ListenersArtists());
+            }
         }
         private void BtnGoToCreatePlaylist_Click(object sender, RoutedEventArgs e)
         {
@@ -367,7 +379,7 @@ namespace DAZTLClient.Windows {
             CreatePlaylistWindow createPlaylistWindow = new CreatePlaylistWindow();
             createPlaylistWindow.Owner = owner;
             createPlaylistWindow.ShowDialog();
-
+            LoadAlbumsPage();
             if (owner != null)
             {
                 owner.Effect = null;
@@ -578,7 +590,6 @@ namespace DAZTLClient.Windows {
                 return;
             }
         }
-
         private void SeekToPosition(double sliderValue)
         {
             if (MusicPlayerService.Instance.CurrentDuration.TotalMilliseconds > 0)

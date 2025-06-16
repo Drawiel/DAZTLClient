@@ -419,15 +419,23 @@
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Height="100">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-                    <ToggleButton Style="{StaticResource MediaToggleButtonStyle}" Content="🔁" Margin="10,0"/>
-                    <Button Style="{StaticResource MediaButtonStyle}" Content="⏮️" Margin="10,0"/>
-                    <ToggleButton Style="{StaticResource PlayPauseButtonStyle}" Margin="10"/>
-                    <Button Style="{StaticResource MediaButtonStyle}" Content="⏭️" Margin="10,0"/>
-                    <ToggleButton Style="{StaticResource MediaToggleButtonStyle}" Content="🔀" Margin="10,0"/>
+                    <ToggleButton x:Name="RepeatToggle" Style="{StaticResource MediaToggleButtonStyle}" Content="🔁" Margin="10,0"/>
+                    <Button x:Name="PrevButton" Style="{StaticResource MediaButtonStyle}" Content="⏮️" Margin="10,0"/>
+                    <ToggleButton x:Name="PlayPauseToggle" Style="{StaticResource PlayPauseButtonStyle}" Margin="10"/>
+                    <Button x:Name="NextButton" Style="{StaticResource MediaButtonStyle}" Content="⏭️" Margin="10,0"/>
+                    <ToggleButton x:Name="ShuffleToggle" Style="{StaticResource MediaToggleButtonStyle}" Content="🔀" Margin="10,0"/>
                 </StackPanel>
 
-                <ProgressBar Width="750
-                             " Height="4" Value="40" Maximum="100" Foreground="Gray" Background="#333333"/>
+                <Slider x:Name="PlaybackSlider" 
+                    Width="750"
+                    Height="4"
+                    Maximum="100"
+                    Foreground="Gray"
+                    Background="#333333"
+                    ValueChanged="PlaybackSlider_ValueChanged"
+                    PreviewMouseDown="PlaybackSlider_PreviewMouseDown"
+                    PreviewMouseUp="PlaybackSlider_PreviewMouseUp"
+                 />
             </StackPanel>
             <Border 
                     Grid.Column="1"

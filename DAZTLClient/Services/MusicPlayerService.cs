@@ -30,6 +30,14 @@ namespace DAZTLClient.Services
             _timer.Tick += Timer_Tick;
         }
 
+        public bool IsPlaying()
+        {
+            return _mediaPlayer != null &&
+                   _mediaPlayer.Source != null &&
+                   _mediaPlayer.Position > TimeSpan.Zero &&
+                   _mediaPlayer.Position < _mediaPlayer.NaturalDuration.TimeSpan;
+        }
+
         public static MusicPlayerService Instance
         {
             get

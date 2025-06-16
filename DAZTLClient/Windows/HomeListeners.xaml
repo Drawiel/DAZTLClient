@@ -790,7 +790,7 @@
                 <Button.ContextMenu>
                     <ContextMenu x:Name="AccountContextMenu" Placement="Bottom">
                         <MenuItem Header="Cuenta" Click="BtnGoToProfileListener_Click"/>
-                        <MenuItem Header="Cerrar sesión" Click="CerrarSesion_Click"/>
+                        <MenuItem Header="Cerrar sesión" Click="Logout_Click"/>
                     </ContextMenu>
                 </Button.ContextMenu>
             </Button>

@@ -12,7 +12,7 @@
         AllowsTransparency="True">
 
     <Window.Resources>
-                <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
+        <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
             <Setter Property="Width" Value="500"/>
             <Setter Property="Height" Value="70"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -21,7 +21,7 @@
             <Setter Property="BorderThickness" Value="3"/>
             <Setter Property="BorderBrush" Value="#9FA3A6"/>
             <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="IsReadOnly" Value="False"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
