@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Daztl;
 using Grpc.Core;
+using Google.Protobuf.WellKnownTypes;
 
 namespace DAZTLClient.Services
 {
@@ -56,8 +57,21 @@ namespace DAZTLClient.Services
 
         public async Task<SongListResponse> ListSongsAsync()
         {
-            var request = new Empty();
+            var request = new Daztl.Empty();
             return await _client.ListSongsAsync(request);
         }
+
+        public async Task<AlbumListResponse> ListAlbumsAsync()
+        {
+            var request = new Daztl.Empty();
+            return await _client.ListAlbumsAsync(request);
+        }
+
+        public async Task<ArtistListResponse> ListArtistsAsync()
+        {
+            var request = new Daztl.Empty();
+            return await _client.ListArtistsAsync(request);
+        }
+
     }
 }
