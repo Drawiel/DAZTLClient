@@ -29,16 +29,17 @@ namespace DAZTLClient.Services
 
                 var response = await _client.LoginUserAsync(grpcRequest);
 
+                SessionManager.Instance.StartSession(response.AccessToken, response.RefreshToken, response.Role);
 
-                // Guardar el token
-                App.Current.Properties["auth_token"] = response.AccessToken;
                 if (response.Role == "artist")
                 {
                     return "Inicio de sesion de artista";
-                } else if (response.Role == "listener")
+                }
+                else if (response.Role == "listener")
                 {
                     return "Inicio de sesion de oyente";
-                } else
+                }
+                else
                 {
                     return "No se reconocio el rol";
                 }
@@ -48,6 +49,7 @@ namespace DAZTLClient.Services
                 return $"Error en el login: {ex.Status.Detail}";
             }
         }
+
 
         public async Task<string> RegisterAsync(Models.RegisterRequest request)
         {
