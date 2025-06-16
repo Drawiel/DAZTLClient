@@ -11,6 +11,7 @@ using Grpc.Net.Client;
 using DAZTLClient.Services;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Effects;
 
 namespace DAZTLClient.Windows {
     /// <summary>
@@ -23,6 +24,9 @@ namespace DAZTLClient.Windows {
         private int itemsPerPage = 6;
 
         private List<PlaylistCover> allCovers;
+        private List<PlaylistViewModel> _allPlaylists = new List<PlaylistViewModel>();
+        private List<AlbumViewModel> allAlbums = new List<AlbumViewModel>();
+        private List<ArtistViewModel> allArtists = new List<ArtistViewModel>();
 
         private List<Notification> notifications = new List<Notification>();
         private bool hasUnreadNotifications = true;
@@ -54,7 +58,7 @@ namespace DAZTLClient.Windows {
             PlayPauseToggle.Unchecked += (s, e) => MusicPlayerService.Instance.Pause();
 
             PrevButton.Click += (s, e) => MusicPlayerService.Instance.PlayPrevious();
-            NextButton.Click += (s, e) => MusicPlayerService.Instance.PlayNext();
+            NextButtonPlaylists.Click += (s, e) => MusicPlayerService.Instance.PlayNext();
 
             RepeatToggle.Checked += (s, e) => MusicPlayerService.Instance.IsRepeating = true;
             RepeatToggle.Unchecked += (s, e) => MusicPlayerService.Instance.IsRepeating = false;
@@ -118,24 +122,17 @@ namespace DAZTLClient.Windows {
             {
                 var reply = await _contentService.ListPlaylistsAsync();
 
-                PlaylistGrid.Children.Clear();
-
-                foreach (var playlist in reply.Playlists)
-                {
-                    var vm = new PlaylistViewModel
+                _allPlaylists = reply.Playlists
+                    .Select(p => new PlaylistViewModel
                     {
-                        Id = playlist.Id,
-                        Name = playlist.Name,
-                        CoverUrl = playlist.CoverUrl
-                    };
+                        Id = p.Id,
+                        Name = p.Name,
+                        CoverUrl = p.CoverUrl
+                    })
+                    .ToList();
 
-                    var cover = new PlaylistCover
-                    {
-                        DataContext = vm
-                    };
-
-                    PlaylistGrid.Children.Add(cover);
-                }
+                currentPagePlaylist = 0;
+                RenderPlaylistPage();
             }
             catch (Exception ex)
             {
@@ -143,60 +140,133 @@ namespace DAZTLClient.Windows {
             }
         }
 
-        private void LoadAlbumsPage() {
-            AlbumsGrid.Children.Clear();
-            int start = currentPageAlbums * itemsPerPage;
-            int end = start + itemsPerPage;
+        private void RenderPlaylistPage()
+        {
+            PlaylistGrid.Children.Clear();
 
-            for(int i = start; i < end && i < allCovers.Count; i++) {
-                var original = allCovers[i];
-                var albumCover = new PlaylistCover {
-                    SongTitle = original.SongTitle,
-                    ArtistName = original.ArtistName,
-                    AlbumCover = original.AlbumCover
+            int start = currentPagePlaylist * itemsPerPage;
+            int end = Math.Min(start + itemsPerPage, _allPlaylists.Count);
+
+            for (int i = start; i < end; i++)
+            {
+                var vm = _allPlaylists[i];
+                var cover = new PlaylistCover
+                {
+                    DataContext = vm
                 };
-                AlbumsGrid.Children.Add(albumCover);
+                PlaylistGrid.Children.Add(cover);
+            }
+            NextButtonPlaylists.IsEnabled = (currentPagePlaylist + 1) * itemsPerPage < _allPlaylists.Count;
+        }
+
+        private void NextPagePlaylists_Click(object sender, RoutedEventArgs e)
+        {
+            if ((currentPagePlaylist + 1) * itemsPerPage < _allPlaylists.Count)
+            {
+                currentPagePlaylist++;
+                RenderPlaylistPage();
+            }
+        }
+        private async void LoadAlbumsPage() {
+            try
+            {
+                var reply = await _contentService.ListAlbumsAsync();
+
+                allAlbums = reply.Albums.Select(album => new AlbumViewModel
+                {
+                    Id = album.Id,
+                    Title = album.Title,
+                    ArtistName = album.ArtistName,
+                    CoverUrl = album.CoverUrl
+                }).ToList();
+
+                currentPageAlbums = 0;
+                RenderAlbumsPage();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error cargando álbumes: {ex.Message}");
             }
         }
 
-        private void LoadArtistsPage() {
+        private void RenderAlbumsPage()
+        {
+            AlbumsGrid.Children.Clear();
+
+            int start = currentPageAlbums * itemsPerPage;
+            int end = start + itemsPerPage;
+
+            for (int i = start; i < end && i < allAlbums.Count; i++)
+            {
+                var album = allAlbums[i];
+
+                var albumCover = new AlbumCover
+                {
+                    DataContext = album
+                };
+
+                AlbumsGrid.Children.Add(albumCover);
+            }
+
+            NextButtonAlbums.IsEnabled = (currentPageAlbums + 1) * itemsPerPage < allAlbums.Count;
+        }
+
+        private void NextPageAlbums_Click(object sender, RoutedEventArgs e)
+        {
+            if ((currentPageAlbums + 1) * itemsPerPage < allAlbums.Count)
+            {
+                currentPageAlbums++;
+                RenderAlbumsPage();
+            }
+        }
+
+        private async void LoadArtistsPage()
+        {
+            try
+            {
+                var reply = await _contentService.ListArtistsAsync();
+
+                allArtists = reply.Artists.Select(artist => new ArtistViewModel
+                {
+                    Id = artist.Id,
+                    Name = artist.Name,
+                    ProfilePicture = artist.ProfilePicture
+                }).ToList();
+
+                currentPageArtists = 0;
+                RenderArtistsPage();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error cargando artistas: {ex.Message}");
+            }
+        }
+
+        private void RenderArtistsPage()
+        {
             ArtistGrid.Children.Clear();
             int start = currentPageArtists * itemsPerPage;
             int end = start + itemsPerPage;
 
-            for(int i = start; i < end && i < allCovers.Count; i++) {
-                var original = allCovers[i];
-                var artistCover = new PlaylistCover {
-                    SongTitle = original.SongTitle,
-                    ArtistName = original.ArtistName,
-                    AlbumCover = original.AlbumCover
+            for (int i = start; i < end && i < allArtists.Count; i++)
+            {
+                var artist = allArtists[i];
+                var artistControl = new ArtistCover
+                {
+                    ArtistName = artist.Name,
+                    AlbumCover = artist.ProfilePicture
                 };
-                ArtistGrid.Children.Add(artistCover);
+                ArtistGrid.Children.Add(artistControl);
             }
+            BtnNextPageArtists.IsEnabled = (currentPageAlbums + 1) * itemsPerPage < allAlbums.Count;
         }
-
-        private void NextPagePlaylists_Click(object sender, RoutedEventArgs e) {
-            currentPagePlaylist++;
-            if(currentPagePlaylist * itemsPerPage >= allCovers.Count)
-                currentPagePlaylist = 0;
-
-            LoadPlaylistPage();
-        }
-
-        private void NextPageAlbums_Click(object sender, RoutedEventArgs e) {
-            currentPageAlbums++;
-            if(currentPageAlbums * itemsPerPage >= allCovers.Count)
-                currentPageAlbums = 0;
-
-            LoadAlbumsPage();
-        }
-
-        private void NextPageArtists_Click(object sender, RoutedEventArgs e) {
-            currentPageArtists++;
-            if(currentPageArtists * itemsPerPage >= allCovers.Count)
-                currentPageArtists = 0;
-
-            LoadArtistsPage();
+        private void NextPageArtists_Click(object sender, RoutedEventArgs e)
+        {
+            if ((currentPageArtists + 1) * itemsPerPage < allArtists.Count)
+            {
+                currentPageArtists++;
+                RenderArtistsPage();
+            }
         }
 
         private void btnRecentSong_Click(object sender, RoutedEventArgs e) {
@@ -285,8 +355,23 @@ namespace DAZTLClient.Windows {
         private void BtnSeeAllArtists_Click(object sender, RoutedEventArgs e) {
 
         }
-        private void BtnGoToCreatePlaylist_Click(object sender, RoutedEventArgs e) {
+        private void BtnGoToCreatePlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            var owner = Window.GetWindow(this);
 
+            if (owner != null)
+            {
+                owner.Effect = new BlurEffect { Radius = 5 };
+            }
+
+            CreatePlaylistWindow createPlaylistWindow = new CreatePlaylistWindow();
+            createPlaylistWindow.Owner = owner;
+            createPlaylistWindow.ShowDialog();
+
+            if (owner != null)
+            {
+                owner.Effect = null;
+            }
         }
 
         private async void txtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -490,7 +575,6 @@ namespace DAZTLClient.Windows {
         {
             if (_isUserDraggingSlider)
             {
-                // No actualizar mientras arrastra, solo cuando suelta
                 return;
             }
         }

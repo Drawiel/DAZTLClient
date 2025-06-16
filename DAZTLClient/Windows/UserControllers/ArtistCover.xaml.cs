@@ -25,32 +25,46 @@ namespace DAZTLClient.Windows.UserControllers
             InitializeComponent();
             this.DataContext = this;
         }
-        private void btnRecentSong_Click(object sender, RoutedEventArgs e) {
+
+        private void btnRecentSong_Click(object sender, RoutedEventArgs e)
+        {
             MessageBox.Show("Botón clickeado");
         }
-        public static readonly DependencyProperty SongTitleProperty =
-        DependencyProperty.Register("SongTitle", typeof(string), typeof(PlaylistCover), new PropertyMetadata(""));
 
-        public string SongTitle {
+        public static readonly DependencyProperty SongTitleProperty =
+            DependencyProperty.Register("SongTitle", typeof(string), typeof(ArtistCover), new PropertyMetadata(""));
+
+        public string SongTitle
+        {
             get => (string)GetValue(SongTitleProperty);
             set => SetValue(SongTitleProperty, value);
         }
 
         public static readonly DependencyProperty ArtistNameProperty =
-            DependencyProperty.Register("ArtistName", typeof(string), typeof(PlaylistCover), new PropertyMetadata(""));
+            DependencyProperty.Register("ArtistName", typeof(string), typeof(ArtistCover), new PropertyMetadata(""));
 
-        public string ArtistName {
+        public string ArtistName
+        {
             get => (string)GetValue(ArtistNameProperty);
             set => SetValue(ArtistNameProperty, value);
         }
 
         public static readonly DependencyProperty AlbumCoverProperty =
-            DependencyProperty.Register("AlbumCover", typeof(string), typeof(PlaylistCover), new PropertyMetadata(""));
+            DependencyProperty.Register("AlbumCover", typeof(string), typeof(ArtistCover), new PropertyMetadata(""));
 
-        public string AlbumCover {
+        public string AlbumCover
+        {
             get => (string)GetValue(AlbumCoverProperty);
             set => SetValue(AlbumCoverProperty, value);
         }
+    }
+
+
+    public class ArtistViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string ProfilePicture { get; set; }
     }
 
 }

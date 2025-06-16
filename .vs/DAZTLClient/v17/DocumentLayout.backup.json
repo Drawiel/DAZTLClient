@@ -3,28 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\services\\contentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\services\\contentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\windows\\createplaylistwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\createplaylistwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\windows\\createplaylistwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\createplaylistwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\windows\\homelisteners.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\homelisteners.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\windows\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\windows\\gui_artistprofile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\gui_artistprofile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\windows\\usercontrollers\\singup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\usercontrollers\\singup.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\windows\\usercontrollers\\playlistcover.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\usercontrollers\\playlistcover.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\windows\\usercontrollers\\artistcover.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\usercontrollers\\artistcover.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\windows\\usercontrollers\\playlistcover.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\usercontrollers\\playlistcover.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\windows\\homelisteners.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\windows\\homelisteners.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\services\\musicplayerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\services\\musicplayerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\services\\contentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|solutionrelative:daztlclient\\services\\contentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{10116322-E58B-49B4-BAB1-EC5DE36DA98B}|DAZTLClient\\DAZTLClient.csproj|c:\\users\\zaido\\desktop\\uv\\6to\\dessistred\\daztl\\daztlclient\\daztlclient\\windows\\usercontrollers\\recentsong.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,7 +70,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 119,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -67,6 +83,106 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\MainWindow.xaml",
+              "RelativeToolTip": "DAZTLClient\\Windows\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-16T05:38:48.47Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreatePlaylistWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\CreatePlaylistWindow.xaml.cs",
+              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\CreatePlaylistWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\CreatePlaylistWindow.xaml.cs",
+              "RelativeToolTip": "DAZTLClient\\Windows\\CreatePlaylistWindow.xaml.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAcwB0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T05:22:51.91Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GUI_ArtistProfile.xaml",
+              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\GUI_ArtistProfile.xaml",
+              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\GUI_ArtistProfile.xaml",
+              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\GUI_ArtistProfile.xaml",
+              "RelativeToolTip": "DAZTLClient\\Windows\\GUI_ArtistProfile.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-16T05:10:16.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SingUp.xaml",
+              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\SingUp.xaml",
+              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\UserControllers\\SingUp.xaml",
+              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\SingUp.xaml",
+              "RelativeToolTip": "DAZTLClient\\Windows\\UserControllers\\SingUp.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-16T04:03:19.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CreatePlaylistWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\CreatePlaylistWindow.xaml",
+              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\CreatePlaylistWindow.xaml",
+              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\CreatePlaylistWindow.xaml",
+              "RelativeToolTip": "DAZTLClient\\Windows\\CreatePlaylistWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-16T03:46:40.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlaylistCover.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\PlaylistCover.xaml.cs",
+              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\UserControllers\\PlaylistCover.xaml.cs",
+              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\PlaylistCover.xaml.cs",
+              "RelativeToolTip": "DAZTLClient\\Windows\\UserControllers\\PlaylistCover.xaml.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T03:37:15.743Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ArtistCover.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\ArtistCover.xaml.cs",
+              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\UserControllers\\ArtistCover.xaml.cs",
+              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\ArtistCover.xaml.cs",
+              "RelativeToolTip": "DAZTLClient\\Windows\\UserControllers\\ArtistCover.xaml.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAswDwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T03:32:01.685Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ContentService.cs",
+              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Services\\ContentService.cs",
+              "RelativeDocumentMoniker": "DAZTLClient\\Services\\ContentService.cs",
+              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Services\\ContentService.cs",
+              "RelativeToolTip": "DAZTLClient\\Services\\ContentService.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAwEUAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T02:58:36.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "PlaylistCover.xaml",
               "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\PlaylistCover.xaml",
               "RelativeDocumentMoniker": "DAZTLClient\\Windows\\UserControllers\\PlaylistCover.xaml",
@@ -78,32 +194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PlaylistCover.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\PlaylistCover.xaml.cs",
-              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\UserControllers\\PlaylistCover.xaml.cs",
-              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\PlaylistCover.xaml.cs",
-              "RelativeToolTip": "DAZTLClient\\Windows\\UserControllers\\PlaylistCover.xaml.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAmwDoAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T00:32:53.91Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "HomeListeners.xaml",
-              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\HomeListeners.xaml",
-              "RelativeDocumentMoniker": "DAZTLClient\\Windows\\HomeListeners.xaml",
-              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\HomeListeners.xaml",
-              "RelativeToolTip": "DAZTLClient\\Windows\\HomeListeners.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-15T20:54:43.744Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "RecentSong.xaml",
               "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\RecentSong.xaml",
               "RelativeDocumentMoniker": "DAZTLClient\\Windows\\UserControllers\\RecentSong.xaml",
@@ -115,33 +206,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "RecentSong.xaml.cs",
               "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\RecentSong.xaml.cs",
               "RelativeDocumentMoniker": "DAZTLClient\\Windows\\UserControllers\\RecentSong.xaml.cs",
               "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\RecentSong.xaml.cs",
               "RelativeToolTip": "DAZTLClient\\Windows\\UserControllers\\RecentSong.xaml.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAwwF4AAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAwwHgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T23:54:33.808Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-15T23:54:33.808Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MusicPlayerService.cs",
-              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Services\\MusicPlayerService.cs",
-              "RelativeDocumentMoniker": "DAZTLClient\\Services\\MusicPlayerService.cs",
-              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Services\\MusicPlayerService.cs",
-              "RelativeToolTip": "DAZTLClient\\Services\\MusicPlayerService.cs",
-              "ViewState": "AgIAAHUAAAAAAAAAAAAowJYAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T22:50:22.002Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "GUI_LogIn.xaml.cs",
               "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\GUI_LogIn.xaml.cs",
               "RelativeDocumentMoniker": "DAZTLClient\\Windows\\GUI_LogIn.xaml.cs",
@@ -149,12 +226,11 @@
               "RelativeToolTip": "DAZTLClient\\Windows\\GUI_LogIn.xaml.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAQwDgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T22:00:36.086Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-15T22:00:36.086Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "DAZTLClient\\Windows\\MainWindow.xaml.cs",
@@ -162,12 +238,11 @@
               "RelativeToolTip": "DAZTLClient\\Windows\\MainWindow.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T22:00:33.959Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-15T22:00:33.959Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "LogIn.xaml.cs",
               "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\UserControllers\\LogIn.xaml.cs",
               "RelativeDocumentMoniker": "DAZTLClient\\Windows\\UserControllers\\LogIn.xaml.cs",
@@ -175,31 +250,17 @@
               "RelativeToolTip": "DAZTLClient\\Windows\\UserControllers\\LogIn.xaml.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAiwCwAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T22:00:04.8Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-15T22:00:04.8Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ContentService.cs",
-              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Services\\ContentService.cs",
-              "RelativeDocumentMoniker": "DAZTLClient\\Services\\ContentService.cs",
-              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Services\\ContentService.cs",
-              "RelativeToolTip": "DAZTLClient\\Services\\ContentService.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABsAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T21:47:42.248Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "HomeListeners.xaml.cs",
               "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\HomeListeners.xaml.cs",
               "RelativeDocumentMoniker": "DAZTLClient\\Windows\\HomeListeners.xaml.cs",
               "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\Windows\\HomeListeners.xaml.cs",
               "RelativeToolTip": "DAZTLClient\\Windows\\HomeListeners.xaml.cs",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAswHYAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAAFsBAAAAAAAAAAAzwGwBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-15T20:56:54.445Z",
               "EditorCaption": ""

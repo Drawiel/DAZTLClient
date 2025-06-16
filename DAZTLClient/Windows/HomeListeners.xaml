@@ -535,6 +535,7 @@
                                 Margin="155,10,1453,10"
                                 Click="BtnSeeAllPlaylist_Click"/>
                             <Button
+                                x:Name="NextButtonPlaylists"
                                 VerticalAlignment="Center"
                                 DockPanel.Dock="Top"
                                 Height="30"
@@ -583,6 +584,7 @@
                                 Click="BtnSeeAllAlbums_Click"
                                 />
                             <Button
+                                x:Name="NextButtonAlbums"
                                 VerticalAlignment="Center"
                                 DockPanel.Dock="Top"
                                 Height="30"
@@ -629,6 +631,7 @@
                                 Margin="155,10,1453,10"
                                 Click="BtnSeeAllArtists_Click" Cursor="Hand"/>
                             <Button
+                                x:Name="BtnNextPageArtists"
                                 VerticalAlignment="Center"
                                 DockPanel.Dock="Top"
                                 Height="30"
