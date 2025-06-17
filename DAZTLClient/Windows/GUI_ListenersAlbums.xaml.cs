@@ -91,7 +91,13 @@ namespace DAZTLClient.Windows
                         var albumViewModel = albumCover?.DataContext as AlbumViewModel;
                         if (albumViewModel != null)
                         {
-                            //GoToAlbumDetail();
+                            albumCover.AlbumClicked += (sender, Empty) =>
+                            {
+                                if (this.NavigationService != null)
+                                {
+                                    NavigationService.Navigate(new GUI_AlbumDetails(album.Id));
+                                }
+                            };
                         }
                     };
 

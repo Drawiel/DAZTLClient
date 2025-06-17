@@ -1,5 +1,4 @@
-﻿using Daztl;
-using DAZTLClient.Models;
+﻿using DAZTLClient.Models;
 using DAZTLClient.Services;
 using DAZTLClient.Windows.UserControllers;
 using System;
@@ -13,40 +12,39 @@ using System.Windows.Media.Imaging;
 
 namespace DAZTLClient.Windows
 {
-    public partial class GUI_PlaylistDetails : Page
+    public partial class GUI_AlbumDetails : Page
     {
-        private readonly PlaylistResponse _playlist;
+        private readonly Daztl.AlbumDetailResponse _album =new();
         private bool _isUserDraggingSlider = false;
-        private List<DAZTLClient.Models.Notification> notifications = new List<DAZTLClient.Models.Notification>();
+        private List<Notification> notifications = new List<Notification>();
         private readonly ContentService _contentService = new ContentService();
 
-        public GUI_PlaylistDetails(PlaylistResponse playlist)
+        public GUI_AlbumDetails(int albumId)
         {
-            _playlist = playlist;
             InitializeComponent();
-            LoadPlaylistData();
+            LoadAlbumData(albumId);
             SetupMusicPlayer();
         }
 
-        private async void LoadPlaylistData()
+        private async void LoadAlbumData(int albumId)
         {
             try
             {
-                var updatedPlaylist = await _contentService.GetPlaylistAsync(_playlist.Id.ToString());
+                var albumDetail = await _contentService.GetAlbumDetailAsync(albumId);
 
-                _playlist.Name = updatedPlaylist.Name;
-                _playlist.CoverUrl = updatedPlaylist.CoverUrl;
-                _playlist.Songs.Clear();
-                _playlist.Songs.AddRange(updatedPlaylist.Songs);
+                _album.Title = albumDetail.Title;
+                _album.CoverUrl = albumDetail.CoverUrl;
+                _album.Songs.Clear();
+                _album.Songs.AddRange(albumDetail.Songs);
 
-                PlaylistTitle.Text = _playlist.Name;
-                if (!string.IsNullOrEmpty(_playlist.CoverUrl))
+                txtBlockTitle.Text = _album.Title;
+                if (!string.IsNullOrEmpty(_album.CoverUrl))
                 {
-                    PlaylistImage.Source = new BitmapImage(new Uri(_playlist.CoverUrl));
+                    imgAlbumCover.Source = new BitmapImage(new Uri(_album.CoverUrl));
                 }
 
                 var songs = new List<SongViewModel>();
-                foreach (var song in _playlist.Songs)
+                foreach (var song in _album.Songs)
                 {
                     songs.Add(new SongViewModel
                     {
@@ -195,7 +193,7 @@ namespace DAZTLClient.Windows
                 };
 
                 btn.Click += (s, e) => {
-                    var noti = (DAZTLClient.Models.Notification)((Button)s).Tag;
+                    var noti = (Notification)((Button)s).Tag;
                     MessageBox.Show($"Navegar a: {noti.Title}");
                     LoadNotifications();
                 };
@@ -237,7 +235,7 @@ namespace DAZTLClient.Windows
                 {
                     var audioUrl = song.AudioUrl;
 
-                    var playlist = _playlist.Songs
+                    var playlist = _album.Songs
                         .Select(s => s.AudioUrl)
                         .ToList();
 
@@ -342,50 +340,8 @@ namespace DAZTLClient.Windows
 
                     textPanel.Children.Add(titleText);
                     textPanel.Children.Add(artistText);
-
-                    var addButton = new Button
-                    {
-                        Content = "+",
-                        FontSize = 20,
-                        Width = 40,
-                        Height = 40,
-                        Background = Brushes.Transparent,
-                        Foreground = Brushes.White,
-                        BorderThickness = new Thickness(0),
-                        Margin = new Thickness(10, 0, 0, 0),
-                        Tag = song.Id
-                    };
-
-                    addButton.Click += async (s, args) =>
-                    {
-                        var button = s as Button;
-                        if (button != null)
-                        {
-                            try
-                            {
-                                var playlistId = _playlist.Id;
-
-                                var response = await _contentService.AddSongToPlaylistAsync(
-                                    playlistId.ToString(),
-                                    button.Tag.ToString(),
-                                    SessionManager.Instance.AccessToken);
-
-                                if (response.Status == "success")
-                                {
-                                    LoadPlaylistData();
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show($"Error al agregar canción: {ex.Message}", "Error",
-                                    MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
-                        }
-                    };
-
                     songPanel.Children.Add(image);
                     songPanel.Children.Add(textPanel);
-                    songPanel.Children.Add(addButton);
 
                     songPanel.MouseLeftButtonDown += (s, args) =>
                     {

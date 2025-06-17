@@ -25,32 +25,26 @@
         Width="287"
         Height="350"
         HorizontalAlignment="Center"
-        VerticalAlignment="Center">
-        <Button
-            Background="Transparent"
-            BorderBrush="Transparent"
-            Width="287"
-            Height="350"
-            Click="btnAlbum_Click">
-            <StackPanel>
-                <Image Source="{Binding CoverUrl}"
+        VerticalAlignment="Center"
+        MouseLeftButtonDown="Border_MouseLeftButtonDown">
+        <StackPanel>
+            <Image Source="{Binding CoverUrl}"
                        Width="250"
                        Height="270"
                        Stretch="UniformToFill"
                        />
-                <TextBlock Text="{Binding Title}"
+            <TextBlock Text="{Binding Title}"
                            Foreground="White"
                            FontSize="16"
                            FontFamily="Nunito"
                            TextAlignment="Center"
                            Margin="7,5,7,0" />
-                <TextBlock Text="{Binding ArtistName}"
+            <TextBlock Text="{Binding ArtistName}"
                            Foreground="#CCCCCC"
                            FontSize="14"
                            FontFamily="Nunito"
                            TextAlignment="Center"
                            Margin="7,0,7,5" />
-            </StackPanel>
-        </Button>
+        </StackPanel>
     </Border>
 </UserControl>

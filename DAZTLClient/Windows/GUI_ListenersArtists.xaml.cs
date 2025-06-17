@@ -17,7 +17,7 @@ namespace DAZTLClient.Windows
 {
     public partial class GUI_ListenersArtists : Page
     {
-        private List<Notification> notifications = new List<Notification>();
+        private List<DAZTLClient.Models.Notification> notifications = new List<DAZTLClient.Models.Notification>();
         private readonly ContentService contentService = new ContentService();
         private bool _isUserDraggingSlider = false;
 
@@ -168,7 +168,7 @@ namespace DAZTLClient.Windows
         {
             for (int i = 1; i <= 10; i++)
             {
-                notifications.Add(new Notification
+                notifications.Add(new DAZTLClient.Models.Notification
                 {
                     Title = $"Notificación {i}",
                 });
@@ -198,7 +198,7 @@ namespace DAZTLClient.Windows
 
                 btn.Click += (s, e) =>
                 {
-                    var noti = (Notification)((Button)s).Tag;
+                    var noti = (DAZTLClient.Models.Notification)((Button)s).Tag;
                     MessageBox.Show($"Navegar a: {noti.Title}");
                     LoadNotifications();
                 };
