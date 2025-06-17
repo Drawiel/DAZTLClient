@@ -322,6 +322,7 @@
                 Style="{StaticResource IconPlusButtonStyle}" 
                 Click="BtnGoToCreatePlaylist_Click"/>
             <TextBox
+                x:Name="txtBoxSearch"
                 Style="{StaticResource TextBoxWithIconStyle}"
                 HorizontalAlignment="Left" 
                 Height="70" 
@@ -329,7 +330,27 @@
                 TextWrapping="NoWrap" 
                 Tag="Buscar..." 
                 VerticalAlignment="Center" 
-                Width="1251"/>
+                Width="1251"
+                TextChanged="txtBoxSearch_TextChanged"/>
+            <Popup x:Name="SearchPopup"
+                PlacementTarget="{Binding ElementName=txtBoxSearch}"
+                Placement="Bottom"
+                AllowsTransparency="True"
+                StaysOpen="False"
+                PopupAnimation="Fade">
+                <Border Width="1250" Height="400"
+                    Background="#202123"
+                    CornerRadius="8"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Padding="10"
+                    SnapsToDevicePixels="True"
+                    Effect="{DynamicResource MaterialDesignElevation3}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="SearchResultsPanel"/>
+                    </ScrollViewer>
+                </Border>
+            </Popup>
             <Button Style="{StaticResource AccountButtonStyle}" 
                 HorizontalAlignment="Left" 
                 Margin="1853,0,0,0" 
@@ -354,32 +375,24 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Encabezado -->
             <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10,0,10,0">
-                <!-- Imagen de la playlist -->
-                <Image Width="180" Height="180" Source="{Binding PlaylistImage}" Stretch="UniformToFill" Margin="0,0,20,0" />
-
-                <!-- Info de la playlist -->
+                <Image x:Name="PlaylistImage" Width="180" Height="180" Source="{Binding PlaylistImage}" Stretch="UniformToFill" Margin="0,0,20,0" />
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Text="Playlist" FontSize="16" Foreground="White" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding PlaylistTitle, FallbackValue='Tus me gusta'}" FontSize="80" FontWeight="Bold" Foreground="White"/>
-                    <TextBlock Text="{Binding Username, FallbackValue='Isabella'}" FontSize="20" Foreground="LightGray" />
+                    <TextBlock x:Name="PlaylistTitle" Text="{Binding PlaylistTitle, FallbackValue=''}" FontSize="80" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock x:Name="Username" Text="{Binding Username, FallbackValue=''}" FontSize="20" Foreground="LightGray" />
                 </StackPanel>
             </StackPanel>
 
-            <!-- Lista de canciones -->
-            <ListBox Grid.Row="2" ItemsSource="{Binding Songs}" Background="Transparent" BorderThickness="0" Margin="10,10,10,152">
+            <ListBox x:Name="Songs" Grid.Row="2" ItemsSource="{Binding Songs}" Background="Transparent" BorderThickness="0" Margin="10,10,10,152">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="#2e2e3f" Margin="0,5" Padding="10" CornerRadius="10">
+                        <Border Background="#101011" Margin="0,5" Padding="10" CornerRadius="10" Width="1880" MouseLeftButtonDown="Song_MouseLeftButtonDown">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <!-- Imagen de la canción -->
                                 <Image Source="{Binding Image}" Width="60" Height="60" Margin="0,0,10,0" Stretch="UniformToFill"/>
-
-                                <!-- Título y artista -->
                                 <StackPanel VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Title}" Foreground="White" FontSize="16" FontWeight="SemiBold"/>
-                                    <TextBlock Text="{Binding Artist}" Foreground="LightGray" FontSize="13"/>
+                                    <TextBlock Text="{Binding Title}" Foreground="White" FontSize="24" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding Artist}" Foreground="LightGray" FontSize="18"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -396,15 +409,23 @@
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Height="100">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-                    <ToggleButton Style="{StaticResource MediaToggleButtonStyle}" Content="🔁" Margin="10,0"/>
-                    <Button Style="{StaticResource MediaButtonStyle}" Content="⏮️" Margin="10,0"/>
-                    <ToggleButton Style="{StaticResource PlayPauseButtonStyle}" Margin="10"/>
-                    <Button Style="{StaticResource MediaButtonStyle}" Content="⏭️" Margin="10,0"/>
-                    <ToggleButton Style="{StaticResource MediaToggleButtonStyle}" Content="🔀" Margin="10,0"/>
+                    <ToggleButton x:Name="RepeatToggle" Style="{StaticResource MediaToggleButtonStyle}" Content="🔁" Margin="10,0"/>
+                    <Button x:Name="PrevButton" Style="{StaticResource MediaButtonStyle}" Content="⏮️" Margin="10,0"/>
+                    <ToggleButton x:Name="PlayPauseToggle" Style="{StaticResource PlayPauseButtonStyle}" Margin="10"/>
+                    <Button x:Name="NextButton" Style="{StaticResource MediaButtonStyle}" Content="⏭️" Margin="10,0"/>
+                    <ToggleButton x:Name="ShuffleToggle" Style="{StaticResource MediaToggleButtonStyle}" Content="🔀" Margin="10,0"/>
                 </StackPanel>
 
-                <ProgressBar Width="750
-                     " Height="4" Value="40" Maximum="100" Foreground="Gray" Background="#333333"/>
+                <Slider x:Name="PlaybackSlider" 
+                    Width="750"
+                    Height="4"
+                    Maximum="100"
+                    Foreground="Gray"
+                    Background="#333333"
+                    ValueChanged="PlaybackSlider_ValueChanged"
+                    PreviewMouseDown="PlaybackSlider_PreviewMouseDown"
+                    PreviewMouseUp="PlaybackSlider_PreviewMouseUp"
+                 />
             </StackPanel>
             <Border 
             Grid.Column="1"

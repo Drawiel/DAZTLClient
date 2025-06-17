@@ -1,4 +1,5 @@
 ﻿using Daztl;
+using DAZTLClient.Models;
 using DAZTLClient.Services;
 using DAZTLClient.Windows.UserControllers;
 using System;
@@ -25,12 +26,9 @@ namespace DAZTLClient.Windows
             InitializeComponent();
             SimulateNotifications();
             _ = LoadArtistsAsync();
-
-            // Configuración del reproductor de música
             SetupMusicPlayer();
         }
 
-        // Métodos originales (sin cambios)
         private async Task LoadArtistsAsync()
         {
             try
@@ -44,6 +42,7 @@ namespace DAZTLClient.Windows
                     var card = new ArtistCover
                     {
                         Margin = new Thickness(0, 0, 0, 15),
+                        ArtistId = artist.Id,
                         ArtistName = artist.Name,
                         AlbumCover = artist.ProfilePicture,
                         Tag = artist
@@ -53,10 +52,6 @@ namespace DAZTLClient.Windows
                     {
                         var artistCover = s as ArtistCover;
                         var selectedArtist = artistCover?.Tag as ArtistResponse;
-                        if (selectedArtist != null)
-                        {
-                            PlayArtistSongs(selectedArtist.Id.ToString());
-                        }
                     };
 
                     ArtistItemsControl.Items.Add(card);
@@ -101,50 +96,10 @@ namespace DAZTLClient.Windows
             ShuffleToggle.Checked += (s, e) => MusicPlayerService.Instance.IsShuffling = true;
             ShuffleToggle.Unchecked += (s, e) => MusicPlayerService.Instance.IsShuffling = false;
 
-            // Configurar eventos del slider
             PlaybackSlider.PreviewMouseDown += PlaybackSlider_PreviewMouseDown;
             PlaybackSlider.PreviewMouseUp += PlaybackSlider_PreviewMouseUp;
             PlaybackSlider.ValueChanged += PlaybackSlider_ValueChanged;
         }
-
-        private async void PlayArtistSongs(string artistId)
-        {
-            /*try
-            {
-                var response = await contentService.GetSongsByArtistAsync(artistId);
-                if (response.Songs.Count > 0)
-                {
-                    var baseUrl = "http://localhost:8000";
-                    var songUrls = response.Songs
-                        .Select(s => baseUrl + s.AudioUrl)
-                        .ToList();
-
-                    MusicPlayerService.Instance.SetPlaylist(songUrls);
-                    MusicPlayerService.Instance.PlayAt(0);
-
-                    // Actualizar UI con la información del artista actual
-                    var artistInfo = response.Artists.FirstOrDefault(a => a.Id == artistId);
-                    if (artistInfo != null)
-                    {
-                        Dispatcher.Invoke(() =>
-                        {
-                            NowPlayingTitle.Text = artistInfo.Name;
-                            NowPlayingArtist.Text = $"{response.Songs.Count} canciones";
-                            NowPlayingImage.Source = new BitmapImage(new Uri(baseUrl + artistInfo.ProfilePicture));
-                        });
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Este artista no tiene canciones disponibles.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cargar canciones del artista: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }*/
-        }
-
         private void PlaybackSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             _isUserDraggingSlider = true;
@@ -173,8 +128,6 @@ namespace DAZTLClient.Windows
                 MusicPlayerService.Instance.Seek(position);
             }
         }
-
-        // Métodos originales (sin cambios)
         private void AccountButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -187,7 +140,10 @@ namespace DAZTLClient.Windows
 
         private void Cuenta_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Ir a la página de cuenta.");
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ListenersProfile());
+            }
         }
 
         private void CerrarSesion_Click(object sender, RoutedEventArgs e)
@@ -290,11 +246,6 @@ namespace DAZTLClient.Windows
             {
                 owner.Effect = null;
             }
-        }
-
-        public class Notification
-        {
-            public string Title { get; set; }
         }
     }
 }

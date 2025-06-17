@@ -1,4 +1,5 @@
-﻿using DAZTLClient.Models;
+﻿using Daztl;
+using DAZTLClient.Models;
 using DAZTLClient.Services;
 using DAZTLClient.Windows.UserControllers;
 using System;
@@ -82,13 +83,27 @@ namespace DAZTLClient.Windows
                         }
                     };
 
-                    card.MouseLeftButtonDown += async (s, e) =>
+                    card.PlaylistClicked += (sender, vm) =>
                     {
-                        var playlistCover = s as PlaylistCover;
-                        var playlistViewModel = playlistCover?.DataContext as PlaylistViewModel;
-                        if (playlistViewModel != null)
+                        if (NavigationService != null)
                         {
-                            //GoToPlaylistDetail();
+                            var playlistDetails = new PlaylistResponse
+                            {
+                                Id = vm.Id,
+                                Name = vm.Name,
+                                CoverUrl = vm.CoverUrl,
+                                Songs = { playlist.Songs.Select(s => new SongResponse
+                        {
+                            Id = s.Id,
+                            Title = s.Title,
+                            Artist = s.Artist,
+                            AudioUrl = s.AudioUrl,
+                            CoverUrl = s.CoverUrl,
+                            ReleaseDate = s.ReleaseDate
+                        })}
+                            };
+
+                            NavigationService.Navigate(new GUI_PlaylistDetails(playlistDetails));
                         }
                     };
 
@@ -146,7 +161,10 @@ namespace DAZTLClient.Windows
 
         private void Cuenta_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Ir a la página de cuenta.");
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ListenersProfile());
+            }
         }
 
         private void CerrarSesion_Click(object sender, RoutedEventArgs e)

@@ -19,7 +19,9 @@
             </Style.Triggers>
         </Style>
 
-
+        <!-- Añade esto para asegurar que las imágenes se carguen correctamente -->
+        <BitmapImage x:Key="LikeBlack" UriSource="/Multimedia/icons/like_black.png"/>
+        <BitmapImage x:Key="LikeBlue" UriSource="/Multimedia/icons/like_blue.png"/>
     </UserControl.Resources>
 
     <Border
@@ -28,65 +30,81 @@
         Height="350"
         HorizontalAlignment="Center"
         VerticalAlignment="Center">
-        <Button
-
+        <Grid>
+            <!-- Botón principal (con ZIndex más bajo) -->
+            <Button
                 Click="btnRecentSong_Click"
                 Background="Transparent"
                 x:Name="btnAccept"
-                HorizontalAlignment="Left" 
+                HorizontalAlignment="Stretch" 
                 Height="350"
                 Margin="0"
-                VerticalAlignment="Top" 
+                VerticalAlignment="Stretch" 
                 Width="287"
-                BorderBrush="Transparent">
-            
-            <Viewbox
-                >
-                <Grid Margin="0" Width="287" Height="350" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                BorderBrush="Transparent"
+                Panel.ZIndex="0">
 
-                    </Grid.ColumnDefinitions>
+                <Viewbox>
+                    <Grid Margin="0" Width="287" Height="350" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Image Source="{Binding AlbumCover, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                   Width="270" 
-                   d:Source="/Multimedia/image6.png"
-                   Height="270" 
-                   Stretch="Uniform" 
-                   Margin="7,7,0,0" 
-                   Grid.Column="0"
-                   Grid.Row="0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top">
-                        <Image.Clip>
-                            <EllipseGeometry Center="135,135" RadiusX="135" RadiusY="135"/>
-                        </Image.Clip>
-                    </Image>
+                        <Image Source="{Binding AlbumCover, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                       Width="270" 
+                       d:Source="/Multimedia/image6.png"
+                       Height="270" 
+                       Stretch="Uniform" 
+                       Margin="7,7,0,0" 
+                       Grid.Column="0"
+                       Grid.Row="0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top">
+                            <Image.Clip>
+                                <EllipseGeometry Center="135,135" RadiusX="135" RadiusY="135"/>
+                            </Image.Clip>
+                        </Image>
 
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,0,7,0">
+                            <TextBlock 
+                            Text="{Binding SongTitle, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            d:Text="Anxiety"
+                            FontSize="16"
+                            FontWeight="Light"
+                            Foreground="White"
+                            FontFamily="Nunito"/>
+                            <TextBlock 
+                            Text="{Binding ArtistName, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            d:Text="Doechii"
+                            FontSize="16"
+                            FontWeight="Light"
+                            Foreground="White"
+                            Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </Viewbox>
+            </Button>
 
-                    <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,0,7,0">
-                        <TextBlock 
-                        Text="{Binding SongTitle, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                        d:Text="Anxiety"
-                        FontSize="16"
-                        FontWeight="Light"
-                        Foreground="White"
-                        FontFamily="Nunito"/>
-                        <TextBlock 
-                        Text="{Binding ArtistName, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                        d:Text="Doechii"
-                        FontSize="16"
-                        FontWeight="Light"
-                        Foreground="White"
-                        Margin="0,5,0,0"/>
-                    </StackPanel>
-                </Grid>
-            </Viewbox>
-        </Button>
-
+            <!-- Botón de Like -->
+            <Button x:Name="btnLike" 
+                Click="btnLike_Click"
+                Width="40" 
+                Height="40" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Top"
+                Margin="0,10,10,0"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Panel.ZIndex="1"
+                Padding="0">
+                <Image x:Name="imgLike" 
+                    Stretch="Uniform"
+                    Source="/Multimedia/icons/like_black.png"/>
+            </Button>
+        </Grid>
     </Border>
 </UserControl>

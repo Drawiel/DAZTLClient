@@ -99,5 +99,98 @@ namespace DAZTLClient.Services
             };
         }
 
+        public async Task<SongListResponse> SearchSongsAsync(string query)
+        {
+            try
+            {
+                var request = new SearchRequest { Query = query };
+
+                var headers = new Metadata
+        {
+            { "authorization", $"Bearer {SessionManager.Instance.AccessToken}" }
+        };
+
+                return await _client.SearchSongsAsync(request, headers);
+            }
+            catch (RpcException ex)
+            {
+                throw new Exception($"Error al buscar canciones: {ex.Status.Detail}");
+            }
+        }
+
+        public async Task<GenericResponse> AddSongToPlaylistAsync(string playlistId, string songId, string token)
+        {
+            try
+            {
+                var request = new AddSongToPlaylistRequest
+                {
+                    PlaylistId = int.Parse(playlistId),
+                    SongId = int.Parse(songId),
+                    Token = token
+                };
+
+                return await _client.AddSongToPlaylistAsync(request);
+            }
+            catch (RpcException ex)
+            {
+                throw new Exception($"Error al agregar canción a la playlist: {ex.Status.Detail}");
+            }
+        }
+
+        public async Task<PlaylistResponse> GetPlaylistAsync(string playlistId)
+        {
+            try
+            {
+                var request = new PlaylistIdRequest { Id = int.Parse(playlistId) };
+
+                var headers = new Metadata
+        {
+            { "authorization", $"Bearer {SessionManager.Instance.AccessToken}" }
+        };
+
+                return await _client.GetPlaylistAsync(request, headers);
+            }
+            catch (RpcException ex)
+            {
+                throw new Exception($"Error al obtener playlist: {ex.Status.Detail}");
+            }
+        }
+
+        public async Task<bool> IsArtistLikedAsync(int artistId)
+        {
+            try
+            {
+                var request = new ArtistIdRequest
+                {
+                    ArtistId = artistId,
+                    Token = SessionManager.Instance.AccessToken
+                };
+
+                var response = await _client.IsArtistLikedAsync(request);
+                return response.IsLiked;
+            }
+            catch (RpcException ex)
+            {
+                throw new Exception($"Error checking like status: {ex.Status.Detail}");
+            }
+        }
+
+        public async Task ToggleArtistLikeAsync(int artistId)
+        {
+            try
+            {
+                var request = new ArtistIdRequest
+                {
+                    ArtistId = artistId,
+                    Token = SessionManager.Instance.AccessToken
+                };
+
+                await _client.LikeArtistAsync(request);
+            }
+            catch (RpcException ex)
+            {
+                throw new Exception($"Error toggling artist like: {ex.Status.Detail}");
+            }
+        }
     }
 }
