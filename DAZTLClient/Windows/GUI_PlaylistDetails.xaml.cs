@@ -17,7 +17,7 @@ namespace DAZTLClient.Windows
     {
         private readonly PlaylistResponse _playlist;
         private bool _isUserDraggingSlider = false;
-        private List<Notification> notifications = new List<Notification>();
+        private List<Daztl.Notification> notifications = new List<Daztl.Notification>();
         private readonly ContentService _contentService = new ContentService();
 
         public GUI_PlaylistDetails(PlaylistResponse playlist)
@@ -187,7 +187,7 @@ namespace DAZTLClient.Windows
                     Height = 70,
                     Margin = new Thickness(0, 5, 0, 5),
                     HorizontalContentAlignment = HorizontalAlignment.Left,
-                    Content = notification.Title,
+                    Content = notification.Message,
                     Background = (Brush)new BrushConverter().ConvertFromString("#202123"),
                     BorderBrush = Brushes.Gray,
                     BorderThickness = new Thickness(1),
@@ -195,8 +195,8 @@ namespace DAZTLClient.Windows
                 };
 
                 btn.Click += (s, e) => {
-                    var noti = (Notification)((Button)s).Tag;
-                    MessageBox.Show($"Navegar a: {noti.Title}");
+                    var noti = (Daztl.Notification)((Button)s).Tag;
+                    MessageBox.Show($"Navegar a: {noti.Message}");
                     LoadNotifications();
                 };
 

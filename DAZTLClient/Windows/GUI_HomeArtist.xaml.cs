@@ -162,5 +162,15 @@ namespace DAZTLClient.Windows {
                 MessageBox.Show("No hay datos para exportar");
             }
         }
+
+        private void BtnGoToAddSong_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ArtistAddSong());
+            }
+        }
+
     }
 }

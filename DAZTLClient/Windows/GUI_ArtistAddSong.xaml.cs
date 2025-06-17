@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAZTLClient.Services;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,131 @@ namespace DAZTLClient.Windows
     /// </summary>
     public partial class GUI_ArtistAddSong : Page
     {
+        private string token;
+        private readonly ContentService _contentService= new();
+        private string imagePath;
+        private string audioPath;
         public GUI_ArtistAddSong()
         {
+            token = SessionManager.Instance.AccessToken;
             InitializeComponent();
         }
+
+
+        private void BtnAddSongCover_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog()
+                {
+                    Filter = "Image Files|*.jpg;*.jpeg;*.png",
+                    Title = "Selecciona una imagen"
+                };
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    imagePath = openFileDialog.FileName;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al subir imagen: {ex.Message}");
+            }
+
+            MessageBox.Show($"Imagen cargada correctamente.");
+        }
+
+        private void BtnAddAudioFile_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog()
+                {
+                    Filter = "Audio Files|*.mp3;*.wav|All Files|*.*",
+                    Title = "Selecciona el archivo de audio"
+                };
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    audioPath = openFileDialog.FileName;
+                    txtImage.Text = System.IO.Path.GetFileName(audioPath);
+                    MessageBox.Show($"Archivo de audio cargado correctamente: {System.IO.Path.GetFileName(audioPath)}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar el audio: {ex.Message}");
+            }
+        }
+
+        private void BtnAddSaveSong_Click(object sender, RoutedEventArgs e)
+        {
+            _ = SaveSongAsync();
+        }
+
+        private async Task SaveSongAsync()
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtBoxSongName.Text))
+                {
+                    MessageBox.Show("Debe ingresar un nombre para la canción");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(audioPath))
+                {
+                    MessageBox.Show("Debe seleccionar un archivo de audio");
+                    return;
+                }
+
+                try
+                {
+                    string songName = txtBoxSongName.Text;
+                    var result = await _contentService.UploadSongAsync(token, songName, audioPath, imagePath);
+
+                    if (result.Status == "success")
+                    {
+                        MessageBox.Show("Canción subida exitosamente", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                        NavigationService?.Navigate(new GUI_HomeArtist());
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Error al subir la canción: {result.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al subir la canción: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void BtnCancelUploadSong_Click(object sender, RoutedEventArgs e)
+        {
+            var confirmResult = MessageBox.Show(
+                "¿Está seguro que desea cancelar la subida de la canción?\nLos cambios no guardados se perderán.",
+                "Confirmar cancelación",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (confirmResult == MessageBoxResult.Yes)
+            {
+                txtBoxSongName.Text = string.Empty;
+                audioPath = string.Empty;
+                imagePath = string.Empty;
+
+                if (NavigationService != null)
+                {
+                    NavigationService.Navigate(new GUI_HomeArtist());
+                }
+            }
+        }
+
     }
 }

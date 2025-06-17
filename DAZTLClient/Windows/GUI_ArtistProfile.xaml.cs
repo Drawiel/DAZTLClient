@@ -75,6 +75,10 @@ namespace DAZTLClient.Windows {
         private void BtnGotoAddSong_Click(object sender, RoutedEventArgs e)
         {
 
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ArtistAddSong());
+            }
         }
 
         private void BtnGotoAddAlbum_Click(object sender, RoutedEventArgs e)

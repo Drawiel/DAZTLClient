@@ -221,7 +221,7 @@
             HorizontalAlignment="Left" 
             Height="260" Margin="59,104,0,0" 
             VerticalAlignment="Top" 
-            Width="259"/>
+            Width="259" Click="BtnAddSongCover_Click"/>
         <TextBox
             Grid.Column="1" 
             HorizontalAlignment="Left"
@@ -229,7 +229,8 @@
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="1158"
-            Style="{StaticResource CustomTextBoxTitleStyle}" Height="136"/>
+            Style="{StaticResource CustomTextBoxTitleStyle}" Height="136"
+            x:Name="txtBoxSongName"/>
         <TextBlock TextWrapping="Wrap" 
            Text="Archivo:" 
            VerticalAlignment="Center"
@@ -241,22 +242,23 @@
             Name="txtImage"
             TextWrapping="Wrap"   
             Margin="321,471,661,539"
+            FontSize="10"
             Style="{StaticResource CustomTextBoxStyle}" Grid.Column="1"/>
         <Button 
             Content="Subir Archivo" 
             Height="60"
             Margin="1056,476,440,544"
-            Style="{StaticResource ShowOnHoverButtonStyle}" Grid.Column="1"/>
+            Style="{StaticResource ShowOnHoverButtonStyle}" Grid.Column="1" Click="BtnAddAudioFile_Click"/>
         <Button 
             Content="Agregar" 
             Height="60"
             Margin="748,682,748,338"
-            Style="{StaticResource ShowOnHoverButtonStyle}" Grid.Column="1"/>
+            Style="{StaticResource ShowOnHoverButtonStyle}" Grid.Column="1" Click="BtnAddSaveSong_Click"/>
         <Button 
             Content="Cancelar" 
             Height="60"
             Margin="432,682,1064,338"
-            Style="{StaticResource ShowOnHoverButtonStyle}" Grid.Column="1"/>
+            Style="{StaticResource ShowOnHoverButtonStyle}" Grid.Column="1" Click="BtnCancelUploadSong_Click"/>
 
     </Grid>
 </Page>

@@ -5,6 +5,7 @@ using Daztl;
 using Grpc.Core;
 using Google.Protobuf.WellKnownTypes;
 using System.IO;
+using Google.Protobuf;
 
 namespace DAZTLClient.Services
 {
@@ -235,6 +236,55 @@ namespace DAZTLClient.Services
                 errorResponse.Status = "error";
                 errorResponse.Message = $"Error: {ex.Message}";
                 return errorResponse;
+            }
+        }
+
+        public async Task<GenericResponse> UploadSongAsync(string token, string title, string audioFilePath, string coverImagePath)
+        {
+            try
+            {
+                if (!File.Exists(audioFilePath))
+                    throw new FileNotFoundException("Archivo de audio no encontrado");
+
+                byte[] audioBytes = File.ReadAllBytes(audioFilePath);
+                if (audioBytes.Length == 0)
+                    throw new Exception("El archivo de audio está vacío");
+
+                ByteString coverImageBytes = ByteString.Empty;
+                if (!string.IsNullOrEmpty(coverImagePath) && File.Exists(coverImagePath))
+                {
+                    byte[] imageBytes = File.ReadAllBytes(coverImagePath);
+                    coverImageBytes = ByteString.CopyFrom(imageBytes);
+                }
+
+                var request = new UploadSongRequest
+                {
+                    Token = token, 
+                    Title = title,
+                    AudioFile = ByteString.CopyFrom(audioBytes),
+                    CoverImage = coverImageBytes
+                };
+
+                var headers = new Metadata
+        {
+            { "authorization", $"Bearer {token}" }
+        };
+
+                Console.WriteLine($"Intentando subir canción: {title} ({audioBytes.Length} bytes)");
+                var response = await _client.UploadSongAsync(request, headers);
+                Console.WriteLine("Respuesta recibida del servidor");
+
+                return response;
+            }
+            catch (RpcException ex)
+            {
+                Console.WriteLine($"ERROR gRPC: {ex.Status.Detail} | Code: {ex.StatusCode}");
+                throw new Exception($"Error del servidor: {ex.Status.Detail ?? "Sin detalles"} (Código: {ex.StatusCode})");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR inesperado: {ex.ToString()}");
+                throw;
             }
         }
 

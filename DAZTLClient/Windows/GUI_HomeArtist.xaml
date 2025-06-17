@@ -114,7 +114,7 @@
             <Button Content="Agregar canción" 
                     Style="{StaticResource UnderlineHoverButtonStyle}"
                     HorizontalAlignment="Center"
-                    Margin="0,390,0,647"/>
+                    Margin="0,390,0,647" Click="BtnGoToAddSong_Click"/>
             <Button Content="Agregar Album" 
                     Style="{StaticResource UnderlineHoverButtonStyle}"
                     HorizontalAlignment="Center"

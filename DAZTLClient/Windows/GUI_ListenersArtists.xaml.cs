@@ -17,7 +17,7 @@ namespace DAZTLClient.Windows
 {
     public partial class GUI_ListenersArtists : Page
     {
-        private List<Notification> notifications = new List<Notification>();
+        private List<Daztl.Notification> notifications = new List<Daztl.Notification>();
         private readonly ContentService contentService = new ContentService();
         private bool _isUserDraggingSlider = false;
 
@@ -168,9 +168,9 @@ namespace DAZTLClient.Windows
         {
             for (int i = 1; i <= 10; i++)
             {
-                notifications.Add(new Notification
+                notifications.Add(new Daztl.Notification
                 {
-                    Title = $"Notificación {i}",
+                    Message = $"Notificación {i}",
                 });
             }
 
@@ -189,7 +189,7 @@ namespace DAZTLClient.Windows
                     Height = 70,
                     Margin = new Thickness(0, 5, 0, 5),
                     HorizontalContentAlignment = HorizontalAlignment.Left,
-                    Content = notification.Title,
+                    Content = notification.Message,
                     Background = (Brush)new BrushConverter().ConvertFromString("#202123"),
                     BorderBrush = Brushes.Gray,
                     BorderThickness = new Thickness(1),
@@ -198,8 +198,8 @@ namespace DAZTLClient.Windows
 
                 btn.Click += (s, e) =>
                 {
-                    var noti = (Notification)((Button)s).Tag;
-                    MessageBox.Show($"Navegar a: {noti.Title}");
+                    var noti = (Daztl.Notification)((Button)s).Tag;
+                    MessageBox.Show($"Navegar a: {noti.Message}");
                     LoadNotifications();
                 };
 
