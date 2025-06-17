@@ -84,6 +84,12 @@ namespace DAZTLClient.Windows {
             LoadPlaylistPage();
             LoadAlbumsPage();
             LoadArtistsPage();
+            _ = StartWebSocketListener();
+        }
+        private async Task StartWebSocketListener()
+        {
+            var client = new WebSocketClient();
+            await client.StartAsync();
         }
 
         private async void LoadAllSongs()
