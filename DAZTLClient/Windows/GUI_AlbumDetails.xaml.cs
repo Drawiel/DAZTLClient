@@ -51,7 +51,7 @@ namespace DAZTLClient.Windows
                         Id = song.Id,
                         Title = song.Title,
                         Artist = song.Artist,
-                        Image = new BitmapImage(new Uri(song.CoverUrl)),
+                        Image = new BitmapImage(new Uri(_album.CoverUrl)),
                         AudioUrl = song.AudioUrl
                     });
                 }

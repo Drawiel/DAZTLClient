@@ -118,7 +118,8 @@
             <Button Content="Agregar Album" 
                     Style="{StaticResource UnderlineHoverButtonStyle}"
                     HorizontalAlignment="Center"
-                    Margin="0,480,0,557"/>
+                    Margin="0,480,0,557"
+                    Click="BtnGoToAddAlbum_Click"/>
             <Button Content="Cerrar Sesion" 
                     Style="{StaticResource UnderlineHoverButtonStyle}"
                     HorizontalAlignment="Center"

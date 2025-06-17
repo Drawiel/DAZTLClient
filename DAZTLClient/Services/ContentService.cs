@@ -15,7 +15,12 @@ namespace DAZTLClient.Services
 
         public ContentService()
         {
-            var channel = GrpcChannel.ForAddress("http://localhost:50051");
+            var channel = GrpcChannel.ForAddress("http://localhost:50051", new GrpcChannelOptions
+            {
+                MaxReceiveMessageSize = 50 * 1024 * 1024, 
+                MaxSendMessageSize = 50 * 1024 * 1024,   
+                Credentials = ChannelCredentials.Insecure
+            });
             _client = new MusicService.MusicServiceClient(channel);
         }
 
@@ -258,6 +263,9 @@ namespace DAZTLClient.Services
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(title))
+                    throw new ArgumentException("El título de la canción es requerido");
+
                 if (!File.Exists(audioFilePath))
                     throw new FileNotFoundException("Archivo de audio no encontrado");
 
@@ -265,19 +273,25 @@ namespace DAZTLClient.Services
                 if (audioBytes.Length == 0)
                     throw new Exception("El archivo de audio está vacío");
 
+                if (audioBytes.Length > 50 * 1024 * 1024)
+                    throw new Exception("El archivo de audio es demasiado grande (máximo 50MB)");
+
                 ByteString coverImageBytes = ByteString.Empty;
                 if (!string.IsNullOrEmpty(coverImagePath) && File.Exists(coverImagePath))
                 {
                     byte[] imageBytes = File.ReadAllBytes(coverImagePath);
+                    if (imageBytes.Length > 5 * 1024 * 1024) 
+                        throw new Exception("La imagen es demasiado grande (máximo 5MB)");
                     coverImageBytes = ByteString.CopyFrom(imageBytes);
                 }
 
                 var request = new UploadSongRequest
                 {
-                    Token = token, 
+                    Token = token,
                     Title = title,
                     AudioFile = ByteString.CopyFrom(audioBytes),
-                    CoverImage = coverImageBytes
+                    CoverImage = coverImageBytes,
+                    ReleaseDate = DateTime.Now.ToString("yyyy-MM-dd")
                 };
 
                 var headers = new Metadata
@@ -285,22 +299,96 @@ namespace DAZTLClient.Services
             { "authorization", $"Bearer {token}" }
         };
 
-                Console.WriteLine($"Intentando subir canción: {title} ({audioBytes.Length} bytes)");
-                var response = await _client.UploadSongAsync(request, headers);
-                Console.WriteLine("Respuesta recibida del servidor");
+                Console.WriteLine($"Subiendo canción: {title} (Audio: {audioBytes.Length} bytes, Imagen: {coverImageBytes.Length} bytes)");
 
+                var response = await _client.UploadSongAsync(request, headers, deadline: DateTime.UtcNow.AddMinutes(5));
+
+                Console.WriteLine($"Respuesta del servidor: {response.Status} - {response.Message}");
                 return response;
             }
             catch (RpcException ex)
             {
                 Console.WriteLine($"ERROR gRPC: {ex.Status.Detail} | Code: {ex.StatusCode}");
-                throw new Exception($"Error del servidor: {ex.Status.Detail ?? "Sin detalles"} (Código: {ex.StatusCode})");
+
+                string errorMessage = ex.StatusCode switch
+                {
+                    StatusCode.Unauthenticated => "Sesión expirada. Por favor, inicia sesión nuevamente.",
+                    StatusCode.PermissionDenied => "No tienes permisos para subir canciones.",
+                    StatusCode.InvalidArgument => "Datos de la canción inválidos.",
+                    StatusCode.ResourceExhausted => "Límite de subidas alcanzado.",
+                    StatusCode.Unavailable => "Servidor no disponible. Intenta más tarde.",
+                    StatusCode.DeadlineExceeded => "Tiempo de espera agotado. El archivo puede ser demasiado grande.",
+                    _ => ex.Status.Detail ?? "Error desconocido del servidor"
+                };
+
+                throw new Exception($"Error al subir canción: {errorMessage}");
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine($"ERROR: Archivo no encontrado - {ex.Message}");
+                throw new Exception("Archivo de audio no encontrado. Verifica la ruta.");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"ERROR: Argumento inválido - {ex.Message}");
+                throw;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"ERROR inesperado: {ex.ToString()}");
-                throw;
+                Console.WriteLine($"ERROR inesperado: {ex}");
+                throw new Exception($"Error inesperado: {ex.Message}");
             }
+        }
+
+
+        public async Task<AlbumDetailResponse> GetAlbumDetailAsync(int albumId)
+        {
+            try
+            {
+                var request = new AlbumDetailRequest { AlbumId = albumId };
+                var headers = new Metadata
+        {
+            { "authorization", $"Bearer {SessionManager.Instance.AccessToken}" }
+        };
+                return await _client.GetAlbumDetailAsync(request, headers);
+            }
+            catch (RpcException ex)
+            {
+                throw new Exception($"Error al obtener detalles del álbum: {ex.Status.Detail}");
+            }
+        }
+
+        public async Task<GenericResponse> UploadAlbumAsync(
+            string token,
+            string title,
+            string coverPath,
+            List<string> songPaths)
+        {
+            var request = new UploadAlbumRequest
+            {
+                Token = token,
+                Title = title,
+            };
+
+            if (File.Exists(coverPath))
+            {
+                request.CoverImage = ByteString.CopyFrom(File.ReadAllBytes(coverPath));
+            }
+
+            foreach (var songPath in songPaths)
+            {
+                if (File.Exists(songPath))
+                {
+                    var song = new AlbumSong
+                    {
+                        AudioFile = ByteString.CopyFrom(File.ReadAllBytes(songPath)),
+                        Filename = Path.GetFileName(songPath)
+                    };
+                    request.Songs.Add(song);
+                }
+            }
+
+            return await _client.UploadAlbumAsync(request);
         }
 
     }

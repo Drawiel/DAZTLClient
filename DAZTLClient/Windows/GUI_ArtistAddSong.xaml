@@ -203,12 +203,13 @@
             <Button Content="Mi perfil" 
                     Style="{StaticResource UnderlineHoverButtonStyle}"
                     HorizontalAlignment="Center"
-                    Margin="0,300,0,732"/>
+                    Margin="0,300,0,732" Click="BtnGoToArtistProfile_Click"/>
             <Button Content="Agregar canción" 
                     Style="{StaticResource UnderlineHoverButtonStyle}"
                     HorizontalAlignment="Center"
                     Margin="0,390,0,647"/>
-            <Button Content="Agregar Album" 
+            <Button Content="Agregar Album"
+                    Click="BtnGoToAddAlbum_Click"
                     Style="{StaticResource UnderlineHoverButtonStyle}"
                     HorizontalAlignment="Center"
                     Margin="0,480,0,557"/>
@@ -253,6 +254,7 @@
             Content="Agregar" 
             Height="60"
             Margin="748,682,748,338"
+            x:Name="btnAddSavedSong"
             Style="{StaticResource ShowOnHoverButtonStyle}" Grid.Column="1" Click="BtnAddSaveSong_Click"/>
         <Button 
             Content="Cancelar" 

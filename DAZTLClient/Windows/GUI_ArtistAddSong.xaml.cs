@@ -89,43 +89,60 @@ namespace DAZTLClient.Windows
         {
             try
             {
+                // Validaciones de la UI
                 if (string.IsNullOrWhiteSpace(txtBoxSongName.Text))
                 {
-                    MessageBox.Show("Debe ingresar un nombre para la canción");
+                    MessageBox.Show("Debe ingresar un nombre para la canción", "Error",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(audioPath))
                 {
-                    MessageBox.Show("Debe seleccionar un archivo de audio");
+                    MessageBox.Show("Debe seleccionar un archivo de audio", "Error",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                try
-                {
-                    string songName = txtBoxSongName.Text;
-                    var result = await _contentService.UploadSongAsync(token, songName, audioPath, imagePath);
+                Mouse.OverrideCursor = Cursors.Wait;
+                btnAddSavedSong.IsEnabled = false;
+                btnAddSavedSong.Content = "Subiendo...";
 
-                    if (result.Status == "success")
-                    {
-                        MessageBox.Show("Canción subida exitosamente", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                        NavigationService?.Navigate(new GUI_HomeArtist());
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Error al subir la canción: {result.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-                catch (Exception ex)
+                string songName = txtBoxSongName.Text.Trim();
+                var result = await _contentService.UploadSongAsync(token, songName, audioPath, imagePath);
+
+                if (result.Status == "success")
                 {
-                    MessageBox.Show($"Error al subir la canción: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Canción subida exitosamente", "Éxito",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    txtBoxSongName.Text = string.Empty;
+                    audioPath = string.Empty;
+                    imagePath = string.Empty;
+                    txtImage.Text = string.Empty;
+
+                    NavigationService?.Navigate(new GUI_HomeArtist());
+                }
+                else
+                {
+                    MessageBox.Show($"Error al subir la canción: {result.Message}", "Error",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error al subir la canción: {ex.Message}", "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+
+                Mouse.OverrideCursor = null;
+                btnAddSavedSong.IsEnabled = true;
+                btnAddSavedSong.Content = "Guardar Canción";
             }
         }
+
 
         private void BtnCancelUploadSong_Click(object sender, RoutedEventArgs e)
         {
@@ -148,5 +165,20 @@ namespace DAZTLClient.Windows
             }
         }
 
+        private void BtnGoToArtistProfile_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ArtistProfile());
+            }
+        }
+
+        private void BtnGoToAddAlbum_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ArtistAddAlbum());
+            }
+        }
     }
 }

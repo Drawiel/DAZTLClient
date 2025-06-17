@@ -172,5 +172,12 @@ namespace DAZTLClient.Windows {
             }
         }
 
+        private void BtnGoToAddAlbum_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ArtistAddAlbum());
+            }
+        }
     }
 }
