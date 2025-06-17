@@ -206,7 +206,13 @@ namespace DAZTLClient.Windows {
                 {
                     DataContext = album
                 };
-
+                albumCover.AlbumClicked += (sender, Empty) =>
+                {
+                    if (this.NavigationService != null)
+                    {
+                        NavigationService.Navigate(new GUI_AlbumDetails(album.Id));
+                    }
+                };
                 AlbumsGrid.Children.Add(albumCover);
             }
 

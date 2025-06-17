@@ -69,4 +69,10 @@
     <Protobuf Include="proto\daztl_service.proto" GrpcServices="Client" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Windows\GUI_AlbumDetails.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

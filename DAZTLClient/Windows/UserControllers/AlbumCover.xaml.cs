@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daztl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +21,15 @@ namespace DAZTLClient.Windows.UserControllers
     /// </summary>
     public partial class AlbumCover : UserControl
     {
+        public event EventHandler AlbumClicked;
         public AlbumCover()
         {
             InitializeComponent();
         }
 
-        private void btnAlbum_Click(object sender, RoutedEventArgs e)
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            AlbumClicked?.Invoke(this, EventArgs.Empty);
 
         }
     }
