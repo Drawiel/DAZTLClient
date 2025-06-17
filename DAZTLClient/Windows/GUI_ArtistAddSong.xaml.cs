@@ -165,5 +165,20 @@ namespace DAZTLClient.Windows
             }
         }
 
+        private void BtnGoToArtistProfile_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ArtistProfile());
+            }
+        }
+
+        private void BtnGoToAddAlbum_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ArtistAddAlbum());
+            }
+        }
     }
 }

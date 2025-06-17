@@ -15,7 +15,12 @@ namespace DAZTLClient.Services
 
         public ContentService()
         {
-            var channel = GrpcChannel.ForAddress("http://localhost:50051");
+            var channel = GrpcChannel.ForAddress("http://localhost:50051", new GrpcChannelOptions
+            {
+                MaxReceiveMessageSize = 50 * 1024 * 1024, 
+                MaxSendMessageSize = 50 * 1024 * 1024,   
+                Credentials = ChannelCredentials.Insecure
+            });
             _client = new MusicService.MusicServiceClient(channel);
         }
 
@@ -336,6 +341,39 @@ namespace DAZTLClient.Services
             {
                 throw new Exception($"Error al obtener detalles del álbum: {ex.Status.Detail}");
             }
+        }
+
+        public async Task<GenericResponse> UploadAlbumAsync(
+            string token,
+            string title,
+            string coverPath,
+            List<string> songPaths)
+        {
+            var request = new UploadAlbumRequest
+            {
+                Token = token,
+                Title = title,
+            };
+
+            if (File.Exists(coverPath))
+            {
+                request.CoverImage = ByteString.CopyFrom(File.ReadAllBytes(coverPath));
+            }
+
+            foreach (var songPath in songPaths)
+            {
+                if (File.Exists(songPath))
+                {
+                    var song = new AlbumSong
+                    {
+                        AudioFile = ByteString.CopyFrom(File.ReadAllBytes(songPath)),
+                        Filename = Path.GetFileName(songPath)
+                    };
+                    request.Songs.Add(song);
+                }
+            }
+
+            return await _client.UploadAlbumAsync(request);
         }
 
     }

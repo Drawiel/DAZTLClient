@@ -203,11 +203,13 @@
             <Button Content="Mi perfil" 
                     Style="{StaticResource UnderlineHoverButtonStyle}"
                     HorizontalAlignment="Center"
-                    Margin="0,300,0,732"/>
+                    Margin="0,300,0,732"
+                    Click="BtnGoToProfile_Click"/>
             <Button Content="Agregar canción" 
                     Style="{StaticResource UnderlineHoverButtonStyle}"
                     HorizontalAlignment="Center"
-                    Margin="0,390,0,647"/>
+                    Margin="0,390,0,647"
+                    Click="BtnGoToAddSong_Click"/>
             <Button Content="Agregar Album" 
                     Style="{StaticResource UnderlineHoverButtonStyle}"
                     HorizontalAlignment="Center"
@@ -221,7 +223,8 @@
             HorizontalAlignment="Left" 
             Height="260" Margin="59,104,0,0" 
             VerticalAlignment="Top" 
-            Width="259"/>
+            Width="259"
+            Click="BtnAddImage_Click"/>
         <TextBox
             Grid.Column="1" 
             HorizontalAlignment="Left"
@@ -229,6 +232,8 @@
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="1158"
+            TextChanged="TxtBoxAlbumTitle_TextChanged"
+            x:Name="txtBoxTitle"
             Style="{StaticResource CustomTextBoxTitleStyle}" Height="136"/>
         <TextBlock TextWrapping="Wrap" 
            Text="Archivo:" 
@@ -244,7 +249,7 @@
            FontSize="20" Grid.Column="1"/>
         <TextBox
             IsEnabled="False"
-            Name="txtImage"
+            Name="txtSongUri"
             TextWrapping="Wrap"   
             Margin="321,471,661,539"
             Style="{StaticResource CustomTextBoxStyle}" Grid.Column="1"/>
@@ -252,16 +257,20 @@
             Content="Subir Archivo" 
             Height="60"
             Margin="1056,476,440,544"
+            Click="BtnAddSongFile_Click"
             Style="{StaticResource ShowOnHoverButtonStyle}" Grid.Column="1"/>
         <Button 
             Content="Agregar" 
             Height="60"
             Margin="1450,946,46,74"
+            x:Name="btnAddAlbum"
+            Click="BtnAddAlbum_Click"
             Style="{StaticResource ShowOnHoverButtonStyle}" Grid.Column="1"/>
         <Button 
             Content="Cancelar" 
             Height="60"
             Margin="1248,946,248,74"
+            Click="BtnCancelAddAlbum_Click"
             Style="{StaticResource ShowOnHoverButtonStyle}" Grid.Column="1"/>
 
         <Border Grid.Column="1"
