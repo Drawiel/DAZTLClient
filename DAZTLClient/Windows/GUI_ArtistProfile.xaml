@@ -234,19 +234,19 @@
             Click="BtnSeeAlbumsArtist_Click"/>
 
             <StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="310,165,0,20">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="310,190,0,20">
                     <TextBox
                         Name="txtUsername"
-                        Text="{Binding Usuario.NombreUsuario}" 
+                        Text="Cargando..." 
                         FontFamily="Nunito"
-                        FontSize="110"
+                        FontSize="90"
                         Foreground="White"
                         VerticalAlignment="Center"
                         IsReadOnly="True"
                         BorderThickness="0"
                         Background="Transparent"
-                        HorizontalAlignment="Left"
-                        MinWidth="50">
+                        MinWidth="50"
+                        MaxLength="30">
                         <TextBox.Style>
                             <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                                 <Setter Property="Template">
@@ -271,15 +271,16 @@
             </StackPanel>
 
             <TextBlock TextWrapping="Wrap" 
-                   Text="Contraseña:" 
+                   Text="Nueva contraseña:" 
                    Foreground="#8B8D90"
-                   Margin="72,411,1356,599"
-                   FontSize="40"/>
+                   Margin="72,392,1356,559"
+                   FontSize="40" RenderTransformOrigin="0.484,-0.073"/>
             <TextBox 
                 Name="txtPassword"
                 TextWrapping="Wrap"   
                 Margin="296,411,686,599"
-                Style="{StaticResource CustomTextBoxStyle}"/>
+                Style="{StaticResource CustomTextBoxStyle}"
+                MaxLength="30"/>
             <TextBlock
                 Text="Biografia:"
                 Foreground="#8B8D90"
@@ -287,10 +288,11 @@
                 FontSize="40"/>
             <TextBox 
                 Name="txtBio"
-                TextWrapping="NoWrap"
+                TextWrapping="Wrap"
                 Height="NaN"
                 Margin="296,541,686,337"
-                Style="{StaticResource CustomTextBoxStyle}"/>
+                Style="{StaticResource CustomTextBoxStyle}"
+                MaxLength="100"/>
 
 
             <Button 

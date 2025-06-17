@@ -27,6 +27,9 @@ namespace DAZTLClient.Windows {
         private string token;
         private readonly UserService _userService = new();
         private string imagePath;
+        private string actualUsername;
+        private string actualBio;
+        private string actualImageUrl;
 
         public GUI_ArtistProfile()
         {
@@ -66,6 +69,7 @@ namespace DAZTLClient.Windows {
             txtUsername.IsReadOnly = false;
             txtUsername.Focus();
             txtPassword.IsReadOnly = false;
+            txtBio.IsReadOnly = false;
             btnSave.Visibility = Visibility.Visible;
             btnCancel.Visibility = Visibility.Visible;
             btnUploadPhoto.Visibility = Visibility.Visible;
@@ -99,9 +103,11 @@ namespace DAZTLClient.Windows {
                 if (artistProfile != null)
                 {
                     txtUsername.Text = artistProfile.Username;
+                    actualUsername = artistProfile.Username;
                     txtBio.Text = artistProfile.Bio;
+                    actualBio = artistProfile.Bio;
                     string imageUrl = artistProfile.ProfileImageUrl;
-                    imageUrl = imageUrl.Replace("localhost", "10.0.2.2");
+                    actualImageUrl = artistProfile.ProfileImageUrl;
                     if (!string.IsNullOrEmpty(imageUrl))
                     {
                         var bitmap = new BitmapImage();
@@ -110,10 +116,7 @@ namespace DAZTLClient.Windows {
                         bitmap.EndInit();
                         imgProfilePicture.Source = bitmap;
                     }
-                    else
-                    {
-
-                    }
+                    
                 }
 
             }
@@ -123,54 +126,121 @@ namespace DAZTLClient.Windows {
             }
         }
 
-        private void BtnUploadPhoto_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog()
-            {
-                Filter = "Image Files|*.jpg;*.jpeg;*.png",
-                Title = "Selecciona una imagen de perfil"
-            };
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-                imagePath = openFileDialog.FileName;
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(imagePath);
-                bitmap.EndInit();
-                imgProfilePicture.Source = bitmap;
-            }
-        }
-
-        private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private async Task UploadProfilePicture(string imagePath)
+        private async void BtnUploadPhoto_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                using (var httpClient = new HttpClient())
+                OpenFileDialog openFileDialog = new OpenFileDialog()
                 {
-                    var fileStream = new FileStream(imagePath, FileMode.Open);
-                    var content = new MultipartFormDataContent();
-                    content.Add(new StreamContent(fileStream), "profile_picture", System.IO.Path.GetFileName(imagePath));
-                    var response = await httpClient.PostAsync("http://10.0.2.2:8000/api/profile/upload_picture/", content);
-                    if (response.IsSuccessStatusCode)
+                    Filter = "Image Files|*.jpg;*.jpeg;*.png",
+                    Title = "Selecciona una imagen de perfil"
+                };
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    imagePath = openFileDialog.FileName;
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(imagePath);
+                    bitmap.EndInit();
+                    imgProfilePicture.Source = bitmap;
+
+                    btnUploadPhoto.IsEnabled = false;
+                    btnUploadPhoto.Content = "Subiendo...";
+
+                    string result = await _userService.UploadProfileImageAsync(token, imagePath);
+                    MessageBox.Show(result);
+
+                    if (result.Contains("Imagen actualizada") || result.Contains("success"))
                     {
-                        MessageBox.Show("Foto de perfil actualizada");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error al actualizar imagen");
+                        LoadArtistProfile();
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al subir la imagen: {ex.Message}");
+                MessageBox.Show($"Error al subir imagen: {ex.Message}");
             }
+            finally
+            {
+                btnUploadPhoto.IsEnabled = true;
+                btnUploadPhoto.Content = "Subir Foto";
+            }
+
+        }
+        private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtPassword.Text))
+            {
+                if(!ValidateFields()){ return ; }
+            }
+            _ = SaveChanges();
+        }
+
+        private async Task SaveChanges()
+        {
+            try
+            {
+                btnSave.IsEnabled = false;
+                btnSave.Content = "Guardando...";
+
+                string username = !string.IsNullOrWhiteSpace(txtUsername.Text) ? txtUsername.Text : null;
+                string password = !string.IsNullOrWhiteSpace(txtPassword.Text) ? txtPassword.Text : null;
+                string bio = !string.IsNullOrWhiteSpace(txtBio.Text) ? txtBio.Text : null;
+
+                var result = await _userService.UpdateArtistProfileAsync(
+                    token, 
+                    username, 
+                    password,
+                    bio
+                );
+
+                if (result.Contains("correctamente"))
+                {
+                    txtUsername.IsReadOnly = true;
+                    txtPassword.IsReadOnly = true;
+                    txtBio.IsReadOnly = true;
+
+                    txtPassword.Clear();
+
+                    btnSave.Visibility = Visibility.Collapsed;
+                    btnCancel.Visibility = Visibility.Collapsed;
+                    btnUploadPhoto.Visibility = Visibility.Collapsed;
+                    MessageBox.Show(result);
+
+                    LoadArtistProfile();
+                } else if (result.Contains("error")){
+                    MessageBox.Show(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+            finally
+            {
+                btnSave.IsEnabled = true;
+                btnSave.Content = "Guardar";
+            }
+
+
+        }
+
+        private bool ValidateFields()
+        {
+            if(string.IsNullOrEmpty(txtUsername.Text)) 
+            {
+                MessageBox.Show("El nombre del perfil no puede ser vacio");
+                return false; 
+            }
+
+            if (Utils.FielValidator.IsValidPassword(txtPassword.Text))
+            {
+                MessageBox.Show("El formato de la contraseña es incorrecto");
+                return false;
+            }
+
+            return true;
         }
     }
 }

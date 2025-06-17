@@ -3,6 +3,7 @@ using DAZTLClient.Models;
 using Grpc.Core;
 using Grpc.Net.Client;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows; // Usamos las clases generadas por gRPC
 
@@ -101,7 +102,6 @@ namespace DAZTLClient.Services
         {
             try
             {
-                // Crear metadata para autenticación
                 var headers = new Metadata();
                 headers.Add("Authorization", $"Bearer {token}");
 
@@ -125,6 +125,65 @@ namespace DAZTLClient.Services
                 throw new Exception($"Error al obtener perfil de artista: {ex.Status.Detail}");
             }
         }
+
+        public async Task<string> UpdateArtistProfileAsync(string token, string username, string password, string bio)
+        {
+            try
+            {
+                var grpcRequest = new Daztl.UpdateArtistProfileRequest
+                {
+                    Token = token,
+                };
+
+                if (!string.IsNullOrWhiteSpace(username))
+                    grpcRequest.Username = username;
+                if (!string.IsNullOrWhiteSpace(password))
+                    grpcRequest.Password = password;
+                if (!string.IsNullOrWhiteSpace(bio))
+                    grpcRequest.Bio = bio;
+
+                var response = await _client.UpdateArtistProfileAsync(grpcRequest);
+
+                if (response.Status == "success")
+                {
+                    return "Perfil de artista actualizado correctamente.";
+                }
+                else
+                {
+                    return $"Error: {response.Message}";
+                }
+            }
+            catch (RpcException ex) 
+            { 
+                return $"Error al actualizar perfil de artista: {ex.Status.Detail}";
+            }
+        }
+
+        public async Task<string> UploadProfileImageAsync(string token, string imagePath)
+        {
+            try
+            {
+                byte[] imageBytes = File.ReadAllBytes(imagePath);
+                string filename = Path.GetFileName(imagePath);
+
+                var grpcRequest = new Daztl.UploadProfileImageRequest
+                {
+                    Token = token,
+                    ImageData = Google.Protobuf.ByteString.CopyFrom(imageBytes),
+                    Filename = filename
+                };
+
+                var response = await _client.UploadProfileImageAsync(grpcRequest);
+                return response.Status == "success" ?
+                    response.Message :
+                    $"Error: {response.Message}";
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+        }
+
 
     }
 }
