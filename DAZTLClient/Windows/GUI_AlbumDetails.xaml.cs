@@ -16,7 +16,7 @@ namespace DAZTLClient.Windows
     {
         private readonly Daztl.AlbumDetailResponse _album =new();
         private bool _isUserDraggingSlider = false;
-        private List<Notification> notifications = new List<Notification>();
+        private List<NotificationUnmarshalling> notifications = new List<NotificationUnmarshalling>();
         private readonly ContentService _contentService = new ContentService();
 
         public GUI_AlbumDetails(int albumId)
@@ -168,39 +168,6 @@ namespace DAZTLClient.Windows
             NavigationService.Navigate(new GUI_ListenersProfile());
         }
 
-        private void NotificationButton_Click(object sender, RoutedEventArgs e)
-        {
-            NotificationPopup.IsOpen = true;
-            LoadNotifications();
-        }
-        private void LoadNotifications()
-        {
-            NotificationList.Children.Clear();
-
-            foreach (var notification in notifications)
-            {
-                var btn = new Button
-                {
-                    Width = 380,
-                    Height = 70,
-                    Margin = new Thickness(0, 5, 0, 5),
-                    HorizontalContentAlignment = HorizontalAlignment.Left,
-                    Content = notification.Title,
-                    Background = (Brush)new BrushConverter().ConvertFromString("#202123"),
-                    BorderBrush = Brushes.Gray,
-                    BorderThickness = new Thickness(1),
-                    Tag = notification
-                };
-
-                btn.Click += (s, e) => {
-                    var noti = (Notification)((Button)s).Tag;
-                    MessageBox.Show($"Navegar a: {noti.Title}");
-                    LoadNotifications();
-                };
-
-                NotificationList.Children.Add(btn);
-            }
-        }
 
         private void BtnGoToCreatePlaylist_Click(object sender, RoutedEventArgs e)
         {

@@ -16,14 +16,12 @@ namespace DAZTLClient.Windows
 {
     public partial class GUI_ListenersAlbums : Page
     {
-        private List<Notification> notifications = new List<Notification>();
         private readonly ContentService contentService = new ContentService();
         private bool _isUserDraggingSlider = false;
 
         public GUI_ListenersAlbums()
         {
             InitializeComponent();
-            SimulateNotifications();
             _ = LoadAlbumsAsync();
 
             // Configuración del reproductor de música
@@ -179,54 +177,6 @@ namespace DAZTLClient.Windows
             }
         }
 
-        private void SimulateNotifications()
-        {
-            for (int i = 1; i <= 10; i++)
-            {
-                notifications.Add(new Notification
-                {
-                    Title = $"Notificación {i}",
-                });
-            }
-
-            LoadNotifications();
-        }
-
-        private void LoadNotifications()
-        {
-            NotificationList.Children.Clear();
-
-            foreach (var notification in notifications)
-            {
-                var btn = new Button
-                {
-                    Width = 380,
-                    Height = 70,
-                    Margin = new Thickness(0, 5, 0, 5),
-                    HorizontalContentAlignment = HorizontalAlignment.Left,
-                    Content = notification.Title,
-                    Background = (Brush)new BrushConverter().ConvertFromString("#202123"),
-                    BorderBrush = Brushes.Gray,
-                    BorderThickness = new Thickness(1),
-                    Tag = notification
-                };
-
-                btn.Click += (s, e) =>
-                {
-                    var noti = (Notification)((Button)s).Tag;
-                    MessageBox.Show($"Navegar a: {noti.Title}");
-                    LoadNotifications();
-                };
-
-                NotificationList.Children.Add(btn);
-            }
-        }
-
-        private void NotificationButton_Click(object sender, RoutedEventArgs e)
-        {
-            NotificationPopup.IsOpen = true;
-            LoadNotifications();
-        }
 
         private void BtnSeeAllPlaylists_Click(object sender, RoutedEventArgs e)
         {

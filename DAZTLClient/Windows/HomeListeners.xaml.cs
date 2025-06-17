@@ -13,6 +13,9 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Effects;
 using static DAZTLClient.Windows.UserControllers.ArtistCover;
+using System.Xml.Serialization;
+using System.Text.Json;
+using DAZTLClient.Models;
 
 namespace DAZTLClient.Windows {
     /// <summary>
@@ -29,7 +32,7 @@ namespace DAZTLClient.Windows {
         private List<AlbumViewModel> allAlbums = new List<AlbumViewModel>();
         private List<ArtistViewModel> allArtists = new List<ArtistViewModel>();
 
-        private List<Notification> notifications = new List<Notification>();
+        private List<NotificationUnmarshalling> notifications = new List<NotificationUnmarshalling>();
         private bool hasUnreadNotifications = true;
 
         public ObservableCollection<SongResponse> FilteredSongs { get; set; } = new();
@@ -68,7 +71,6 @@ namespace DAZTLClient.Windows {
             ShuffleToggle.Checked += (s, e) => MusicPlayerService.Instance.IsShuffling = true;
             ShuffleToggle.Unchecked += (s, e) => MusicPlayerService.Instance.IsShuffling = false;
             allCovers = new List<PlaylistCover>();
-            SimulateNotifications();
 
             for(int i = 0; i < 12; i++) {
                 var cover = new PlaylistCover {
@@ -88,7 +90,7 @@ namespace DAZTLClient.Windows {
         }
         private async Task StartWebSocketListener()
         {
-            var client = new WebSocketClient();
+            var client = new WebSocketClientNotification(this);
             await client.StartAsync();
         }
 
@@ -319,42 +321,53 @@ namespace DAZTLClient.Windows {
                 NavigationService.Navigate(new GUI_ListenersPlaylist());
             }
         }
-        private void SimulateNotifications() {
-            for(int i = 1; i <= 10; i++) {
-                notifications.Add(new Notification {
-                    Title = $"Notificación {i}",
-                    
-                });
-            }
+        
+        public void AddNotification(string titleNotification)
+        {
+            var notification = JsonSerializer.Deserialize<NotificationUnmarshalling>(titleNotification);
 
-            LoadNotifications();
+            if (notification?.type == "notification")
+            {
+                notifications.Add(notification);
+            }
         }
 
-        private void LoadNotifications() {
+        private void LoadNotifications()
+        {
             NotificationList.Children.Clear();
 
-            foreach(var notification in notifications) {
-                var btn = new Button {
+            foreach (var notification in notifications.ToList()) 
+            {
+                var btn = new Button
+                {
                     Width = 380,
                     Height = 70,
                     Margin = new Thickness(0, 5, 0, 5),
                     HorizontalContentAlignment = HorizontalAlignment.Left,
-                    Content = notification.Title,
+                    Content = notification.message,
                     Background = (Brush)new BrushConverter().ConvertFromString("#202123"),
                     BorderBrush = Brushes.Gray,
+                    Foreground = Brushes.White,
                     BorderThickness = new Thickness(1),
-                    Tag = notification // Guardamos la referencia
+                    Tag = notification
                 };
 
-                btn.Click += (s, e) => {
-                    var noti = (Notification)((Button)s).Tag;
-                    MessageBox.Show($"Navegar a: {noti.Title}");
-                    LoadNotifications(); // Refrescar UI
+                btn.Click += (s, e) =>
+                {
+                    var noti = (NotificationUnmarshalling)((Button)s).Tag;
+
+                    var chatWindow = new ChatWindow(noti.id);
+                    chatWindow.Owner = Application.Current.MainWindow;
+                    chatWindow.ShowDialog(); 
+
+                                    notifications.Remove(noti);
+                    LoadNotifications();
                 };
 
                 NotificationList.Children.Add(btn);
             }
         }
+
 
         private void NotificationButton_Click(object sender, RoutedEventArgs e) {
             NotificationPopup.IsOpen = true;
@@ -364,9 +377,6 @@ namespace DAZTLClient.Windows {
         }
 
 
-        public class Notification {
-            public string Title { get; set; }
-        }
 
         private void BtnSeeAllAlbums_Click(object sender, RoutedEventArgs e) {
             if (this.NavigationService != null)

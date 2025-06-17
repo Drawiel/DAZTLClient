@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAZTLClient.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
@@ -8,18 +9,24 @@ using System.Windows;
 
 namespace DAZTLClient.Services
 {
-    public class WebSocketClient
+    public class WebSocketClientChat
     {
         
-            private readonly ClientWebSocket _client = new();
-            private readonly Uri _uri = new("ws://localhost:8000/ws/notifications/");
+        private readonly ClientWebSocket _client = new();
+        private readonly Uri _uri = new("ws://localhost:8000/ws/chat/");
+        private ChatWindow chatWindow;
 
-            public async Task StartAsync()
+        public WebSocketClientChat(ChatWindow chatwindow)
+        {
+            this.chatWindow = chatWindow;
+        }
+
+        public async Task StartAsync()
             {
                 try
                 {
                     await _client.ConnectAsync(_uri, CancellationToken.None);
-                    Console.WriteLine("✅ Conectado al WebSocket");
+                    Console.WriteLine("Conectado al WebSocket");
 
                     byte[] buffer = new byte[1024];
 
@@ -28,16 +35,15 @@ namespace DAZTLClient.Services
                         var result = await _client.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
                         string message = Encoding.UTF8.GetString(buffer, 0, result.Count);
 
-                        // Lógica para manejar el mensaje recibido
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            MessageBox.Show($"📩 Notificación: {message}");
+                            chatWindow.PrintMessage(message);
                         });
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("❌ Error al conectar WebSocket: " + ex.Message);
+                    MessageBox.Show("Error al conectar WebSocket: " + ex.Message);
                 }
             }
 

@@ -26,7 +26,6 @@ service MusicService {
 
     rpc UploadSong (UploadSongRequest) returns (GenericResponse);
     rpc UploadAlbum (UploadAlbumRequest) returns (GenericResponse);
-    rpc GetAlbumDetail (AlbumDetailRequest) returns (AlbumDetailResponse);
 
     rpc ArtistReport (Empty) returns (ReportResponse);
     rpc SystemReport (Empty) returns (ReportResponse);
@@ -45,6 +44,8 @@ service MusicService {
     rpc GlobalSearch(SearchRequest) returns (GlobalSearchResponse);
 
 
+    rpc SendMessageChat (MessageRequest) returns (Empty) ;
+
     rpc ListNotifications (Empty) returns (NotificationListResponse);
     rpc GetUnseenNotificationCount (Empty) returns (UnseenCountResponse);
     rpc MarkNotificationAsSeen (MarkAsSeenRequest) returns (GenericResponse);
@@ -61,6 +62,11 @@ message RegisterRequest {
     string last_name = 5;
 }
 
+message MessageRequest{
+    string token = 1;
+    string username = 2;
+    string message = 3;
+}
 message RegisterArtistRequest {
     string username = 1;
     string email = 2;
@@ -173,10 +179,6 @@ message PlaylistIdRequest {
     int32 id = 1;
 }
 
-message AlbumDetailRequest {
-    int32 album_id = 1;  
-}
-
 message PlaylistDetailRequest {
   string token = 1;
   int32 playlist_id = 2;
@@ -189,16 +191,6 @@ message PlaylistDetailResponse {
   string status = 4;
   string message = 5;
   string cover_url = 6;
-}
-
-message AlbumDetailResponse {
-    int32 id = 1;
-    string title = 2;
-    string artist_name = 3;
-    string cover_url = 4;
-    repeated SongResponse songs = 5;
-    string status = 6;
-    string message = 7;
 }
 
 message PlaylistResponse {

@@ -1,0 +1,32 @@
+﻿<Window x:Class="DAZTLClient.Windows.ChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DAZTLClient.Windows"
+        mc:Ignorable="d"
+        Title="ChatWindow" Height="450" Width="451"
+    WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        WindowStyle="ToolWindow"
+        ShowInTaskbar="False"
+        Background="#202123">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Área de mensajes -->
+        <ScrollViewer Grid.Row="0" Margin="0,0,0,10" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="MessagesPanel" />
+        </ScrollViewer>
+
+        <!-- Input + botón -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBox x:Name="InputBox" Width="280" Height="30" Margin="0,0,10,0" />
+            <Button Content="Enviar" Width="80" Height="30" Click="SendButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

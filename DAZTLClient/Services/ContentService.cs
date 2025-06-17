@@ -37,7 +37,22 @@ namespace DAZTLClient.Services
             }
         }
 
-
+        public async Task<AlbumDetailResponse> GetAlbumDetailAsync(int albumId)
+        {
+            try
+            {
+                var request = new AlbumDetailRequest { AlbumId = albumId };
+                var headers = new Metadata
+        {
+            { "authorization", $"Bearer {SessionManager.Instance.AccessToken}" }
+        };
+                return await _client.GetAlbumDetailAsync(request, headers);
+            }
+            catch (RpcException ex)
+            {
+                throw new Exception($"Error al obtener detalles del álbum: {ex.Status.Detail}");
+            }
+        }
         public async Task<GlobalSearchResponse> GlobalSearchAsync(string query)
         {
             try

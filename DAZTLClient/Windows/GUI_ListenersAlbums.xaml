@@ -344,17 +344,7 @@
             Width="1920"
             Height="85"
             VerticalAlignment="Top">
-            <Button x:Name="NotificationButton"
-                HorizontalAlignment="Left" 
-                Height="33" 
-                Margin="1750,0,0,0" 
-                VerticalAlignment="Center" 
-                Width="28"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                Style="{StaticResource IconButtonStyle}"
-                Click="NotificationButton_Click">
-            </Button>
+            
 
             <!-- Popup de notificaciones -->
             <Popup x:Name="NotificationPopup"
