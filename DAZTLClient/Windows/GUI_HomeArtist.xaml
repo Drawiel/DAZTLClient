@@ -120,27 +120,62 @@
                     HorizontalAlignment="Center"
                     Margin="0,480,0,557"/>
             <Button Content="Cerrar Sesion" 
-                Style="{StaticResource UnderlineHoverButtonStyle}"
-                HorizontalAlignment="Center"
-                Margin="0,572,0,466" />
+                    Style="{StaticResource UnderlineHoverButtonStyle}"
+                    HorizontalAlignment="Center"
+                    Margin="0,572,0,466"
+                    Click="BtnCloseSession_Click"/>
 
         </Grid>
         <Button 
             Grid.Column="1" 
+            x:Name="btnSongsReport"
             Content="Canciones"
             Style="{StaticResource ReportButtonStyle}"
             HorizontalAlignment="Left" 
             Height="185" 
             Margin="78,181,0,0" 
             VerticalAlignment="Top" 
-            Width="340"/>
+            Width="340"
+            Click="BtnSongsReport_Click"/>
         <Button 
             Grid.Column="1" 
             Content="Albumes"
+            x:Name="btnAlbumsReport"
             Style="{StaticResource ReportButtonStyle}"
             HorizontalAlignment="Left" 
             Margin="78,448,0,448" 
-            Width="340"/>
+            Width="340"
+            Click="BtnAlbumsReport_Click"/>
+
+        <DataGrid
+            Grid.Column="1"
+            Name="dataGridReportData" 
+            Height="638" Margin="522,0,76,0" 
+            VerticalAlignment="Center"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            GridLinesVisibility="All"
+            HeadersVisibility="All"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            />
+
+        <Button 
+            Grid.Column="1" 
+            Content="Exportar"
+            x:Name="btnExport"
+            Style="{StaticResource ReportButtonStyle}" 
+            Margin="1244,879,208,101" 
+            Height="100" Width="200"
+            FontSize="30"
+            IsEnabled="False"
+            Click="BtnExportCSV_Click"/>
+        <TextBlock
+            Text="Mi reporte:"
+            x:Name="txtReportInfo"
+            Foreground="#8B8D90"
+            Margin="522,138,76,872"
+            FontSize="40" Grid.Column="1" d:LayoutOverrides="HorizontalAlignment"/>
 
     </Grid>
 </Page>

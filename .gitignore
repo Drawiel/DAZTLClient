@@ -365,3 +365,11 @@ FodyWeavers.xsd
 
 .vs/DAZTLClient
 DAZTLClient/obj
+/.vs/DAZTLClient/DesignTimeBuild/.dtbcache.v2
+/.vs/DAZTLClient/v17/.futdcache.v2
+/.vs/DAZTLClient/v17/.suo
+/.vs/DAZTLClient/v17/DocumentLayout.backup.json
+/.vs/DAZTLClient/v17/DocumentLayout.json
+/DAZTLClient/obj/Debug/net8.0-windows/DAZTLClient.AssemblyInfo.cs
+/DAZTLClient/obj/Debug/net8.0-windows/DAZTLClient.AssemblyInfoInputs.cache
+/DAZTLClient/obj/Debug/net8.0-windows/DAZTLClient_MarkupCompile.i.cache

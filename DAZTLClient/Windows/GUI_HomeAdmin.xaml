@@ -115,54 +115,77 @@
         </Grid>
         <Button 
             Grid.Column="1" 
+            x:Name="btnUsersReport"
             Content="Usuarios"
             Style="{StaticResource ReportButtonStyle}"
             HorizontalAlignment="Left" 
             Height="185" 
             Margin="78,181,0,0" 
             VerticalAlignment="Top" 
-            Width="340"/>
+            Width="340"
+            Click="BtnUsersReport_Click"/>
 
         <Button 
             Grid.Column="1" 
+            x:Name="btnSongsReport"
             Content="Canciones"
             Style="{StaticResource ReportButtonStyle}"
             HorizontalAlignment="Left" 
             Margin="78,448,0,448" 
             Height="185"
-            Width="340"/>
+            Width="340"
+            Click="BtnSongsReport_Click"/>
         <Button 
             Grid.Column="1" 
             Content="Artistas"
+            x:Name="btnArtistsReport"
             Style="{StaticResource ReportButtonStyle}"
             HorizontalAlignment="Left" 
             Height="185" 
             Width="340"
             Margin="522,181,0,0" 
-            VerticalAlignment="Top"/>
+            VerticalAlignment="Top"
+            Click="BtnArtistsReport_Click"/>
         <Button 
             Grid.Column="1" 
             Content="Oyentes"
+            x:Name="btnListenersReport"
             Style="{StaticResource ReportButtonStyle}"
             HorizontalAlignment="Left" 
             Height="185" 
             Width="340"
             Margin="972,181,0,0" 
-            VerticalAlignment="Top"/>
+            VerticalAlignment="Top"
+            Click="BtnListenersReport_Click"/>
         <Button 
             Grid.Column="1" 
             Content="Albumes"
+            x:Name="btnAlbumsReport"
             Style="{StaticResource ReportButtonStyle}" 
             Margin="522,448,790,447" 
-            Height="185"/>
+            Height="185"
+            Click="BtnAlbumsReport_Click"/>
+
+        <DataGrid
+            Grid.Column="1"
+            Name="dataGridReportData" 
+            Height="368" Margin="0,695,510,0" 
+            VerticalAlignment="Top"
+            AutoGenerateColumns="True"
+            IsReadOnly="True"
+            GridLinesVisibility="All"
+            HeadersVisibility="All"
+            />
         <Button 
             Grid.Column="1" 
-            Content="Playlist"
-            Style="{StaticResource ReportButtonStyle}"
-            HorizontalAlignment="Left" 
-            Margin="78,720,0,175" 
-            Height="185"
-            Width="340" d:LayoutOverrides="Height"/>
+            Content="Exportar"
+            x:Name="btnExport"
+            Style="{StaticResource ReportButtonStyle}" 
+            Margin="1244,879,208,101" 
+            Height="100" Width="200"
+            FontSize="30"
+            IsEnabled="False"
+            Click="BtnExportCSV_Click"/>
 
     </Grid>
 </Page>

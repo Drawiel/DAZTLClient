@@ -192,5 +192,51 @@ namespace DAZTLClient.Services
                 throw new Exception($"Error toggling artist like: {ex.Status.Detail}");
             }
         }
+
+        public async Task<AdminReportResponse> GetAdminReportAsync(string token, string reportType)
+        {
+            try
+            {
+                var grpcRequest = new Daztl.AdminReportRequest
+                {
+                    Token = token,
+                    ReportType = reportType
+                };
+
+                var response = await _client.GetAdminReportAsync(grpcRequest);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                var errorResponse = new AdminReportResponse();
+                errorResponse.Status = "error";
+                errorResponse.Message = $"Error: {ex.Message}";
+                return errorResponse;
+            }
+        }
+
+        public async Task<ArtistReportResponse> GetArtistReportAsync(string token, string reportType)
+        {
+            try
+            {
+                var grpcRequest = new ArtistReportRequest
+                {
+                    Token = token,
+                    ReportType = reportType
+                };
+
+                var response = await _client.GetArtistReportAsync(grpcRequest);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                var errorResponse = new ArtistReportResponse();
+                errorResponse.Status = "error";
+                errorResponse.Message = $"Error: {ex.Message}";
+                return errorResponse;
+            }
+        }
+
     }
 }

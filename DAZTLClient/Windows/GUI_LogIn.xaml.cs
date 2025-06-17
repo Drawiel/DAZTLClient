@@ -26,6 +26,7 @@ namespace DAZTLClient.Windows {
             SignupPage.LogInRequested += (s, e) => ShowLogIn();
             LoginPage.LoginListenerSuccessful += (s, e) => NavigateToHomeListener();
             LoginPage.LoginArtistSuccessful += (s, e) => NavigateToHomeArtist();
+            LoginPage.LoginAdminSuccessful += (s, e) => NavigateToHomeAdmin();
         }
 
         private void ShowSignUp() {
@@ -62,6 +63,10 @@ namespace DAZTLClient.Windows {
         private void NavigateToHomeArtist()
         {
             this.NavigationService.Navigate(new GUI_HomeArtist());
+        }
+        private void NavigateToHomeAdmin()
+        {
+            this.NavigationService.Navigate(new GUI_HomeAdmin());
         }
     }
 
