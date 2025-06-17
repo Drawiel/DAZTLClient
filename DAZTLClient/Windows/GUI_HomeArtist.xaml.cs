@@ -36,11 +36,6 @@ namespace DAZTLClient.Windows {
             }
         }
 
-        private void BtnAlbumsReport_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void BtnCloseSession_Click(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService != null)

@@ -253,6 +253,7 @@
             Content="Agregar" 
             Height="60"
             Margin="748,682,748,338"
+            x:Name="btnAddSavedSong"
             Style="{StaticResource ShowOnHoverButtonStyle}" Grid.Column="1" Click="BtnAddSaveSong_Click"/>
         <Button 
             Content="Cancelar" 
