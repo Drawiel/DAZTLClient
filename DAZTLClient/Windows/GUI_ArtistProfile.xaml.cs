@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
 using System.Net.Http;
+using DAZTLClient.Services;
 
 namespace DAZTLClient.Windows {
     /// <summary>
@@ -26,9 +27,6 @@ namespace DAZTLClient.Windows {
         private string token;
         private readonly UserService _userService = new();
         private string imagePath;
-        private string actualUsername;
-        private string actualBio;
-        private string actualImageUrl;
 
         public GUI_ArtistProfile()
         {
@@ -91,7 +89,7 @@ namespace DAZTLClient.Windows {
 
         private void BtnGoToHome_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new GUI_HomeArtist());
         }
 
         private async void LoadArtistProfile()
@@ -102,11 +100,8 @@ namespace DAZTLClient.Windows {
                 if (artistProfile != null)
                 {
                     txtUsername.Text = artistProfile.Username;
-                    actualUsername = artistProfile.Username;
                     txtBio.Text = artistProfile.Bio;
-                    actualBio = artistProfile.Bio;
                     string imageUrl = artistProfile.ProfileImageUrl;
-                    actualImageUrl = artistProfile.ProfileImageUrl;
                     if (!string.IsNullOrEmpty(imageUrl))
                     {
                         var bitmap = new BitmapImage();
@@ -172,6 +167,10 @@ namespace DAZTLClient.Windows {
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 if(!ValidateFields()){ return ; }
+            }
+            if (!Utils.FielValidator.IsValidPassword(txtPassword.Text))
+            {
+                if (!ValidateFields()) { return; }
             }
             _ = SaveChanges();
         }
@@ -241,8 +240,14 @@ namespace DAZTLClient.Windows {
 
             return true;
         }
-        private void BtnSeeAlbumsArtist_Click(object sender, RoutedEventArgs e) {
 
+        private void BtnCancelChanges_Click(object sender, RoutedEventArgs e)
+        {
+            btnSave.Visibility=Visibility.Collapsed;
+            btnCancel.Visibility=Visibility.Collapsed;
+            btnUploadPhoto.Visibility=Visibility.Collapsed;
+            txtPassword.Clear();
+            LoadArtistProfile();
         }
     }
 }

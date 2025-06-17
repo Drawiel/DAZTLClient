@@ -22,6 +22,9 @@
     <Compile Update="Windows\GUI_ArtistProfile.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\GUI_HomeAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\GUI_HomeArtist.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,6 +1,4 @@
-﻿using DAZTLClient.Windows;
-using DAZTLClient.Windows.UserControllers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,21 +9,26 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DAZTLClient
+namespace DAZTLClient.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GUI_HomeAdmin.xaml
     /// </summary>
-    public partial class MainWindow : Window {
-        public MainWindow() {
+    public partial class GUI_HomeAdmin : Page
+    {
+        public GUI_HomeAdmin()
+        {
             InitializeComponent();
-            MainFrame.Navigate(new GUI_LogIn());
+        }
+        
+
+        private void BtnCloseSession_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
-
 }

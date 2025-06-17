@@ -33,22 +33,25 @@
             </Button.RenderTransform>
         </Button>
         <TextBox
-           Name="txtBoxName"
-           materialDesign:HintAssist.HelperTextFontSize="60"
-           materialDesign:HintAssist.Hint="Nombre(s)"
-           materialDesign:HintAssist.Foreground="White"
-           HorizontalAlignment="Left" 
-           Height="75" 
-           Margin="107,247,0,0" 
-           TextWrapping="NoWrap" 
-           Text="" 
-           VerticalAlignment="Top" 
-           Width="490"
-           FontSize="24"
-           VerticalContentAlignment="Center"
-           Padding="22,0,35,0"
-           Background="Transparent"
-           Foreground="White"/>
+            Name="txtBoxName"
+            materialDesign:HintAssist.HelperTextFontSize="60"
+            materialDesign:HintAssist.Hint="Nombre(s)"
+            materialDesign:HintAssist.Foreground="White"
+            HorizontalAlignment="Left" 
+            Height="75" 
+            Margin="107,247,0,0" 
+            TextWrapping="NoWrap" 
+            Text="" 
+            VerticalAlignment="Top" 
+            Width="490"
+            FontSize="24"
+            VerticalContentAlignment="Center"
+            Padding="22,0,35,0"
+            Background="Transparent"
+            Foreground="White"
+            MaxLength="30"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"
+            />
         <TextBox
            Name="txtBoxLastName"
            materialDesign:HintAssist.HelperTextFontSize="60"
@@ -65,7 +68,9 @@
            VerticalContentAlignment="Center"
            Padding="22,0,35,0"
            Background="Transparent"
-           Foreground="White"/>
+           Foreground="White"
+            MaxLength="30"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"/>
         <TextBox
            Name="txtBoxUsername"
            materialDesign:HintAssist.HelperTextFontSize="60"
@@ -82,7 +87,9 @@
            VerticalContentAlignment="Center"
            Padding="22,0,35,0"
            Background="Transparent"
-           Foreground="White"/>
+           Foreground="White"
+            MaxLength="30"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"/>
         <TextBox
             Name="txtBoxEmail"
             materialDesign:HintAssist.HelperTextFontSize="60"
@@ -99,7 +106,9 @@
             VerticalContentAlignment="Center"
             Padding="22,0,35,0"
             Background="Transparent"
-            Foreground="White"/>
+            Foreground="White"
+            MaxLength="30"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"/>
         <PasswordBox
             Name="pssBoxPaswordOne"
             HorizontalAlignment="Left" 
@@ -114,7 +123,9 @@
             Style="{StaticResource MaterialDesignRevealPasswordBox}"
             TextElement.FontSize="24"
             TextElement.Foreground="#C6C6C6"
-            Padding="22,0,10,0"/>
+            Padding="22,0,10,0"
+            MaxLength="20"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"/>
         <PasswordBox 
             Name="pssBoxPaswordTwo"
             HorizontalAlignment="Left" 
@@ -129,7 +140,9 @@
             Style="{StaticResource MaterialDesignRevealPasswordBox}"
             TextElement.FontSize="24"
             TextElement.Foreground="#C6C6C6"
-            Padding="22,0,10,0"/>
+            Padding="22,0,10,0"
+            MaxLength="30"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="Hidden"/>
 
 
         <Button 

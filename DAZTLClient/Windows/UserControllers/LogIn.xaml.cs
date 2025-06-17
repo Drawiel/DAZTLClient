@@ -25,6 +25,7 @@ namespace DAZTLClient.Windows.UserControllers
         private readonly UserService _userService = new UserService();
         public event EventHandler LoginListenerSuccessful;
         public event EventHandler LoginArtistSuccessful;
+        public event EventHandler LoginAdminSuccessful;
 
         public LogIn() {
             InitializeComponent();
@@ -51,6 +52,12 @@ namespace DAZTLClient.Windows.UserControllers
                 } else if (result == "Inicio de sesion de oyente")
                 {
                     LoginListenerSuccessful?.Invoke(this, EventArgs.Empty);
+                } else if (result == "Inicio de sesion de admin")
+                {
+                    LoginAdminSuccessful?.Invoke(this, EventArgs.Empty);
+                } else
+                {
+                    MessageBox.Show("No se han reconocido esas credenciales", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex) { 

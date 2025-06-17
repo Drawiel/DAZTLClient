@@ -308,6 +308,7 @@
                 Height="60"
                 Width="110"
                 Margin="698,968,844,52"
+                Click="BtnCancelChanges_Click"
                 Style="{StaticResource ShowOnHoverButtonStyle}"/>
             <Button 
                 Name="btnUploadPhoto"

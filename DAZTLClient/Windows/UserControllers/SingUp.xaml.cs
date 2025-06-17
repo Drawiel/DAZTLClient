@@ -1,5 +1,6 @@
 ﻿using DAZTLClient.Models;
 using DAZTLClient.Services;
+using DAZTLClient.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,18 @@ namespace DAZTLClient.Windows.UserControllers
         {
             var password = pssBoxPaswordOne.Password;
             var confirmPassword = pssBoxPaswordTwo.Password;
+
+            if (!FielValidator.IsValidPassword(password))
+            {
+                MessageBox.Show("La contraseña no es valida, requiere una letra minuscula, mayuscula y caracter especial", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!FielValidator.IsValidEmail(txtBoxEmail.Text))
+            {
+                MessageBox.Show("El Email ingresado no es valido", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             if (password != confirmPassword)
             {

@@ -444,7 +444,7 @@
                 <Button.ContextMenu>
                     <ContextMenu x:Name="AccountContextMenu" Placement="Bottom">
                         <MenuItem Header="Cuenta"/>
-                        <MenuItem Header="Cerrar sesión" Click="CerrarSesion_Click"/>
+                        <MenuItem Header="Cerrar sesión" Click="BtnCloseSession_Click"/>
                     </ContextMenu>
                 </Button.ContextMenu>
             </Button>
@@ -491,48 +491,84 @@
                 </StackPanel>
 
             </StackPanel>
-
             <TextBlock TextWrapping="Wrap" 
-                       Text="Imagen:" 
+                       Text="Nueva Contraseña:" 
                        Foreground="#8B8D90"
-                       Margin="72,471,1690,539"
-                       FontSize="40"/>
-            <TextBox 
-                Name="txtImage"
-                TextWrapping="Wrap"   
-                Margin="290,471,960,539"
-                Style="{StaticResource CustomTextBoxStyle}"/>
-            <TextBlock TextWrapping="Wrap" 
-                       Text="Contraseña:" 
-                       Foreground="#8B8D90"
-                       Margin="72,650,1635,360"
+                       Margin="72,450,1635,520"
                        FontSize="40"/>
             <TextBox 
                 Name="txtPassword"
                 TextWrapping="Wrap"   
-                Margin="290,650,960,360"
-                Style="{StaticResource CustomTextBoxStyle}"/>
+                Margin="328,471,922,539"
+                MaxLength="30"
+                Style="{StaticResource CustomTextBoxStyle}" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+
+            <TextBlock TextWrapping="Wrap" 
+                Text="Email:" 
+                Foreground="#8B8D90"
+                Margin="72,575,1635,445"
+                FontSize="40"/>
+
+            <TextBox 
+                Name="txtEmail"
+                TextWrapping="Wrap"   
+                Margin="328,570,922,440"
+                MaxLength="40"
+                Style="{StaticResource CustomTextBoxStyle}" d:LayoutOverrides="HorizontalAlignment"/>
+
+            <TextBlock TextWrapping="Wrap" 
+                Text="Nombre(s):" 
+                Foreground="#8B8D90"
+                Margin="72,671,1635,349"
+                FontSize="40"/>
+
+            <TextBox 
+                Name="txtFirstName"
+                TextWrapping="Wrap"   
+                Margin="328,666,922,344"
+                MaxLength="25"
+                Style="{StaticResource CustomTextBoxStyle}" d:LayoutOverrides="HorizontalAlignment"/>
+
+            <TextBlock TextWrapping="Wrap" 
+                Text="Apellido(s):" 
+                Foreground="#8B8D90"
+                Margin="72,781,1635,239"
+                FontSize="40"/>
+
+            <TextBox 
+                Name="txtLastName"
+                TextWrapping="Wrap"   
+                Margin="328,776,922,234"
+                MaxLength="25"
+                Style="{StaticResource CustomTextBoxStyle}" d:LayoutOverrides="HorizontalAlignment"/>
 
             <Button 
                 Name="btnSave"
                 Content="Guardar" 
-                    Height="60"
-                    Width="110"
-                    Margin="830,730,950,220"
-                    Style="{StaticResource ShowOnHoverButtonStyle}"/>
+                Height="60"
+                Margin="1611,811,118,209"
+                Click="BtnSaveChanges_Click"
+                Style="{StaticResource ShowOnHoverButtonStyle}"/>
             <Button 
                 Name="btnCancel"
                 Content="Cancelar" 
-                    Height="60"
-                    Width="110"
-                    Margin="580,730,960,220"
-                    Style="{StaticResource ShowOnHoverButtonStyle}"/>
+                Height="60"
+                Margin="1449,811,343,209"
+                Click="BtnCancelChanges_Click"
+                Style="{StaticResource ShowOnHoverButtonStyle}"/>
+            <Button 
+                Name="btnUploadPhoto"
+                Content="Subir foto" 
+                Height="60"
+                Margin="1229,811,503,209"
+                Click="BtnUploadPhoto_Click"
+                Style="{StaticResource ShowOnHoverButtonStyle}"/>
 
             <Image
                 x:Name="imgProfilePicture"
                 Width="260" 
                 Height="260" 
-                Stretch="Uniform" 
+                Stretch="Fill" 
                 Margin="58,154,0,0" 
                 Grid.Column="0"
                 Grid.Row="0"

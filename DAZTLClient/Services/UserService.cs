@@ -41,6 +41,10 @@ namespace DAZTLClient.Services
                 {
                     return "Inicio de sesion de oyente";
                 }
+                else if(response.Role == "admin")
+                {
+                    return "Inicio de sesion de admin";
+                }
                 else
                 {
                     return "No se reconocio el rol";
@@ -61,7 +65,9 @@ namespace DAZTLClient.Services
                 {
                     Username = request.Username,
                     Email = request.Email,
-                    Password = request.Password
+                    Password = request.Password,
+                    FirstName = request.FirstName,
+                    LastName = request.LastName
                 };
                 var response = await _client.RegisterUserAsync(grpcRequest);
 
@@ -126,6 +132,32 @@ namespace DAZTLClient.Services
             }
         }
 
+        public async Task<Daztl.UserProfileResponse> GetListenerProfileAsync(string token)
+        {
+            try
+            {
+                var headers = new Metadata();
+                headers.Add("Authorization", $"Bearer {token}");
+
+                var grpcRequest = new Daztl.Empty();
+
+                var response = await _client.GetProfileAsync(grpcRequest, headers);
+
+                return new Daztl.UserProfileResponse
+                {
+                    Username = response.Username,
+                    Email = response.Email,
+                    FirstName = response.FirstName,
+                    LastName = response.LastName,
+                    ProfileImageUrl = response.ProfileImageUrl,
+                };
+            }
+            catch (Grpc.Core.RpcException ex)
+            {
+                throw new Exception($"Error al obtener perfil de oyente: {ex.Status.Detail}");
+            }
+        }
+
         public async Task<string> UpdateArtistProfileAsync(string token, string username, string password, string bio)
         {
             try
@@ -183,7 +215,46 @@ namespace DAZTLClient.Services
                 return $"Error: {ex.Message}";
             }
         }
+        public async Task<string> UpdateProfileAsync(string token, string email, string firstName, string lastName, string username, string password)
+        {
+            try
+            {
+                var grpcRequest = new Daztl.UpdateProfileRequest
+                {
+                    Token = token
+                };
 
+                if (!string.IsNullOrWhiteSpace(email))
+                    grpcRequest.Email = email;
+                if (!string.IsNullOrWhiteSpace(firstName))
+                    grpcRequest.FirstName = firstName;
+                if (!string.IsNullOrWhiteSpace(lastName))
+                    grpcRequest.LastName = lastName;
+                if (!string.IsNullOrWhiteSpace(username))
+                    grpcRequest.Username = username;
+                if (!string.IsNullOrWhiteSpace(password)) 
+                    grpcRequest.Password = password;
+
+                var response = await _client.UpdateProfileAsync(grpcRequest);
+
+                if (response.Status == "success")
+                {
+                    return "Perfil actualizado correctamente.";
+                }
+                else
+                {
+                    return $"Error: {response.Message}";
+                }
+            }
+            catch (Grpc.Core.RpcException ex)
+            {
+                return $"Error al actualizar perfil: {ex.Status.Detail}";
+            }
+        }
 
     }
+
+
 }
+
+    
