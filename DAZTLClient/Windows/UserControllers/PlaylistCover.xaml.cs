@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daztl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,12 +21,21 @@ namespace DAZTLClient.Windows.UserControllers
     /// </summary>
     public partial class PlaylistCover : UserControl
     {
+        public event EventHandler<PlaylistResponse> PlaylistClicked;
+
         public PlaylistCover()
         {
             InitializeComponent();
         }
-        private void btnRecentSong_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show("Botón clickeado");
+
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is PlaylistResponse response)
+            {
+                PlaylistClicked?.Invoke(this, response);
+            }
+            e.Handled = true;
         }
         public static readonly DependencyProperty SongTitleProperty =
         DependencyProperty.Register("SongTitle", typeof(string), typeof(PlaylistCover), new PropertyMetadata(""));
@@ -49,14 +59,6 @@ namespace DAZTLClient.Windows.UserControllers
         public string AlbumCover {
             get => (string)GetValue(AlbumCoverProperty);
             set => SetValue(AlbumCoverProperty, value);
-        }
-
-        private void btnPlaylist_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is PlaylistViewModel vm)
-            {
-                MessageBox.Show($"Clic en playlist: {vm.Name} (ID: {vm.Id})");
-            }
         }
     }
         public class PlaylistViewModel

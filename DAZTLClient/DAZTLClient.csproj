@@ -16,6 +16,8 @@
     <None Remove="Multimedia\Hovers\Hover_btn_LogIn.png" />
     <None Remove="Multimedia\Hovers\Hover_btn_SignUp.png" />
     <None Remove="Multimedia\Icons\keyboard_arrow_right.png" />
+    <None Remove="Multimedia\Icons\like_black.png" />
+    <None Remove="Multimedia\Icons\like_blue.png" />
     <None Remove="Multimedia\ListenersBackground.png" />
     <None Remove="Multimedia\LogIn.png" />
     <None Remove="Multimedia\passwordBox.png" />
@@ -28,6 +30,8 @@
 
   <ItemGroup>
     <Resource Include="Multimedia\ArtistsBackground.png" />
+    <Resource Include="Multimedia\Icons\like_black.png" />
+    <Resource Include="Multimedia\Icons\like_blue.png" />
     <Resource Include="Multimedia\ProfileArtist.png" />
     <Resource Include="Multimedia\ProfileListener.png" />
   </ItemGroup>

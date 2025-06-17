@@ -12,6 +12,7 @@ using DAZTLClient.Services;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Effects;
+using static DAZTLClient.Windows.UserControllers.ArtistCover;
 
 namespace DAZTLClient.Windows {
     /// <summary>
@@ -24,7 +25,7 @@ namespace DAZTLClient.Windows {
         private int itemsPerPage = 6;
 
         private List<PlaylistCover> allCovers;
-        private List<PlaylistViewModel> _allPlaylists = new List<PlaylistViewModel>();
+        private List<PlaylistResponse> _allPlaylists = new List<PlaylistResponse>();
         private List<AlbumViewModel> allAlbums = new List<AlbumViewModel>();
         private List<ArtistViewModel> allArtists = new List<ArtistViewModel>();
 
@@ -41,6 +42,7 @@ namespace DAZTLClient.Windows {
 
         public HomeListeners() {
             InitializeComponent();
+            PlayPauseToggle.IsChecked = MusicPlayerService.Instance.IsPlaying();
             MusicPlayerService.Instance.PlaybackPositionChanged += progress =>
             {
                 if (!_isUserDraggingSlider)
@@ -121,16 +123,7 @@ namespace DAZTLClient.Windows {
             try
             {
                 var reply = await _contentService.ListPlaylistsAsync();
-
-                _allPlaylists = reply.Playlists
-                    .Select(p => new PlaylistViewModel
-                    {
-                        Id = p.Id,
-                        Name = p.Name,
-                        CoverUrl = p.CoverUrl
-                    })
-                    .ToList();
-
+                _allPlaylists = reply.Playlists.ToList();
                 currentPagePlaylist = 0;
                 RenderPlaylistPage();
             }
@@ -149,14 +142,23 @@ namespace DAZTLClient.Windows {
 
             for (int i = start; i < end; i++)
             {
-                var vm = _allPlaylists[i];
+                var playlistResponse = _allPlaylists[i];
                 var cover = new PlaylistCover
                 {
-                    DataContext = vm
+                    DataContext = playlistResponse
                 };
+                cover.PlaylistClicked += PlaylistCover_PlaylistClicked;
                 PlaylistGrid.Children.Add(cover);
             }
             NextButtonPlaylists.IsEnabled = (currentPagePlaylist + 1) * itemsPerPage < _allPlaylists.Count;
+        }
+
+        private void PlaylistCover_PlaylistClicked(object sender, PlaylistResponse playlistResponse)
+        {
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_PlaylistDetails(playlistResponse));
+            }
         }
 
         private void NextPagePlaylists_Click(object sender, RoutedEventArgs e)
@@ -253,6 +255,7 @@ namespace DAZTLClient.Windows {
                 var artist = allArtists[i];
                 var artistControl = new ArtistCover
                 {
+                    ArtistId = artist.Id,
                     ArtistName = artist.Name,
                     AlbumCover = artist.ProfilePicture
                 };
@@ -290,8 +293,13 @@ namespace DAZTLClient.Windows {
             MessageBox.Show("Ir a la página de cuenta.");
         }
 
-        private void CerrarSesion_Click(object sender, RoutedEventArgs e) {
-            MusicPlayerService.Instance.Stop();
+        private void Logout_Click(object sender, RoutedEventArgs e) {
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_LogIn());
+                SessionManager.Instance.EndSession();
+                MusicPlayerService.Instance.Stop();
+            }
         }
 
         private void BtnSeeAllPlaylist_Click(object sender, RoutedEventArgs e) {
@@ -349,11 +357,17 @@ namespace DAZTLClient.Windows {
         }
 
         private void BtnSeeAllAlbums_Click(object sender, RoutedEventArgs e) {
-
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ListenersAlbums());
+            }
         }
 
         private void BtnSeeAllArtists_Click(object sender, RoutedEventArgs e) {
-
+            if (this.NavigationService != null)
+            {
+                NavigationService.Navigate(new GUI_ListenersArtists());
+            }
         }
         private void BtnGoToCreatePlaylist_Click(object sender, RoutedEventArgs e)
         {
@@ -367,7 +381,7 @@ namespace DAZTLClient.Windows {
             CreatePlaylistWindow createPlaylistWindow = new CreatePlaylistWindow();
             createPlaylistWindow.Owner = owner;
             createPlaylistWindow.ShowDialog();
-
+            LoadAlbumsPage();
             if (owner != null)
             {
                 owner.Effect = null;
@@ -387,7 +401,6 @@ namespace DAZTLClient.Windows {
             try
             {
                 var response = await _contentService.GlobalSearchAsync(query);
-
                 SearchResultsPanel.Children.Clear();
 
                 if (response.Songs.Count == 0 &&
@@ -403,6 +416,9 @@ namespace DAZTLClient.Windows {
                     });
                 }
 
+                var baseUrl = "http://localhost:8000";
+
+                // Canciones (ya implementado)
                 if (response.Songs.Count > 0)
                 {
                     SearchResultsPanel.Children.Add(new TextBlock
@@ -422,7 +438,7 @@ namespace DAZTLClient.Windows {
                             Margin = new Thickness(10, 2, 5, 2),
                             Cursor = Cursors.Hand
                         };
-                        var baseUrl = "http://localhost:8000";
+
                         var imageUrl = new Uri(baseUrl + song.CoverUrl);
                         var image = new Image
                         {
@@ -452,16 +468,14 @@ namespace DAZTLClient.Windows {
                             }
 
                             MusicPlayerService.Instance.Play(audioUrl);
-
                             SearchPopup.IsOpen = false;
                         };
 
                         SearchResultsPanel.Children.Add(songPanel);
                     }
-
-
                 }
 
+                // Álbumes (modificado para mostrar imágenes)
                 if (response.Albums.Count > 0)
                 {
                     SearchResultsPanel.Children.Add(new TextBlock
@@ -475,23 +489,44 @@ namespace DAZTLClient.Windows {
 
                     foreach (var album in response.Albums)
                     {
-                        var albumItem = new TextBlock
+                        var albumPanel = new StackPanel
                         {
-                            Text = album.Title,
-                            FontSize = 24,
-                            Foreground = Brushes.LightGray,
+                            Orientation = Orientation.Horizontal,
                             Margin = new Thickness(10, 2, 5, 2),
                             Cursor = Cursors.Hand
                         };
-                        albumItem.MouseLeftButtonDown += (s, args) =>
+
+                        var imageUrl = new Uri(baseUrl + album.CoverUrl);
+                        var image = new Image
+                        {
+                            Source = new BitmapImage(imageUrl),
+                            Width = 50,
+                            Height = 50,
+                            Margin = new Thickness(0, 0, 10, 0)
+                        };
+
+                        var text = new TextBlock
+                        {
+                            Text = $"{album.Title} - {album.ArtistName}",
+                            FontSize = 24,
+                            Foreground = Brushes.LightGray,
+                            VerticalAlignment = VerticalAlignment.Center
+                        };
+
+                        albumPanel.Children.Add(image);
+                        albumPanel.Children.Add(text);
+
+                        albumPanel.MouseLeftButtonDown += (s, args) =>
                         {
                             MessageBox.Show($"Seleccionaste el álbum: {album.Title}");
                             SearchPopup.IsOpen = false;
                         };
-                        SearchResultsPanel.Children.Add(albumItem);
+
+                        SearchResultsPanel.Children.Add(albumPanel);
                     }
                 }
 
+                // Artistas (modificado para mostrar imágenes)
                 if (response.Artists.Count > 0)
                 {
                     SearchResultsPanel.Children.Add(new TextBlock
@@ -505,20 +540,40 @@ namespace DAZTLClient.Windows {
 
                     foreach (var artist in response.Artists)
                     {
-                        var artistItem = new TextBlock
+                        var artistPanel = new StackPanel
+                        {
+                            Orientation = Orientation.Horizontal,
+                            Margin = new Thickness(10, 2, 5, 2),
+                            Cursor = Cursors.Hand
+                        };
+
+                        var imageUrl = new Uri(baseUrl + artist.ProfilePicture);
+                        var image = new Image
+                        {
+                            Source = new BitmapImage(imageUrl),
+                            Width = 50,
+                            Height = 50,
+                            Margin = new Thickness(0, 0, 10, 0)
+                        };
+
+                        var text = new TextBlock
                         {
                             Text = artist.Name,
                             FontSize = 24,
                             Foreground = Brushes.LightGray,
-                            Margin = new Thickness(10, 2, 5, 2),
-                            Cursor = Cursors.Hand
+                            VerticalAlignment = VerticalAlignment.Center
                         };
-                        artistItem.MouseLeftButtonDown += (s, args) =>
+
+                        artistPanel.Children.Add(image);
+                        artistPanel.Children.Add(text);
+
+                        artistPanel.MouseLeftButtonDown += (s, args) =>
                         {
                             MessageBox.Show($"Seleccionaste el artista: {artist.Name}");
                             SearchPopup.IsOpen = false;
                         };
-                        SearchResultsPanel.Children.Add(artistItem);
+
+                        SearchResultsPanel.Children.Add(artistPanel);
                     }
                 }
 
@@ -535,20 +590,39 @@ namespace DAZTLClient.Windows {
 
                     foreach (var playlist in response.Playlists)
                     {
-                        var playlistItem = new TextBlock
+                        var playlistPanel = new StackPanel
+                        {
+                            Orientation = Orientation.Horizontal,
+                            Margin = new Thickness(10, 2, 5, 2),
+                            Cursor = Cursors.Hand
+                        };
+
+                        var imageUrl = new Uri(baseUrl + playlist.CoverUrl);
+                        var image = new Image
+                        {
+                            Source = new BitmapImage(imageUrl),
+                            Width = 50,
+                            Height = 50,
+                            Margin = new Thickness(0, 0, 10, 0)
+                        };
+
+                        var text = new TextBlock
                         {
                             Text = playlist.Name,
                             FontSize = 24,
                             Foreground = Brushes.LightGray,
-                            Margin = new Thickness(10, 2, 5, 2),
-                            Cursor = Cursors.Hand
+                            VerticalAlignment = VerticalAlignment.Center
                         };
-                        playlistItem.MouseLeftButtonDown += (s, args) =>
+
+                        playlistPanel.Children.Add(image);
+                        playlistPanel.Children.Add(text);
+
+                        playlistPanel.MouseLeftButtonDown += (s, args) =>
                         {
-                            MessageBox.Show($"Seleccionaste la playlist: {playlist.Name}");
-                            SearchPopup.IsOpen = false;
+                            NavigationService.Navigate(new GUI_PlaylistDetails(playlist));
                         };
-                        SearchResultsPanel.Children.Add(playlistItem);
+
+                        SearchResultsPanel.Children.Add(playlistPanel);
                     }
                 }
 
@@ -578,7 +652,6 @@ namespace DAZTLClient.Windows {
                 return;
             }
         }
-
         private void SeekToPosition(double sliderValue)
         {
             if (MusicPlayerService.Instance.CurrentDuration.TotalMilliseconds > 0)
