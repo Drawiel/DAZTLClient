@@ -341,7 +341,7 @@ namespace DAZTLClient.Services
         }
 
 
-        public async Task<AlbumDetailResponse> GetAlbumDetailAsync(int albumId)
+        public async Task<AlbumDetailResponse> GetsAlbumDetailAsync(int albumId)
         {
             try
             {
