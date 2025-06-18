@@ -41,8 +41,14 @@ namespace DAZTLClient.Windows
             {
                 AddMessage("Tu", userInput);
                 InputBox.Clear();
-
+                _=SendMessageAsync(userInput);
             }
+        }
+
+        private async Task SendMessageAsync(string userInput)
+        {
+            await new ContentService().SendChatMessageAsync(1, userInput);
+
         }
 
         private void AddMessage(string sender, string message)

@@ -390,6 +390,27 @@ namespace DAZTLClient.Services
 
             return await _client.UploadAlbumAsync(request);
         }
+        public async Task<Google.Protobuf.WellKnownTypes.Empty> SendChatMessageAsync(int songId, string message)
+        {
+            try
+            {
+                var request = new MessageRequest
+                {
+                    Token = SessionManager.Instance.AccessToken,
+                    Message = message
+                };
 
+                var headers = new Metadata
+        {
+            { "authorization", $"Bearer {SessionManager.Instance.AccessToken}" }
+        };
+
+                return await _client.SendMessageChatAsync(request, headers);
+            }
+            catch (RpcException ex)
+            {
+                throw new Exception($"Error sending chat message: {ex.Status.Detail}");
+            }
+        }
     }
 }

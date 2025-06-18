@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\daur0\\Source\\Repos\\Drawiel\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj": {}
+    "C:\\Users\\chuch\\OneDrive\\Desktop\\LIS-UV\\6to-Semestre\\Desarrollo de sistemas en red\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\daur0\\Source\\Repos\\Drawiel\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj": {
+    "C:\\Users\\chuch\\OneDrive\\Desktop\\LIS-UV\\6to-Semestre\\Desarrollo de sistemas en red\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\daur0\\Source\\Repos\\Drawiel\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
+        "projectUniqueName": "C:\\Users\\chuch\\OneDrive\\Desktop\\LIS-UV\\6to-Semestre\\Desarrollo de sistemas en red\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
         "projectName": "DAZTLClient",
-        "projectPath": "C:\\Users\\daur0\\Source\\Repos\\Drawiel\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
-        "packagesPath": "C:\\Users\\daur0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\daur0\\Source\\Repos\\Drawiel\\DAZTLClient\\DAZTLClient\\obj\\",
+        "projectPath": "C:\\Users\\chuch\\OneDrive\\Desktop\\LIS-UV\\6to-Semestre\\Desarrollo de sistemas en red\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
+        "packagesPath": "C:\\Users\\chuch\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\chuch\\OneDrive\\Desktop\\LIS-UV\\6to-Semestre\\Desarrollo de sistemas en red\\DAZTLClient\\DAZTLClient\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\daur0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\chuch\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
