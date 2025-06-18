@@ -390,7 +390,7 @@ namespace DAZTLClient.Services
 
             return await _client.UploadAlbumAsync(request);
         }
-        public async Task<Google.Protobuf.WellKnownTypes.Empty> SendChatMessageAsync(int songId, string message)
+        public async Task<Daztl.Empty> SendChatMessageAsync(int songId, string message)
         {
             try
             {

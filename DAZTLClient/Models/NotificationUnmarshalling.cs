@@ -10,7 +10,7 @@ namespace DAZTLClient.Models
     public class NotificationUnmarshalling
     {
         public string type { get; set; }
-        public string id { get; set; }
+        public int id { get; set; }
         public string message { get; set; }
 
         [JsonPropertyName("created_at")]

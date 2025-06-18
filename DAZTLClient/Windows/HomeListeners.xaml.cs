@@ -356,7 +356,7 @@ namespace DAZTLClient.Windows {
                 {
                     var noti = (NotificationUnmarshalling)((Button)s).Tag;
 
-                    var chatWindow = new ChatWindow(noti.id);
+                    var chatWindow = new ChatWindow("");
                     chatWindow.Owner = Application.Current.MainWindow;
                     chatWindow.ShowDialog(); 
 
