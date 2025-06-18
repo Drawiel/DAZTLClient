@@ -30,7 +30,7 @@ namespace DAZTLClient.Windows
         {
             try
             {
-                var albumDetail = await _contentService.GetAlbumDetailAsync(albumId);
+                var albumDetail = await _contentService.GetsAlbumDetailAsync(albumId);
 
                 _album.Title = albumDetail.Title;
                 _album.CoverUrl = albumDetail.CoverUrl;
