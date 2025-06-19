@@ -25,7 +25,7 @@
 
         <!-- Input + botón -->
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBox x:Name="InputBox" Width="280" Height="30" Margin="0,0,10,0" />
+            <TextBox x:Name="InputBox" Width="280" Height="30" Margin="0,0,10,0" Foreground="White"/>
             <Button Content="Enviar" Width="80" Height="30" Click="SendButton_Click" />
         </StackPanel>
     </Grid>

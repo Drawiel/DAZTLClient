@@ -24,8 +24,9 @@ namespace DAZTLClient.Windows
     {
         public ChatWindow(string idNotification)
         {
+            this.Title = "Chat en vivo";
             InitializeComponent();
-            AddMessage("Daztl", "Este es un canal para hablar de la nueva cancion de ");
+            AddMessage("Daztl", "Este es un canal para hablar de la nueva cancion.");
             _ = StartWebSocketListener();
         }
         private async Task StartWebSocketListener()
@@ -39,7 +40,6 @@ namespace DAZTLClient.Windows
             string userInput = InputBox.Text.Trim();
             if (!string.IsNullOrEmpty(userInput))
             {
-                AddMessage("Tu", userInput);
                 InputBox.Clear();
                 _=SendMessageAsync(userInput);
             }

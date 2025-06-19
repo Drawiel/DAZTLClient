@@ -86,8 +86,26 @@ namespace DAZTLClient.Windows {
             LoadPlaylistPage();
             LoadAlbumsPage();
             LoadArtistsPage();
+            _ = LoadNotificationsFromDBAsync(); 
             _ = StartWebSocketListener();
         }
+
+        private async Task LoadNotificationsFromDBAsync()
+        {
+            var notificationsDB = await _contentService.ListNotificationsAsync();
+
+            foreach (var grpcNotification in notificationsDB.Notifications)
+            {
+                notifications.Add(new NotificationUnmarshalling
+                {
+                    id = int.Parse(grpcNotification.Id),
+                    message = grpcNotification.Message,
+                    created_at = DateTime.Parse(grpcNotification.CreatedAt)
+                });
+            }
+
+        }
+
         private async Task StartWebSocketListener()
         {
             var client = new WebSocketClientNotification(this);
@@ -344,7 +362,13 @@ namespace DAZTLClient.Windows {
                     Height = 70,
                     Margin = new Thickness(0, 5, 0, 5),
                     HorizontalContentAlignment = HorizontalAlignment.Left,
-                    Content = notification.message,
+                    Content = new TextBlock
+                    {
+                        Text = notification.message,
+                        TextWrapping = TextWrapping.Wrap,
+                        TextTrimming = TextTrimming.CharacterEllipsis,
+                        MaxWidth = 360 
+                    },
                     Background = (Brush)new BrushConverter().ConvertFromString("#202123"),
                     BorderBrush = Brushes.Gray,
                     Foreground = Brushes.White,
@@ -355,12 +379,23 @@ namespace DAZTLClient.Windows {
                 btn.Click += (s, e) =>
                 {
                     var noti = (NotificationUnmarshalling)((Button)s).Tag;
+                    DateTime notificationTime = noti.created_at;
+                    TimeSpan elapsed = DateTime.Now - notificationTime;
+                    if (elapsed.TotalMinutes > 50)
+                    {
+                        MessageBox.Show("El chat ha expirado (más de 50 minutos).");
+                    }
+                    else
+                    {
+                        _ = _contentService.DeleteNotificationAsync(noti.id);
+                        var chatWindow = new ChatWindow("");
+                        chatWindow.Owner = Application.Current.MainWindow;
+                        chatWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                        chatWindow.Show();
+                    }
+                    
 
-                    var chatWindow = new ChatWindow("");
-                    chatWindow.Owner = Application.Current.MainWindow;
-                    chatWindow.ShowDialog(); 
-
-                                    notifications.Remove(noti);
+                    notifications.Remove(noti);
                     LoadNotifications();
                 };
 

@@ -295,13 +295,24 @@ namespace DAZTLClient.Services
                 };
 
                 var headers = new Metadata
-        {
-            { "authorization", $"Bearer {token}" }
-        };
+                {
+                    { "authorization", $"Bearer {token}" }
+                };
 
                 Console.WriteLine($"Subiendo canción: {title} (Audio: {audioBytes.Length} bytes, Imagen: {coverImageBytes.Length} bytes)");
 
                 var response = await _client.UploadSongAsync(request, headers, deadline: DateTime.UtcNow.AddMinutes(5));
+                Thread.Sleep(1000);
+                if (response.Status == "success")
+                {
+                    var requestNotification = new Notification
+                    {
+                        Message = $"Nueva cancion '{title}'. Únete al chat para ver que piensan de ella.",
+                    };
+
+                    var responseNotification = await _client.CreateNotificationAsync(requestNotification, headers, deadline: DateTime.UtcNow.AddMinutes(5));
+
+                }
 
                 Console.WriteLine($"Respuesta del servidor: {response.Status} - {response.Message}");
                 return response;
@@ -401,11 +412,48 @@ namespace DAZTLClient.Services
                 };
 
                 var headers = new Metadata
-        {
-            { "authorization", $"Bearer {SessionManager.Instance.AccessToken}" }
-        };
+                {
+                    { "authorization", $"Bearer {SessionManager.Instance.AccessToken}" }
+                };
 
                 return await _client.SendMessageChatAsync(request, headers);
+            }
+            catch (RpcException ex)
+            {
+                throw new Exception($"Error sending chat message: {ex.Status.Detail}");
+            }
+        }
+
+        public async Task<Daztl.NotificationListResponse> ListNotificationsAsync()
+        {
+            try
+            {
+                var emptyRequest = new Daztl.Empty();
+                var reply = await _client.ListNotificationsAsync(emptyRequest);
+                return reply;
+            }
+            catch (RpcException ex)
+            {
+                Console.WriteLine($"ERROR gRPC: {ex.Status.Detail}");
+                throw new Exception($"Error al obtener las notificaciones: {ex.Status.Detail}");
+            }
+        }
+        public async Task<Daztl.GenericResponse> DeleteNotificationAsync(int id)
+        {
+            try
+            {
+                var request = new MarkAsSeenRequest
+                {
+                    Token = SessionManager.Instance.AccessToken,
+                    NotificationId = id
+                };
+
+                var headers = new Metadata
+                {
+                    { "authorization", $"Bearer {SessionManager.Instance.AccessToken}" }
+                };
+
+                return await _client.MarkNotificationAsSeenAsync(request, headers);
             }
             catch (RpcException ex)
             {

@@ -18,7 +18,7 @@ namespace DAZTLClient.Services
 
         public WebSocketClientChat(ChatWindow chatwindow)
         {
-            this.chatWindow = chatWindow;
+            this.chatWindow = chatwindow;
         }
 
         public async Task StartAsync()
