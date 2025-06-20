@@ -19,6 +19,8 @@ namespace DAZTLClient.Windows
         private List<NotificationUnmarshalling> notifications = new List<NotificationUnmarshalling>();
         private readonly ContentService _contentService = new ContentService();
 
+        private string currentFilesURL = "http://localhost:8000/media/";
+
         public GUI_AlbumDetails(int albumId)
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace DAZTLClient.Windows
                 var albumDetail = await _contentService.GetsAlbumDetailAsync(albumId);
 
                 _album.Title = albumDetail.Title;
-                _album.CoverUrl = albumDetail.CoverUrl;
+                _album.CoverUrl = currentFilesURL + albumDetail.CoverUrl;
                 _album.Songs.Clear();
                 _album.Songs.AddRange(albumDetail.Songs);
 
@@ -52,7 +54,7 @@ namespace DAZTLClient.Windows
                         Title = song.Title,
                         Artist = song.Artist,
                         Image = new BitmapImage(new Uri(_album.CoverUrl)),
-                        AudioUrl = song.AudioUrl
+                        AudioUrl = currentFilesURL + song.AudioUrl
                     });
                 }
 

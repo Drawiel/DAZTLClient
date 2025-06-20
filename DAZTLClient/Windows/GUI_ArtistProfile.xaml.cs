@@ -28,6 +28,8 @@ namespace DAZTLClient.Windows {
         private readonly UserService _userService = new();
         private string imagePath;
 
+        private string currentFilesURL = "http://localhost:8000/media/";
+
         public GUI_ArtistProfile()
         {
             InitializeComponent();
@@ -105,7 +107,7 @@ namespace DAZTLClient.Windows {
                 {
                     txtUsername.Text = artistProfile.Username;
                     txtBio.Text = artistProfile.Bio;
-                    string imageUrl = artistProfile.ProfileImageUrl;
+                    string imageUrl = currentFilesURL + artistProfile.ProfileImageUrl;
                     if (!string.IsNullOrEmpty(imageUrl))
                     {
                         var bitmap = new BitmapImage();

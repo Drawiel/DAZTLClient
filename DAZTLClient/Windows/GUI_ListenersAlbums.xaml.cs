@@ -19,6 +19,8 @@ namespace DAZTLClient.Windows
         private readonly ContentService contentService = new ContentService();
         private bool _isUserDraggingSlider = false;
 
+        private string currentFilesURL = "http://localhost:8000/media/";
+
         public GUI_ListenersAlbums()
         {
             InitializeComponent();
@@ -78,7 +80,7 @@ namespace DAZTLClient.Windows
                         {
                             Id = album.Id,
                             Title = album.Title,
-                            CoverUrl = album.CoverUrl,
+                            CoverUrl = currentFilesURL + album.CoverUrl,
                             ArtistName = album.ArtistName
                         }
                     };

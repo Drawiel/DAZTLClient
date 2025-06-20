@@ -21,10 +21,11 @@ namespace DAZTLClient.Windows
         private readonly ContentService _contentService = new ContentService();
         private bool _isUserDraggingSlider = false;
 
+        private string currentFilesURL = "http://localhost:8000/media/";
+
         public GUI_ListenersPlaylist()
         {
             InitializeComponent();
-            SimulateNotifications();
             _ = LoadPlaylistsAsync();
 
             SetupMusicPlayer();
@@ -79,7 +80,7 @@ namespace DAZTLClient.Windows
                         {
                             Id = playlist.Id,
                             Name = playlist.Name,
-                            CoverUrl = playlist.CoverUrl
+                            CoverUrl = currentFilesURL + playlist.CoverUrl
                         }
                     };
 
@@ -97,8 +98,8 @@ namespace DAZTLClient.Windows
                             Id = s.Id,
                             Title = s.Title,
                             Artist = s.Artist,
-                            AudioUrl = s.AudioUrl,
-                            CoverUrl = s.CoverUrl,
+                            AudioUrl = currentFilesURL + s.AudioUrl,
+                            CoverUrl = currentFilesURL + s.CoverUrl,
                             ReleaseDate = s.ReleaseDate
                         })}
                             };

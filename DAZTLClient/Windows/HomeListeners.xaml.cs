@@ -27,6 +27,8 @@ namespace DAZTLClient.Windows {
         private int currentPageArtists = 0;
         private int itemsPerPage = 6;
 
+        private string currentFilesURL = "http://localhost:8000/media/";
+
         private List<PlaylistCover> allCovers;
         private List<PlaylistResponse> _allPlaylists = new List<PlaylistResponse>();
         private List<AlbumViewModel> allAlbums = new List<AlbumViewModel>();
@@ -130,7 +132,7 @@ namespace DAZTLClient.Windows {
                     if (i < response.Songs.Count)
                     {
                         var song = response.Songs[i];
-                        songControls[i].SetSongData(song.Title, song.Artist, song.CoverUrl, song.AudioUrl);
+                        songControls[i].SetSongData(song.Title, song.Artist, currentFilesURL+song.CoverUrl, currentFilesURL + song.AudioUrl);
                         songControls[i].Visibility = Visibility.Visible;
                     }
                     else
@@ -169,6 +171,7 @@ namespace DAZTLClient.Windows {
             for (int i = start; i < end; i++)
             {
                 var playlistResponse = _allPlaylists[i];
+                playlistResponse.CoverUrl = currentFilesURL + playlistResponse.CoverUrl;
                 var cover = new PlaylistCover
                 {
                     DataContext = playlistResponse
@@ -205,7 +208,7 @@ namespace DAZTLClient.Windows {
                     Id = album.Id,
                     Title = album.Title,
                     ArtistName = album.ArtistName,
-                    CoverUrl = album.CoverUrl
+                    CoverUrl = currentFilesURL + album.CoverUrl
                 }).ToList();
 
                 currentPageAlbums = 0;
@@ -496,7 +499,7 @@ namespace DAZTLClient.Windows {
                             Cursor = Cursors.Hand
                         };
 
-                        var imageUrl = new Uri(baseUrl + song.CoverUrl);
+                        var imageUrl = new Uri(currentFilesURL + song.CoverUrl);
                         var image = new Image
                         {
                             Source = new BitmapImage(imageUrl),
@@ -518,10 +521,10 @@ namespace DAZTLClient.Windows {
 
                         songPanel.MouseLeftButtonDown += (s, args) =>
                         {
-                            var audioUrl = baseUrl + song.AudioUrl;
+                            var audioUrl = currentFilesURL + song.AudioUrl;
                             if (string.IsNullOrEmpty(song.AudioUrl))
                             {
-                                audioUrl = baseUrl + song.AudioUrl.Replace(".png", ".mp3");
+                                audioUrl = currentFilesURL + song.AudioUrl.Replace(".png", ".mp3");
                             }
 
                             MusicPlayerService.Instance.Play(audioUrl);
@@ -553,7 +556,7 @@ namespace DAZTLClient.Windows {
                             Cursor = Cursors.Hand
                         };
 
-                        var imageUrl = new Uri(baseUrl + album.CoverUrl);
+                        var imageUrl = new Uri(currentFilesURL + album.CoverUrl);
                         var image = new Image
                         {
                             Source = new BitmapImage(imageUrl),
@@ -604,7 +607,7 @@ namespace DAZTLClient.Windows {
                             Cursor = Cursors.Hand
                         };
 
-                        var imageUrl = new Uri(baseUrl + artist.ProfilePicture);
+                        var imageUrl = new Uri(currentFilesURL + artist.ProfilePicture);
                         var image = new Image
                         {
                             Source = new BitmapImage(imageUrl),
@@ -654,7 +657,7 @@ namespace DAZTLClient.Windows {
                             Cursor = Cursors.Hand
                         };
 
-                        var imageUrl = new Uri(baseUrl + playlist.CoverUrl);
+                        var imageUrl = new Uri(currentFilesURL + playlist.CoverUrl);
                         var image = new Image
                         {
                             Source = new BitmapImage(imageUrl),

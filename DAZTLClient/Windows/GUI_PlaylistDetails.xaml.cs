@@ -20,6 +20,8 @@ namespace DAZTLClient.Windows
         private List<Daztl.Notification> notifications = new List<Daztl.Notification>();
         private readonly ContentService _contentService = new ContentService();
 
+        private string currentFilesURL = "http://localhost:8000/media/";
+
         public GUI_PlaylistDetails(PlaylistResponse playlist)
         {
             _playlist = playlist;
@@ -35,7 +37,7 @@ namespace DAZTLClient.Windows
                 var updatedPlaylist = await _contentService.GetPlaylistAsync(_playlist.Id.ToString());
 
                 _playlist.Name = updatedPlaylist.Name;
-                _playlist.CoverUrl = updatedPlaylist.CoverUrl;
+                _playlist.CoverUrl = currentFilesURL + updatedPlaylist.CoverUrl;
                 _playlist.Songs.Clear();
                 _playlist.Songs.AddRange(updatedPlaylist.Songs);
 
@@ -53,8 +55,8 @@ namespace DAZTLClient.Windows
                         Id = song.Id,
                         Title = song.Title,
                         Artist = song.Artist,
-                        Image = new BitmapImage(new Uri(song.CoverUrl)),
-                        AudioUrl = song.AudioUrl
+                        Image = new BitmapImage(new Uri(currentFilesURL + song.CoverUrl)),
+                        AudioUrl = currentFilesURL + song.AudioUrl
                     });
                 }
 
@@ -307,7 +309,7 @@ namespace DAZTLClient.Windows
                         Cursor = Cursors.Hand
                     };
 
-                    var imageUrl = new Uri(song.CoverUrl);
+                    var imageUrl = new Uri(currentFilesURL + song.CoverUrl);
                     var image = new Image
                     {
                         Source = new BitmapImage(imageUrl),

@@ -26,6 +26,8 @@ namespace DAZTLClient.Windows {
         private string token;
         private string imagePath;
 
+        private string currentFilesURL = "http://localhost:8000/media/";
+
         public GUI_ListenersProfile() {
             InitializeComponent();
             token = SessionManager.Instance.AccessToken;
@@ -127,7 +129,7 @@ namespace DAZTLClient.Windows {
                     txtFirstName.Text = profile.FirstName;
                     txtLastName.Text = profile.LastName;
 
-                    string imageUrl = profile.ProfileImageUrl;
+                    string imageUrl = currentFilesURL + profile.ProfileImageUrl;
                     if (!string.IsNullOrEmpty(imageUrl))
                     {
                         var bitmap = new BitmapImage();
