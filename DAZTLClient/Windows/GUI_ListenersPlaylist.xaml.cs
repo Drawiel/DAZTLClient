@@ -73,47 +73,37 @@ namespace DAZTLClient.Windows
 
                 foreach (var playlist in response.Playlists)
                 {
+                    var playlistResponse = new PlaylistResponse
+                    {
+                        Id = playlist.Id,
+                        Name = playlist.Name,
+                        CoverUrl = currentFilesURL + playlist.CoverUrl,
+                        Songs = { playlist.Songs.Select(s => new SongResponse
+                {
+                    Id = s.Id,
+                    Title = s.Title,
+                    Artist = s.Artist,
+                    AudioUrl = currentFilesURL + s.AudioUrl,
+                    CoverUrl = currentFilesURL + s.CoverUrl,
+                    ReleaseDate = s.ReleaseDate
+                })}
+                    };
+
                     var card = new PlaylistCover
                     {
                         Margin = new Thickness(0, 0, 0, 15),
-                        DataContext = new PlaylistViewModel
-                        {
-                            Id = playlist.Id,
-                            Name = playlist.Name,
-                            CoverUrl = currentFilesURL + playlist.CoverUrl
-                        }
+                        DataContext = playlistResponse
                     };
 
-                    card.PlaylistClicked += (sender, vm) =>
+                    card.PlaylistClicked += (sender, playlist) =>
                     {
                         if (NavigationService != null)
                         {
-                            var playlistDetails = new PlaylistResponse
-                            {
-                                Id = vm.Id,
-                                Name = vm.Name,
-                                CoverUrl = vm.CoverUrl,
-                                Songs = { playlist.Songs.Select(s => new SongResponse
-                        {
-                            Id = s.Id,
-                            Title = s.Title,
-                            Artist = s.Artist,
-                            AudioUrl = currentFilesURL + s.AudioUrl,
-                            CoverUrl = currentFilesURL + s.CoverUrl,
-                            ReleaseDate = s.ReleaseDate
-                        })}
-                            };
-
-                            NavigationService.Navigate(new GUI_PlaylistDetails(playlistDetails));
+                            NavigationService.Navigate(new GUI_PlaylistDetails(playlist));
                         }
                     };
 
                     PlaylistItemsControl.Items.Add(card);
-                }
-
-                if (!response.Playlists.Any())
-                {
-                    MessageBox.Show("No se encontraron playlists.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)

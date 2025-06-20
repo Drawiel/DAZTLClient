@@ -85,19 +85,11 @@ namespace DAZTLClient.Windows
                         }
                     };
 
-                    card.MouseLeftButtonDown += async (s, e) =>
+                    card.AlbumClicked += (sender, args) =>
                     {
-                        var albumCover = s as AlbumCover;
-                        var albumViewModel = albumCover?.DataContext as AlbumViewModel;
-                        if (albumViewModel != null)
+                        if (this.NavigationService != null)
                         {
-                            albumCover.AlbumClicked += (sender, Empty) =>
-                            {
-                                if (this.NavigationService != null)
-                                {
-                                    NavigationService.Navigate(new GUI_AlbumDetails(album.Id));
-                                }
-                            };
+                            NavigationService.Navigate(new GUI_AlbumDetails(album.Id));
                         }
                     };
 

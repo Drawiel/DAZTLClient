@@ -17,8 +17,8 @@ namespace DAZTLClient.Services
         {
             var channel = GrpcChannel.ForAddress("http://localhost:50051", new GrpcChannelOptions
             {
-                MaxReceiveMessageSize = 50 * 1024 * 1024, 
-                MaxSendMessageSize = 50 * 1024 * 1024,   
+                MaxReceiveMessageSize = 150 * 1024 * 1024, 
+                MaxSendMessageSize = 150 * 1024 * 1024,   
                 Credentials = ChannelCredentials.Insecure
             });
             _client = new MusicService.MusicServiceClient(channel);

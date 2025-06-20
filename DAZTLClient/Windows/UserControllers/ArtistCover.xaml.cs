@@ -73,7 +73,6 @@ namespace DAZTLClient.Windows.UserControllers
 
         private void btnRecentSong_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Botón clickeado");
         }
 
         public static readonly DependencyProperty SongTitleProperty =

@@ -94,8 +94,11 @@ namespace DAZTLClient.Windows
             RepeatToggle.Checked += (s, e) => MusicPlayerService.Instance.IsRepeating = true;
             RepeatToggle.Unchecked += (s, e) => MusicPlayerService.Instance.IsRepeating = false;
 
-            ShuffleToggle.Checked += (s, e) => MusicPlayerService.Instance.IsShuffling = true;
-            ShuffleToggle.Unchecked += (s, e) => MusicPlayerService.Instance.IsShuffling = false;
+            ShuffleToggle.IsChecked = MusicPlayerService.Instance.IsShuffling;
+            MusicPlayerService.Instance.ShuffleStateChanged += (isShuffling) =>
+            {
+                Dispatcher.Invoke(() => ShuffleToggle.IsChecked = isShuffling);
+            };
 
             PlaybackSlider.PreviewMouseDown += PlaybackSlider_PreviewMouseDown;
             PlaybackSlider.PreviewMouseUp += PlaybackSlider_PreviewMouseUp;
@@ -227,31 +230,24 @@ namespace DAZTLClient.Windows
 
         private void Song_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.OriginalSource is DependencyObject source)
+            var song = (sender as FrameworkElement)?.DataContext as SongViewModel;
+            if (song == null) return;
+
+            try
             {
-                var parent = FindParent<Button>(source);
-                if (parent != null) return;
+                var audioUrl = song.AudioUrl;
+
+                var playlist = _playlist.Songs
+                    .Select(s => currentFilesURL + s.AudioUrl)
+                    .ToList();
+
+                MusicPlayerService.Instance.SetPlaylist(playlist);
+                MusicPlayerService.Instance.PlayAt(playlist.IndexOf(song.AudioUrl));
             }
-
-            if (sender is Border border && border.DataContext is SongViewModel song)
+            catch (Exception ex)
             {
-                try
-                {
-                    var audioUrl = song.AudioUrl;
-
-                    var playlist = _playlist.Songs
-                        .Select(s => s.AudioUrl)
-                        .ToList();
-
-                    MusicPlayerService.Instance.SetPlaylist(playlist);
-                    MusicPlayerService.Instance.PlayAt(playlist.IndexOf(song.AudioUrl));
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al reproducir la canción: {ex.Message}",
-                                  "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                MessageBox.Show($"Error al reproducir la canción: {ex.Message}",
+                              "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

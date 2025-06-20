@@ -192,30 +192,16 @@ namespace DAZTLClient.Windows
 
         private void Song_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.OriginalSource is DependencyObject source)
-            {
-                var parent = FindParent<Button>(source);
-                if (parent != null) return;
-            }
-
             if (sender is Border border && border.DataContext is SongViewModel song)
             {
                 try
                 {
-                    var audioUrl = song.AudioUrl;
-
-                    var playlist = _album.Songs
-                        .Select(s => s.AudioUrl)
-                        .ToList();
-
-                    MusicPlayerService.Instance.SetPlaylist(playlist);
-                    MusicPlayerService.Instance.PlayAt(playlist.IndexOf(song.AudioUrl));
-
+                    MusicPlayerService.Instance.Play(song.AudioUrl);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error al reproducir la canción: {ex.Message}",
-                                  "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Error al reproducir: {ex.Message}", "Error",
+                                  MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -314,13 +300,7 @@ namespace DAZTLClient.Windows
 
                     songPanel.MouseLeftButtonDown += (s, args) =>
                     {
-                        var audioUrl = song.AudioUrl;
-                        if (string.IsNullOrEmpty(song.AudioUrl))
-                        {
-                            audioUrl = song.AudioUrl;
-                        }
-
-                        MusicPlayerService.Instance.Play(audioUrl);
+                        MusicPlayerService.Instance.Play(song.AudioUrl);
                         SearchPopup.IsOpen = false;
                     };
 
