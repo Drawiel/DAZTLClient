@@ -131,8 +131,15 @@ namespace DAZTLClient.Windows
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al subir la canción: {ex.Message}", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Canción subida exitosamente", "Éxito",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+
+                txtBoxSongName.Text = string.Empty;
+                audioPath = string.Empty;
+                imagePath = string.Empty;
+                txtImage.Text = string.Empty;
+
+                NavigationService?.Navigate(new GUI_HomeArtist());
             }
             finally
             {
