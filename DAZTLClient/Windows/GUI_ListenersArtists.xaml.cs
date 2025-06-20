@@ -46,7 +46,7 @@ namespace DAZTLClient.Windows
                         Margin = new Thickness(0, 0, 0, 15),
                         ArtistId = artist.Id,
                         ArtistName = artist.Name,
-                        AlbumCover = currentFilesURL + artist.ProfilePicture,
+                        AlbumCover = currentFilesURL + artist.ProfilePicture.Replace("http://localhost/media/", ""),
                         Tag = artist
                     };
 

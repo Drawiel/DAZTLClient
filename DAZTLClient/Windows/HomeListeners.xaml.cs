@@ -267,7 +267,7 @@ namespace DAZTLClient.Windows {
                 {
                     Id = artist.Id,
                     Name = artist.Name,
-                    ProfilePicture = artist.ProfilePicture
+                    ProfilePicture = currentFilesURL + artist.ProfilePicture.Replace("http://localhost/media/", "")
                 }).ToList();
 
                 currentPageArtists = 0;
