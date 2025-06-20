@@ -107,7 +107,7 @@ namespace DAZTLClient.Windows {
                 {
                     txtUsername.Text = artistProfile.Username;
                     txtBio.Text = artistProfile.Bio;
-                    string imageUrl = currentFilesURL + artistProfile.ProfileImageUrl;
+                    string imageUrl = currentFilesURL + artistProfile.ProfileImageUrl.Replace("http://localhost/media/", "");
                     if (!string.IsNullOrEmpty(imageUrl))
                     {
                         var bitmap = new BitmapImage();

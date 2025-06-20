@@ -129,7 +129,7 @@ namespace DAZTLClient.Windows {
                     txtFirstName.Text = profile.FirstName;
                     txtLastName.Text = profile.LastName;
 
-                    string imageUrl = currentFilesURL + profile.ProfileImageUrl;
+                    string imageUrl = currentFilesURL + profile.ProfileImageUrl.Replace("http://localhost/media/","");
                     if (!string.IsNullOrEmpty(imageUrl))
                     {
                         var bitmap = new BitmapImage();

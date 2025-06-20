@@ -607,7 +607,7 @@ namespace DAZTLClient.Windows {
                             Cursor = Cursors.Hand
                         };
 
-                        var imageUrl = new Uri(currentFilesURL + artist.ProfilePicture);
+                        var imageUrl = new Uri(currentFilesURL + artist.ProfilePicture.Replace("http://localhost/media/", ""));
                         var image = new Image
                         {
                             Source = new BitmapImage(imageUrl),
