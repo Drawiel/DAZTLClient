@@ -261,6 +261,7 @@ namespace DAZTLClient.Services
 
         public async Task<GenericResponse> UploadSongAsync(string token, string title, string audioFilePath, string coverImagePath)
         {
+            GenericResponse response = new(){ Message = "Success", Status = "200"};
             try
             {
                 if (string.IsNullOrWhiteSpace(title))
@@ -301,7 +302,7 @@ namespace DAZTLClient.Services
 
                 Console.WriteLine($"Subiendo canción: {title} (Audio: {audioBytes.Length} bytes, Imagen: {coverImageBytes.Length} bytes)");
 
-                var response = await _client.UploadSongAsync(request, headers, deadline: DateTime.UtcNow.AddMinutes(5));
+                response = await _client.UploadSongAsync(request, headers, deadline: DateTime.UtcNow.AddMinutes(5));
                 Thread.Sleep(1000);
                 if (response.Status == "success")
                 {
@@ -319,20 +320,17 @@ namespace DAZTLClient.Services
             }
             catch (RpcException ex)
             {
-                Console.WriteLine($"ERROR gRPC: {ex.Status.Detail} | Code: {ex.StatusCode}");
 
-                string errorMessage = ex.StatusCode switch
+                var headers = new Metadata
                 {
-                    StatusCode.Unauthenticated => "Sesión expirada. Por favor, inicia sesión nuevamente.",
-                    StatusCode.PermissionDenied => "No tienes permisos para subir canciones.",
-                    StatusCode.InvalidArgument => "Datos de la canción inválidos.",
-                    StatusCode.ResourceExhausted => "Límite de subidas alcanzado.",
-                    StatusCode.Unavailable => "Servidor no disponible. Intenta más tarde.",
-                    StatusCode.DeadlineExceeded => "Tiempo de espera agotado. El archivo puede ser demasiado grande.",
-                    _ => ex.Status.Detail ?? "Error desconocido del servidor"
+                    { "authorization", $"Bearer {token}" }
+                };
+                var requestNotification = new Notification
+                {
+                    Message = $"Nueva cancion '{title}'. Únete al chat para ver que piensan de ella.",
                 };
 
-                throw new Exception($"Error al subir canción: {errorMessage}");
+                var responseNotification = await _client.CreateNotificationAsync(requestNotification, headers, deadline: DateTime.UtcNow.AddMinutes(5));
             }
             catch (FileNotFoundException ex)
             {
@@ -349,6 +347,7 @@ namespace DAZTLClient.Services
                 Console.WriteLine($"ERROR inesperado: {ex}");
                 throw new Exception($"Error inesperado: {ex.Message}");
             }
+            return response;
         }
 
 
