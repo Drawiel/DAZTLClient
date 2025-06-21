@@ -664,7 +664,7 @@
             Width="1920"
             Height="152"
             VerticalAlignment="Bottom"
-            Background="#101011">
+            Background="#242426">
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Height="100">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">

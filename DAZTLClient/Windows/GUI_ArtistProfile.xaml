@@ -20,7 +20,7 @@
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                             <TextBlock x:Name="ButtonText"
                                Text="{TemplateBinding Content}"
-                               Foreground="#595E63"
+                               Foreground="White"
                                FontSize="20"
                                FontFamily="Nunito"
                                HorizontalAlignment="Center"/>
@@ -28,7 +28,7 @@
                             <Rectangle x:Name="Underline"
                                Height="2"
                                Width="{Binding ActualWidth, ElementName=ButtonText}"
-                               Fill="#595E63"
+                               Fill="White"
                                HorizontalAlignment="Center"
                                Margin="0,2,0,0"/>
                         </StackPanel>
@@ -143,11 +143,11 @@
         <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
             <Setter Property="Width" Value="670"/>
             <Setter Property="Height" Value="70"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#9FA3A6"/>
+            <Setter Property="Background" Value="#4E4E4E"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="26"/>
             <Setter Property="BorderThickness" Value="3"/>
-            <Setter Property="BorderBrush" Value="#9FA3A6"/>
+            <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -272,7 +272,7 @@
 
             <TextBlock TextWrapping="Wrap" 
                    Text="Nueva contraseña:" 
-                   Foreground="#8B8D90"
+                   Foreground="White"
                    Margin="72,392,1356,559"
                    FontSize="40" RenderTransformOrigin="0.484,-0.073"/>
             <TextBox 
@@ -283,7 +283,7 @@
                 MaxLength="30"/>
             <TextBlock
                 Text="Biografia:"
-                Foreground="#8B8D90"
+                Foreground="White"
                 Margin="72,541,1362,469"
                 FontSize="40"/>
             <TextBox 

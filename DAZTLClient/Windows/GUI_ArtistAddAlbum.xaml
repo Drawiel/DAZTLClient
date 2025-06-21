@@ -19,7 +19,7 @@
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                             <TextBlock x:Name="ButtonText"
                                Text="{TemplateBinding Content}"
-                               Foreground="#595E63"
+                               Foreground="White"
                                FontSize="20"
                                FontFamily="Nunito"
                                HorizontalAlignment="Center"/>
@@ -27,7 +27,7 @@
                             <Rectangle x:Name="Underline"
                                Height="2"
                                Width="{Binding ActualWidth, ElementName=ButtonText}"
-                               Fill="#595E63"
+                               Fill="White"
                                HorizontalAlignment="Center"
                                Margin="0,2,0,0"/>
                         </StackPanel>
@@ -45,8 +45,8 @@
         <Style x:Key="CustomTextBoxTitleStyle" TargetType="TextBox">
             <Setter Property="Width" Value="670"/>
             <Setter Property="Height" Value="70"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#9FA3A6"/>
+            <Setter Property="Background" Value="#4E4E4E"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="70"/>
             <Setter Property="BorderThickness" Value="0,0,0,3"/>
             <Setter Property="BorderBrush" Value="#9FA3A6"/>
@@ -82,10 +82,10 @@
             <Setter Property="Width" Value="670"/>
             <Setter Property="Height" Value="70"/>
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#9FA3A6"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="70"/>
             <Setter Property="BorderThickness" Value="3"/>
-            <Setter Property="BorderBrush" Value="#9FA3A6"/>
+            <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
@@ -115,9 +115,9 @@
         </Style>
 
         <Style x:Key="VisibleIconButtonStyle" TargetType="Button">
-            <Setter Property="Foreground" Value="#9FA3A6"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="#9FA3A6"/>
+            <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="BorderThickness" Value="3"/>
             <Setter Property="Width" Value="259"/>
             <Setter Property="Height" Value="260"/>
@@ -149,10 +149,10 @@
         </Style>
 
         <Style x:Key="ShowOnHoverButtonStyle" TargetType="Button">
-            <Setter Property="Foreground" Value="#9FA3A6"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="#9FA3A6"/>
+            <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="BorderThickness" Value="3"/>
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="Margin" Value="3"/>
@@ -238,13 +238,13 @@
         <TextBlock TextWrapping="Wrap" 
            Text="Archivo:" 
            VerticalAlignment="Center"
-           Foreground="#8B8D90"
+           Foreground="White"
            Margin="59,471,1408,539"
            FontSize="40" Grid.Column="1"/>
         <TextBlock TextWrapping="Wrap" 
            Text="Título" 
            VerticalAlignment="Top"
-           Foreground="#8B8D90"
+           Foreground="White"
            Margin="388,310,1152,0"
            FontSize="20" Grid.Column="1"/>
         <TextBox
@@ -275,7 +275,7 @@
 
         <Border Grid.Column="1"
             Margin="59,622,445,74"
-            BorderBrush="#9FA3A6"
+            BorderBrush="White"
             BorderThickness="3"
             CornerRadius="10">
 
