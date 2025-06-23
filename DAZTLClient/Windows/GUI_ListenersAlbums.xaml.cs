@@ -26,8 +26,28 @@ namespace DAZTLClient.Windows
             InitializeComponent();
             _ = LoadAlbumsAsync();
 
-            // Configuración del reproductor de música
             SetupMusicPlayer();
+            MusicPlayerService.Instance.SongInfoChanged += UpdateNowPlayingInfo;
+            if (MusicPlayerService.Instance.IsPlaying())
+            {
+                UpdateNowPlayingInfo();
+            }
+        }
+        private void UpdateNowPlayingInfo()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                var player = MusicPlayerService.Instance;
+
+                BitmapImage albumCover = null;
+                if (!string.IsNullOrEmpty(player.CurrentAlbumCoverUrl))
+                {
+                    albumCover = new BitmapImage(new Uri(player.CurrentAlbumCoverUrl));
+                }
+                SongPlayingNow3.SongTitle.Text = player.CurrentSongTitle ?? "Desconocido";
+                SongPlayingNow3.ArtistName.Text = player.CurrentArtistName ?? "Artista desconocido";
+                SongPlayingNow3.AlbumCover.Source = albumCover;
+            });
         }
 
         private void SetupMusicPlayer()
@@ -41,10 +61,7 @@ namespace DAZTLClient.Windows
                 }
             };
 
-            MusicPlayerService.Instance.PlaybackStateChanged += (isPlaying) =>
-            {
-                Dispatcher.Invoke(() => PlayPauseToggle.IsChecked = isPlaying);
-            };
+            MusicPlayerService.PlaybackStateChanged += OnPlaybackStateChanged;
 
             PlayPauseToggle.Checked += (s, e) => MusicPlayerService.Instance.Resume();
             PlayPauseToggle.Unchecked += (s, e) => MusicPlayerService.Instance.Pause();
@@ -61,6 +78,11 @@ namespace DAZTLClient.Windows
             PlaybackSlider.PreviewMouseDown += PlaybackSlider_PreviewMouseDown;
             PlaybackSlider.PreviewMouseUp += PlaybackSlider_PreviewMouseUp;
             PlaybackSlider.ValueChanged += PlaybackSlider_ValueChanged;
+        }
+
+        private void OnPlaybackStateChanged(bool isPlaying)
+        {
+            Dispatcher.Invoke(() => PlayPauseToggle.IsChecked = isPlaying);
         }
 
         private async Task LoadAlbumsAsync()

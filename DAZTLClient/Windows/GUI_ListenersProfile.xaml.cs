@@ -25,6 +25,7 @@ namespace DAZTLClient.Windows {
         private UserService _userService = new();
         private string token;
         private string imagePath;
+        private bool _isUserDraggingSlider = false;
 
         private string currentFilesURL = "http://localhost:8000/media/";
 
@@ -33,8 +34,91 @@ namespace DAZTLClient.Windows {
             token = SessionManager.Instance.AccessToken;
             SimulateNotifications();
             LoadListenerProfile();
+            SetupMusicControllers();
 
         }
+
+        private void SetupMusicControllers()
+        {
+            PlayPauseToggle.IsChecked = MusicPlayerService.Instance.IsPlaying();
+            MusicPlayerService.Instance.PlaybackPositionChanged += progress =>
+            {
+                if (!_isUserDraggingSlider)
+                {
+                    PlaybackSlider.Value = progress;
+                }
+            };
+
+            MusicPlayerService.PlaybackStateChanged += OnPlaybackStateChanged;
+
+            PlayPauseToggle.Checked += (s, e) => MusicPlayerService.Instance.Resume();
+            PlayPauseToggle.Unchecked += (s, e) => MusicPlayerService.Instance.Pause();
+
+            PrevButton.Click += (s, e) => MusicPlayerService.Instance.PlayPrevious();
+            NextButton.Click += (s, e) => MusicPlayerService.Instance.PlayNext();
+
+            RepeatToggle.Checked += (s, e) => MusicPlayerService.Instance.IsRepeating = true;
+            RepeatToggle.Unchecked += (s, e) => MusicPlayerService.Instance.IsRepeating = false;
+
+            ShuffleToggle.Checked += (s, e) => MusicPlayerService.Instance.IsShuffling = true;
+            ShuffleToggle.Unchecked += (s, e) => MusicPlayerService.Instance.IsShuffling = false;
+            MusicPlayerService.Instance.SongInfoChanged += UpdateNowPlayingInfo;
+            if (MusicPlayerService.Instance.IsPlaying())
+            {
+                UpdateNowPlayingInfo();
+            }
+        }
+
+        private void OnPlaybackStateChanged(bool isPlaying)
+        {
+            Dispatcher.Invoke(() => PlayPauseToggle.IsChecked = isPlaying);
+        }
+
+        private void PlaybackSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            _isUserDraggingSlider = true;
+        }
+
+        private void PlaybackSlider_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            _isUserDraggingSlider = false;
+            SeekToPosition(PlaybackSlider.Value);
+        }
+
+        private void PlaybackSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (_isUserDraggingSlider)
+            {
+                return;
+            }
+        }
+        private void SeekToPosition(double sliderValue)
+        {
+            if (MusicPlayerService.Instance.CurrentDuration.TotalMilliseconds > 0)
+            {
+                var position = TimeSpan.FromMilliseconds(
+                    sliderValue / 100 * MusicPlayerService.Instance.CurrentDuration.TotalMilliseconds);
+                MusicPlayerService.Instance.Seek(position);
+            }
+        }
+
+        private void UpdateNowPlayingInfo()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                var player = MusicPlayerService.Instance;
+
+                BitmapImage albumCover = null;
+                if (!string.IsNullOrEmpty(player.CurrentAlbumCoverUrl))
+                {
+                    albumCover = new BitmapImage(new Uri(player.CurrentAlbumCoverUrl));
+                }
+                SongPlayingNow3.SongTitle.Text = player.CurrentSongTitle ?? "Desconocido";
+                SongPlayingNow3.ArtistName.Text = player.CurrentArtistName ?? "Artista desconocido";
+                SongPlayingNow3.AlbumCover.Source = albumCover;
+            });
+        }
+
         private void AccountButton_Click(object sender, RoutedEventArgs e) {
             var button = sender as Button;
             if(button?.ContextMenu != null) {

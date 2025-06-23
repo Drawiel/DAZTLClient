@@ -110,7 +110,7 @@ namespace DAZTLClient.Windows.UserControllers {
 
             if (!string.IsNullOrEmpty(audioUrl))
             {
-                MusicPlayerService.Instance.Play(audioUrl);
+                MusicPlayerService.Instance.Play(audioUrl, SongTitle, ArtistName, AlbumCover?.ToString());
             }
             else
             {

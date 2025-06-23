@@ -56,22 +56,24 @@ namespace DAZTLClient.Windows {
                 }
             };
 
-            MusicPlayerService.Instance.PlaybackStateChanged += (isPlaying) =>
-            {
-                Dispatcher.Invoke(() => PlayPauseToggle.IsChecked = isPlaying);
-            };
+            MusicPlayerService.PlaybackStateChanged += OnPlaybackStateChanged;
 
             PlayPauseToggle.Checked += (s, e) => MusicPlayerService.Instance.Resume();
             PlayPauseToggle.Unchecked += (s, e) => MusicPlayerService.Instance.Pause();
 
             PrevButton.Click += (s, e) => MusicPlayerService.Instance.PlayPrevious();
-            NextButtonPlaylists.Click += (s, e) => MusicPlayerService.Instance.PlayNext();
+            NextButton.Click += (s, e) => MusicPlayerService.Instance.PlayNext();
 
             RepeatToggle.Checked += (s, e) => MusicPlayerService.Instance.IsRepeating = true;
             RepeatToggle.Unchecked += (s, e) => MusicPlayerService.Instance.IsRepeating = false;
 
             ShuffleToggle.Checked += (s, e) => MusicPlayerService.Instance.IsShuffling = true;
             ShuffleToggle.Unchecked += (s, e) => MusicPlayerService.Instance.IsShuffling = false;
+            MusicPlayerService.Instance.SongInfoChanged += UpdateNowPlayingInfo;
+            if (MusicPlayerService.Instance.IsPlaying())
+            {
+                UpdateNowPlayingInfo();
+            }
             allCovers = new List<PlaylistCover>();
 
             for(int i = 0; i < 12; i++) {
@@ -92,6 +94,11 @@ namespace DAZTLClient.Windows {
             _ = StartWebSocketListener();
         }
 
+        private void OnPlaybackStateChanged(bool isPlaying)
+        {
+            Dispatcher.Invoke(() => PlayPauseToggle.IsChecked = isPlaying);
+        }
+
         private async Task LoadNotificationsFromDBAsync()
         {
             var notificationsDB = await _contentService.ListNotificationsAsync();
@@ -106,6 +113,23 @@ namespace DAZTLClient.Windows {
                 });
             }
 
+        }
+
+        private void UpdateNowPlayingInfo()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                var player = MusicPlayerService.Instance;
+
+                BitmapImage albumCover = null;
+                if (!string.IsNullOrEmpty(player.CurrentAlbumCoverUrl))
+                {
+                    albumCover = new BitmapImage(new Uri(player.CurrentAlbumCoverUrl));
+                }
+                SongPlayingNow3.SongTitle.Text = player.CurrentSongTitle ?? "Desconocido";
+                SongPlayingNow3.ArtistName.Text = player.CurrentArtistName ?? "Artista desconocido";
+                SongPlayingNow3.AlbumCover.Source = albumCover;
+            });
         }
 
         private async Task StartWebSocketListener()
@@ -527,7 +551,12 @@ namespace DAZTLClient.Windows {
                                 audioUrl = currentFilesURL + song.AudioUrl.Replace(".png", ".mp3");
                             }
 
-                            MusicPlayerService.Instance.Play(audioUrl);
+                            MusicPlayerService.Instance.Play(
+                                audioUrl,
+                                song.Title,
+                                song.Artist,
+                                currentFilesURL + song.CoverUrl
+                            );
                             SearchPopup.IsOpen = false;
                         };
 

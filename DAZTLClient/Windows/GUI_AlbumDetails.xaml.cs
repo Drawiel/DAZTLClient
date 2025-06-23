@@ -1,4 +1,5 @@
-﻿using DAZTLClient.Models;
+﻿using Daztl;
+using DAZTLClient.Models;
 using DAZTLClient.Services;
 using DAZTLClient.Windows.UserControllers;
 using System;
@@ -26,6 +27,28 @@ namespace DAZTLClient.Windows
             InitializeComponent();
             LoadAlbumData(albumId);
             SetupMusicPlayer();
+            MusicPlayerService.Instance.SongInfoChanged += UpdateNowPlayingInfo;
+            if (MusicPlayerService.Instance.IsPlaying())
+            {
+                UpdateNowPlayingInfo();
+            }
+        }
+
+        private void UpdateNowPlayingInfo()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                var player = MusicPlayerService.Instance;
+
+                BitmapImage albumCover = null;
+                if (!string.IsNullOrEmpty(player.CurrentAlbumCoverUrl))
+                {
+                    albumCover = new BitmapImage(new Uri(player.CurrentAlbumCoverUrl));
+                }
+                SongPlayingNow3.SongTitle.Text = player.CurrentSongTitle ?? "Desconocido";
+                SongPlayingNow3.ArtistName.Text = player.CurrentArtistName ?? "Artista desconocido";
+                SongPlayingNow3.AlbumCover.Source = albumCover;
+            });
         }
 
         private async void LoadAlbumData(int albumId)
@@ -78,9 +101,11 @@ namespace DAZTLClient.Windows
                 }
             };
 
-            MusicPlayerService.Instance.PlaybackStateChanged += (isPlaying) =>
+            MusicPlayerService.PlaybackStateChanged += OnPlaybackStateChanged;
+
+            MusicPlayerService.Instance.ShuffleStateChanged += (isShuffling) =>
             {
-                Dispatcher.Invoke(() => PlayPauseToggle.IsChecked = isPlaying);
+                Dispatcher.Invoke(() => ShuffleToggle.IsChecked = isShuffling);
             };
 
             PlayPauseToggle.Checked += (s, e) => MusicPlayerService.Instance.Resume();
@@ -98,6 +123,11 @@ namespace DAZTLClient.Windows
             PlaybackSlider.PreviewMouseDown += PlaybackSlider_PreviewMouseDown;
             PlaybackSlider.PreviewMouseUp += PlaybackSlider_PreviewMouseUp;
             PlaybackSlider.ValueChanged += PlaybackSlider_ValueChanged;
+        }
+
+        private void OnPlaybackStateChanged(bool isPlaying)
+        {
+            Dispatcher.Invoke(() => PlayPauseToggle.IsChecked = isPlaying);
         }
 
         private void PlaybackSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -192,17 +222,24 @@ namespace DAZTLClient.Windows
 
         private void Song_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is Border border && border.DataContext is SongViewModel song)
+            var song = (sender as FrameworkElement)?.DataContext as SongViewModel;
+            if (song == null) return;
+
+            try
             {
-                try
-                {
-                    MusicPlayerService.Instance.Play(song.AudioUrl);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al reproducir: {ex.Message}", "Error",
-                                  MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                var audioUrl = song.AudioUrl;
+
+                var playlist = _album.Songs
+                    .Select(s => currentFilesURL + s.AudioUrl)
+                    .ToList();
+
+                MusicPlayerService.Instance.SetPlaylist(playlist);
+                MusicPlayerService.Instance.PlayAt(playlist.IndexOf(song.AudioUrl), song.Title, song.Artist, _album.CoverUrl);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al reproducir la canción: {ex.Message}",
+                              "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

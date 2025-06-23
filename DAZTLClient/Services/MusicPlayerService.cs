@@ -17,8 +17,14 @@ namespace DAZTLClient.Services
         private int _currentIndex = -1;
         private Random _random = new Random();
 
+        public string CurrentSongTitle { get; private set; }
+        public string CurrentArtistName { get; private set; }
+        public string CurrentAlbumCoverUrl { get; private set; }
+
+
         public bool IsRepeating { get; set; } = false;
         public event Action<bool> ShuffleStateChanged;
+        public event Action SongInfoChanged;
 
         private bool _isShuffling;
 
@@ -33,7 +39,6 @@ namespace DAZTLClient.Services
 
                     if (value)
                     {
-                        // Al activar shuffle, guardamos la lista original y creamos una mezclada
                         if (_originalPlaylist.Count == 0 && _shuffledPlaylist.Count > 0)
                         {
                             _originalPlaylist = new List<string>(_shuffledPlaylist);
@@ -65,7 +70,7 @@ namespace DAZTLClient.Services
         }
 
         public event Action<double> PlaybackPositionChanged;
-        public event Action<bool> PlaybackStateChanged;
+        public static event Action<bool> PlaybackStateChanged;
         public TimeSpan CurrentDuration => _mediaPlayer.NaturalDuration.HasTimeSpan ? _mediaPlayer.NaturalDuration.TimeSpan : TimeSpan.Zero;
 
         private MusicPlayerService()
@@ -142,7 +147,7 @@ namespace DAZTLClient.Services
             }
         }
 
-        public void PlayAt(int index)
+        public void PlayAt(int index, string title = "", string artist = "", string coverUrl = "")
         {
             if (_originalPlaylist.Count == 0) return;
 
@@ -151,6 +156,9 @@ namespace DAZTLClient.Services
             if (index < 0 || index >= currentPlaylist.Count) return;
 
             _currentIndex = index;
+            CurrentSongTitle = title;
+            CurrentArtistName = artist;
+            CurrentAlbumCoverUrl = coverUrl;
             PlayCurrent();
         }
 
@@ -165,13 +173,21 @@ namespace DAZTLClient.Services
             _mediaPlayer.Play();
             _timer.Start();
             PlaybackStateChanged?.Invoke(true);
+
+            SongInfoChanged?.Invoke();
         }
 
-        public void Play(string url)
+        public void Play(string url, string title = "", string artist = "", string coverUrl = "")
         {
             _originalPlaylist = new List<string> { url };
             _shuffledPlaylist = new List<string> { url };
             _currentIndex = 0;
+
+            CurrentSongTitle = title;
+            CurrentArtistName = artist;
+            CurrentAlbumCoverUrl = coverUrl;
+
+            SongInfoChanged?.Invoke();
             PlayCurrent();
         }
 
