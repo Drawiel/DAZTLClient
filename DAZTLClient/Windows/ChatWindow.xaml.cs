@@ -22,11 +22,15 @@ namespace DAZTLClient.Windows
     /// </summary>
     public partial class ChatWindow : Window
     {
-        public ChatWindow(string idNotification)
+        public ChatWindow(string message)
         {
             this.Title = "Chat en vivo";
             InitializeComponent();
-            AddMessage("Daztl", "Este es un canal para hablar de la nueva cancion.");
+            string modifiedMessage = message.Replace(
+                "Únete al chat para ver que piensan de ella",
+                "Conversa con los demás oyentes para ver que opinan"
+            );
+            AddMessage("Daztl", modifiedMessage);
             _ = StartWebSocketListener();
         }
         private async Task StartWebSocketListener()
@@ -72,6 +76,23 @@ namespace DAZTLClient.Windows
             {
                 AddMessage(messageChat.username, messageChat.message);
             }
+        }
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+                this.WindowState = WindowState.Normal;
+            else
+                this.WindowState = WindowState.Maximized;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

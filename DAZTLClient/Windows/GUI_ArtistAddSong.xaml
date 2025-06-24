@@ -215,14 +215,26 @@
                     Margin="0,480,0,557"/>
 
         </Grid>
-        <Button 
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="59,104,0,0" VerticalAlignment="Top">
+            <Image
+            x:Name="imgSongCover"
+            Width="259"
+            Height="260"
+            Stretch="UniformToFill"
+            Source="/Multimedia/default_cover.png">
+                <Image.Clip>
+                    <RectangleGeometry Rect="0,0,259,260" RadiusX="10" RadiusY="10"/>
+                </Image.Clip>
+            </Image>
+            <Button 
             Style="{StaticResource VisibleIconButtonStyle}"
-            Grid.Column="1" 
             Content="Button" 
-            HorizontalAlignment="Left" 
-            Height="260" Margin="59,104,0,0" 
-            VerticalAlignment="Top" 
-            Width="259" Click="BtnAddSongCover_Click"/>
+            Height="260" 
+            Width="259" 
+            Click="BtnAddSongCover_Click"
+            Margin="0,-260,0,0"
+            Background="Transparent"/>
+        </StackPanel>
         <TextBox
             Grid.Column="1" 
             HorizontalAlignment="Left"

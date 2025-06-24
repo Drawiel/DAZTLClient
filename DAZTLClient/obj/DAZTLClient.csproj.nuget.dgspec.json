@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj": {}
+    "C:\\Users\\chuch\\OneDrive\\Desktop\\LIS-UV\\6to-Semestre\\Desarrollo de sistemas en red\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj": {
+    "C:\\Users\\chuch\\OneDrive\\Desktop\\LIS-UV\\6to-Semestre\\Desarrollo de sistemas en red\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
+        "projectUniqueName": "C:\\Users\\chuch\\OneDrive\\Desktop\\LIS-UV\\6to-Semestre\\Desarrollo de sistemas en red\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
         "projectName": "DAZTLClient",
-        "projectPath": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
-        "packagesPath": "C:\\Users\\zaido\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zaido\\Desktop\\UV\\6to\\DesSistRed\\Daztl\\DAZTLClient\\DAZTLClient\\obj\\",
+        "projectPath": "C:\\Users\\chuch\\OneDrive\\Desktop\\LIS-UV\\6to-Semestre\\Desarrollo de sistemas en red\\DAZTLClient\\DAZTLClient\\DAZTLClient.csproj",
+        "packagesPath": "C:\\Users\\chuch\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\chuch\\OneDrive\\Desktop\\LIS-UV\\6to-Semestre\\Desarrollo de sistemas en red\\DAZTLClient\\DAZTLClient\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\zaido\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\chuch\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

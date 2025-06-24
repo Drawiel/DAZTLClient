@@ -156,6 +156,7 @@ namespace DAZTLClient.Windows
             txtSongUri.Text = string.Empty;
             albumCoverPath = string.Empty;
             songFiles.Clear();
+            imgAlbumCover.Source = new BitmapImage(new Uri("/Multimedia/default_cover.png", UriKind.Relative));
         }
 
 
@@ -226,6 +227,13 @@ namespace DAZTLClient.Windows
                 if (openFileDialog.ShowDialog() == true)
                 {
                     albumCoverPath = openFileDialog.FileName;
+
+                    // Cargar y mostrar la imagen seleccionada
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(albumCoverPath);
+                    bitmap.EndInit();
+                    imgAlbumCover.Source = bitmap;
 
                     MessageBox.Show("Portada cargada correctamente", "Éxito",
                         MessageBoxButton.OK, MessageBoxImage.Information);

@@ -31,32 +31,6 @@ namespace DAZTLClient.Windows
             token = SessionManager.Instance.AccessToken;
             InitializeComponent();
         }
-
-
-        private void BtnAddSongCover_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                OpenFileDialog openFileDialog = new OpenFileDialog()
-                {
-                    Filter = "Image Files|*.jpg;*.jpeg;*.png",
-                    Title = "Selecciona una imagen"
-                };
-
-                if (openFileDialog.ShowDialog() == true)
-                {
-                    imagePath = openFileDialog.FileName;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al subir imagen: {ex.Message}");
-            }
-
-            MessageBox.Show($"Imagen cargada correctamente.");
-        }
-
         private void BtnAddAudioFile_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -120,7 +94,7 @@ namespace DAZTLClient.Windows
                     audioPath = string.Empty;
                     imagePath = string.Empty;
                     txtImage.Text = string.Empty;
-
+                    imgSongCover.Source = new BitmapImage(new Uri("/Multimedia/default_cover.png", UriKind.Relative));
                     NavigationService?.Navigate(new GUI_HomeArtist());
                 }
                 else
@@ -164,6 +138,8 @@ namespace DAZTLClient.Windows
                 txtBoxSongName.Text = string.Empty;
                 audioPath = string.Empty;
                 imagePath = string.Empty;
+                txtImage.Text = string.Empty;
+                imgSongCover.Source = new BitmapImage(new Uri("/Multimedia/default_cover.png", UriKind.Relative));
 
                 if (NavigationService != null)
                 {
@@ -171,7 +147,35 @@ namespace DAZTLClient.Windows
                 }
             }
         }
+        private void BtnAddSongCover_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog()
+                {
+                    Filter = "Image Files|*.jpg;*.jpeg;*.png",
+                    Title = "Selecciona una imagen"
+                };
 
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    imagePath = openFileDialog.FileName;
+            
+                    // Cargar y mostrar la imagen seleccionada
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(imagePath);
+                    bitmap.EndInit();
+                    imgSongCover.Source = bitmap;
+            
+                    MessageBox.Show($"Imagen cargada correctamente.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al subir imagen: {ex.Message}");
+            }
+        }
         private void BtnGoToArtistProfile_Click(object sender, RoutedEventArgs e)
         {
             if (NavigationService != null)

@@ -415,7 +415,7 @@ namespace DAZTLClient.Windows {
                     else
                     {
                         _ = _contentService.DeleteNotificationAsync(noti.id);
-                        var chatWindow = new ChatWindow("");
+                        var chatWindow = new ChatWindow(noti.message);
                         chatWindow.Owner = Application.Current.MainWindow;
                         chatWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                         chatWindow.Show();
