@@ -42,12 +42,12 @@ namespace DAZTLClient.Windows
                 var player = MusicPlayerService.Instance;
 
                 BitmapImage albumCover = null;
-                if (!string.IsNullOrEmpty(player.CurrentAlbumCoverUrl))
+                if (!string.IsNullOrEmpty(player.CurrentSong.AlbumCoverUrl))
                 {
-                    albumCover = new BitmapImage(new Uri(player.CurrentAlbumCoverUrl));
+                    albumCover = new BitmapImage(new Uri(player.CurrentSong.AlbumCoverUrl));
                 }
-                SongPlayingNow3.SongTitle.Text = player.CurrentSongTitle ?? "Desconocido";
-                SongPlayingNow3.ArtistName.Text = player.CurrentArtistName ?? "Artista desconocido";
+                SongPlayingNow3.SongTitle.Text = player.CurrentSong.Title ?? "Desconocido";
+                SongPlayingNow3.ArtistName.Text = player.CurrentSong.Artist ?? "Artista desconocido";
                 SongPlayingNow3.AlbumCover.Source = albumCover;
             });
         }
@@ -262,11 +262,19 @@ namespace DAZTLClient.Windows
                 var audioUrl = song.AudioUrl;
 
                 var playlist = _playlist.Songs
-                    .Select(s => currentFilesURL + s.AudioUrl)
+                    .Select(s => new SongInfo
+                    {
+                        AudioUrl = currentFilesURL + s.AudioUrl,
+                        Title = s.Title,
+                        Artist = s.Artist,
+                        AlbumCoverUrl = _playlist.CoverUrl
+                    })
                     .ToList();
 
                 MusicPlayerService.Instance.SetPlaylist(playlist);
-                MusicPlayerService.Instance.PlayAt(playlist.IndexOf(song.AudioUrl), song.Title, song.Artist, _playlist.CoverUrl);
+                var selectedIndex = _playlist.Songs.ToList().FindIndex(s =>
+                     s.AudioUrl == song.AudioUrl.Replace(currentFilesURL, ""));
+                MusicPlayerService.Instance.PlayAt(selectedIndex);
             }
             catch (Exception ex)
             {
@@ -417,7 +425,9 @@ namespace DAZTLClient.Windows
                             audioUrl = song.AudioUrl;
                         }
 
-                        MusicPlayerService.Instance.Play(audioUrl);
+                        MusicPlayerService.Instance.Play(
+                            new SongInfo { Title = song.Title, Artist = song.Artist, AudioUrl = audioUrl, AlbumCoverUrl = currentFilesURL + song.CoverUrl }
+                        );
                         SearchPopup.IsOpen = false;
                     };
 

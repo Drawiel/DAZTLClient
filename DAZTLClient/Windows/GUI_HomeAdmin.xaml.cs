@@ -116,13 +116,6 @@ namespace DAZTLClient.Windows
         {
             dataGridReportData.Columns.Add(new DataGridTextColumn
             {
-                Header = "ID",
-                Binding = new Binding("Id"),
-                Width = new DataGridLength(60)
-            });
-
-            dataGridReportData.Columns.Add(new DataGridTextColumn
-            {
                 Header = "Nombre de Usuario",
                 Binding = new Binding("Username"),
                 Width = new DataGridLength(150)
@@ -168,13 +161,6 @@ namespace DAZTLClient.Windows
         {
             dataGridReportData.Columns.Add(new DataGridTextColumn
             {
-                Header = "ID",
-                Binding = new Binding("Id"),
-                Width = new DataGridLength(60)
-            });
-
-            dataGridReportData.Columns.Add(new DataGridTextColumn
-            {
                 Header = "Nombre de Usuario",
                 Binding = new Binding("Username"),
                 Width = new DataGridLength(150)
@@ -211,13 +197,6 @@ namespace DAZTLClient.Windows
 
         private void ConfigureListenersColumns()
         {
-            dataGridReportData.Columns.Add(new DataGridTextColumn
-            {
-                Header = "ID",
-                Binding = new Binding("Id"),
-                Width = new DataGridLength(60)
-            });
-
             dataGridReportData.Columns.Add(new DataGridTextColumn
             {
                 Header = "Nombre de Usuario",
@@ -258,13 +237,6 @@ namespace DAZTLClient.Windows
         {
             dataGridReportData.Columns.Add(new DataGridTextColumn
             {
-                Header = "ID",
-                Binding = new Binding("Id"),
-                Width = new DataGridLength(60)
-            });
-
-            dataGridReportData.Columns.Add(new DataGridTextColumn
-            {
                 Header = "Título",
                 Binding = new Binding("Title"),
                 Width = new DataGridLength(250)
@@ -280,13 +252,6 @@ namespace DAZTLClient.Windows
 
         private void ConfigureAlbumsColumns()
         {
-            dataGridReportData.Columns.Add(new DataGridTextColumn
-            {
-                Header = "ID",
-                Binding = new Binding("Id"),
-                Width = new DataGridLength(60)
-            });
-
             dataGridReportData.Columns.Add(new DataGridTextColumn
             {
                 Header = "Título",

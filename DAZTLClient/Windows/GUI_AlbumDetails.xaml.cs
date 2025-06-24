@@ -39,15 +39,25 @@ namespace DAZTLClient.Windows
             Dispatcher.Invoke(() =>
             {
                 var player = MusicPlayerService.Instance;
+                var currentSong = player.CurrentSong;
 
-                BitmapImage albumCover = null;
-                if (!string.IsNullOrEmpty(player.CurrentAlbumCoverUrl))
+                if (currentSong != null)
                 {
-                    albumCover = new BitmapImage(new Uri(player.CurrentAlbumCoverUrl));
+                    BitmapImage albumCover = null;
+                    if (!string.IsNullOrEmpty(currentSong.AlbumCoverUrl))
+                    {
+                        albumCover = new BitmapImage(new Uri(currentSong.AlbumCoverUrl));
+                    }
+                    SongPlayingNow3.SongTitle.Text = currentSong.Title ?? "Desconocido";
+                    SongPlayingNow3.ArtistName.Text = currentSong.Artist ?? "Artista desconocido";
+                    SongPlayingNow3.AlbumCover.Source = albumCover;
                 }
-                SongPlayingNow3.SongTitle.Text = player.CurrentSongTitle ?? "Desconocido";
-                SongPlayingNow3.ArtistName.Text = player.CurrentArtistName ?? "Artista desconocido";
-                SongPlayingNow3.AlbumCover.Source = albumCover;
+                else
+                {
+                    SongPlayingNow3.SongTitle.Text = "No hay canción en reproducción";
+                    SongPlayingNow3.ArtistName.Text = string.Empty;
+                    SongPlayingNow3.AlbumCover.Source = null;
+                }
             });
         }
 
@@ -123,6 +133,255 @@ namespace DAZTLClient.Windows
             PlaybackSlider.PreviewMouseDown += PlaybackSlider_PreviewMouseDown;
             PlaybackSlider.PreviewMouseUp += PlaybackSlider_PreviewMouseUp;
             PlaybackSlider.ValueChanged += PlaybackSlider_ValueChanged;
+        }
+
+        private async void txtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string query = txtBoxSearch.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                SearchPopup.IsOpen = false;
+                return;
+            }
+
+            try
+            {
+                var response = await _contentService.GlobalSearchAsync(query);
+                SearchResultsPanel.Children.Clear();
+
+                if (response.Songs.Count == 0 &&
+                    response.Albums.Count == 0 &&
+                    response.Artists.Count == 0 &&
+                    response.Playlists.Count == 0)
+                {
+                    SearchResultsPanel.Children.Add(new TextBlock
+                    {
+                        Text = "No se encontraron resultados.",
+                        Foreground = Brushes.White,
+                        Margin = new Thickness(5)
+                    });
+                }
+
+                var baseUrl = "http://localhost:8000";
+
+                // Canciones (ya implementado)
+                if (response.Songs.Count > 0)
+                {
+                    SearchResultsPanel.Children.Add(new TextBlock
+                    {
+                        Text = "Canciones",
+                        FontSize = 28,
+                        FontWeight = FontWeights.Bold,
+                        Foreground = Brushes.White,
+                        Margin = new Thickness(5, 10, 5, 2)
+                    });
+
+                    foreach (var song in response.Songs)
+                    {
+                        var songPanel = new StackPanel
+                        {
+                            Orientation = Orientation.Horizontal,
+                            Margin = new Thickness(10, 2, 5, 2),
+                            Cursor = Cursors.Hand
+                        };
+
+                        var imageUrl = new Uri(currentFilesURL + song.CoverUrl);
+                        var image = new Image
+                        {
+                            Source = new BitmapImage(imageUrl),
+                            Width = 50,
+                            Height = 50,
+                            Margin = new Thickness(0, 0, 10, 0)
+                        };
+
+                        var text = new TextBlock
+                        {
+                            Text = $"{song.Title} - {song.Artist}",
+                            FontSize = 24,
+                            Foreground = Brushes.LightGray,
+                            VerticalAlignment = VerticalAlignment.Center
+                        };
+
+                        songPanel.Children.Add(image);
+                        songPanel.Children.Add(text);
+
+                        songPanel.MouseLeftButtonDown += (s, args) =>
+                        {
+                            var audioUrl = currentFilesURL + song.AudioUrl;
+                            if (string.IsNullOrEmpty(song.AudioUrl))
+                            {
+                                audioUrl = currentFilesURL + song.AudioUrl.Replace(".png", ".mp3");
+                            }
+
+                            MusicPlayerService.Instance.Play(
+                                new SongInfo { Title = song.Title, Artist = song.Artist, AudioUrl = audioUrl, AlbumCoverUrl = currentFilesURL + song.CoverUrl }
+                            );
+                            SearchPopup.IsOpen = false;
+                        };
+
+                        SearchResultsPanel.Children.Add(songPanel);
+                    }
+                }
+
+                // Álbumes (modificado para mostrar imágenes)
+                if (response.Albums.Count > 0)
+                {
+                    SearchResultsPanel.Children.Add(new TextBlock
+                    {
+                        Text = "Álbumes",
+                        FontSize = 28,
+                        FontWeight = FontWeights.Bold,
+                        Foreground = Brushes.White,
+                        Margin = new Thickness(5, 10, 5, 2)
+                    });
+
+                    foreach (var album in response.Albums)
+                    {
+                        var albumPanel = new StackPanel
+                        {
+                            Orientation = Orientation.Horizontal,
+                            Margin = new Thickness(10, 2, 5, 2),
+                            Cursor = Cursors.Hand
+                        };
+
+                        var imageUrl = new Uri(currentFilesURL + album.CoverUrl);
+                        var image = new Image
+                        {
+                            Source = new BitmapImage(imageUrl),
+                            Width = 50,
+                            Height = 50,
+                            Margin = new Thickness(0, 0, 10, 0)
+                        };
+
+                        var text = new TextBlock
+                        {
+                            Text = $"{album.Title} - {album.ArtistName}",
+                            FontSize = 24,
+                            Foreground = Brushes.LightGray,
+                            VerticalAlignment = VerticalAlignment.Center
+                        };
+
+                        albumPanel.Children.Add(image);
+                        albumPanel.Children.Add(text);
+
+                        albumPanel.MouseLeftButtonDown += (s, args) =>
+                        {
+                            MessageBox.Show($"Seleccionaste el álbum: {album.Title}");
+                            SearchPopup.IsOpen = false;
+                        };
+
+                        SearchResultsPanel.Children.Add(albumPanel);
+                    }
+                }
+
+                // Artistas (modificado para mostrar imágenes)
+                if (response.Artists.Count > 0)
+                {
+                    SearchResultsPanel.Children.Add(new TextBlock
+                    {
+                        Text = "Artistas",
+                        FontSize = 28,
+                        FontWeight = FontWeights.Bold,
+                        Foreground = Brushes.White,
+                        Margin = new Thickness(5, 10, 5, 2)
+                    });
+
+                    foreach (var artist in response.Artists)
+                    {
+                        var artistPanel = new StackPanel
+                        {
+                            Orientation = Orientation.Horizontal,
+                            Margin = new Thickness(10, 2, 5, 2),
+                            Cursor = Cursors.Hand
+                        };
+
+                        var imageUrl = new Uri(currentFilesURL + artist.ProfilePicture.Replace("http://localhost/media/", ""));
+                        var image = new Image
+                        {
+                            Source = new BitmapImage(imageUrl),
+                            Width = 50,
+                            Height = 50,
+                            Margin = new Thickness(0, 0, 10, 0)
+                        };
+
+                        var text = new TextBlock
+                        {
+                            Text = artist.Name,
+                            FontSize = 24,
+                            Foreground = Brushes.LightGray,
+                            VerticalAlignment = VerticalAlignment.Center
+                        };
+
+                        artistPanel.Children.Add(image);
+                        artistPanel.Children.Add(text);
+
+                        artistPanel.MouseLeftButtonDown += (s, args) =>
+                        {
+                            MessageBox.Show($"Seleccionaste el artista: {artist.Name}");
+                            SearchPopup.IsOpen = false;
+                        };
+
+                        SearchResultsPanel.Children.Add(artistPanel);
+                    }
+                }
+
+                if (response.Playlists.Count > 0)
+                {
+                    SearchResultsPanel.Children.Add(new TextBlock
+                    {
+                        Text = "Playlists",
+                        FontSize = 28,
+                        FontWeight = FontWeights.Bold,
+                        Foreground = Brushes.White,
+                        Margin = new Thickness(5, 10, 5, 2)
+                    });
+
+                    foreach (var playlist in response.Playlists)
+                    {
+                        var playlistPanel = new StackPanel
+                        {
+                            Orientation = Orientation.Horizontal,
+                            Margin = new Thickness(10, 2, 5, 2),
+                            Cursor = Cursors.Hand
+                        };
+
+                        var imageUrl = new Uri(currentFilesURL + playlist.CoverUrl);
+                        var image = new Image
+                        {
+                            Source = new BitmapImage(imageUrl),
+                            Width = 50,
+                            Height = 50,
+                            Margin = new Thickness(0, 0, 10, 0)
+                        };
+
+                        var text = new TextBlock
+                        {
+                            Text = playlist.Name,
+                            FontSize = 24,
+                            Foreground = Brushes.LightGray,
+                            VerticalAlignment = VerticalAlignment.Center
+                        };
+
+                        playlistPanel.Children.Add(image);
+                        playlistPanel.Children.Add(text);
+
+                        playlistPanel.MouseLeftButtonDown += (s, args) =>
+                        {
+                            NavigationService.Navigate(new GUI_PlaylistDetails(playlist));
+                        };
+
+                        SearchResultsPanel.Children.Add(playlistPanel);
+                    }
+                }
+
+                SearchPopup.IsOpen = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                SearchPopup.IsOpen = false;
+            }
         }
 
         private void OnPlaybackStateChanged(bool isPlaying)
@@ -227,14 +486,21 @@ namespace DAZTLClient.Windows
 
             try
             {
-                var audioUrl = song.AudioUrl;
-
                 var playlist = _album.Songs
-                    .Select(s => currentFilesURL + s.AudioUrl)
+                    .Select(s => new SongInfo
+                    {
+                        AudioUrl = currentFilesURL + s.AudioUrl,
+                        Title = s.Title,
+                        Artist = s.Artist,
+                        AlbumCoverUrl = _album.CoverUrl
+                    })
                     .ToList();
 
                 MusicPlayerService.Instance.SetPlaylist(playlist);
-                MusicPlayerService.Instance.PlayAt(playlist.IndexOf(song.AudioUrl), song.Title, song.Artist, _album.CoverUrl);
+
+                var selectedIndex = _album.Songs.ToList().FindIndex(s =>
+                     s.AudioUrl == song.AudioUrl.Replace(currentFilesURL, ""));
+                MusicPlayerService.Instance.PlayAt(selectedIndex);
             }
             catch (Exception ex)
             {
@@ -251,106 +517,5 @@ namespace DAZTLClient.Windows
             return FindParent<T>(parentObject);
         }
 
-        private async void txtBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string query = txtBoxSearch.Text.Trim();
-
-            if (string.IsNullOrWhiteSpace(query))
-            {
-                SearchPopup.IsOpen = false;
-                return;
-            }
-
-            try
-            {
-                var response = await _contentService.SearchSongsAsync(query);
-
-                SearchResultsPanel.Children.Clear();
-
-                if (response.Songs.Count == 0)
-                {
-                    SearchResultsPanel.Children.Add(new TextBlock
-                    {
-                        Text = "No se encontraron canciones.",
-                        Foreground = Brushes.White,
-                        Margin = new Thickness(5)
-                    });
-                    SearchPopup.IsOpen = true;
-                    return;
-                }
-
-                SearchResultsPanel.Children.Add(new TextBlock
-                {
-                    Text = "Canciones",
-                    FontSize = 28,
-                    FontWeight = FontWeights.Bold,
-                    Foreground = Brushes.White,
-                    Margin = new Thickness(5, 10, 5, 2)
-                });
-
-                foreach (var song in response.Songs)
-                {
-                    var songPanel = new StackPanel
-                    {
-                        Orientation = Orientation.Horizontal,
-                        Margin = new Thickness(10, 5, 5, 5),
-                        Cursor = Cursors.Hand
-                    };
-
-                    var imageUrl = new Uri(song.CoverUrl);
-                    var image = new Image
-                    {
-                        Source = new BitmapImage(imageUrl),
-                        Width = 50,
-                        Height = 50,
-                        Margin = new Thickness(0, 0, 10, 0)
-                    };
-
-                    var textPanel = new StackPanel
-                    {
-                        Orientation = Orientation.Vertical,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        Width = 1000
-                    };
-
-                    var titleText = new TextBlock
-                    {
-                        Text = song.Title,
-                        FontSize = 20,
-                        Foreground = Brushes.White,
-                        FontWeight = FontWeights.SemiBold,
-                        TextTrimming = TextTrimming.CharacterEllipsis
-                    };
-
-                    var artistText = new TextBlock
-                    {
-                        Text = song.Artist,
-                        FontSize = 16,
-                        Foreground = Brushes.LightGray,
-                        TextTrimming = TextTrimming.CharacterEllipsis
-                    };
-
-                    textPanel.Children.Add(titleText);
-                    textPanel.Children.Add(artistText);
-                    songPanel.Children.Add(image);
-                    songPanel.Children.Add(textPanel);
-
-                    songPanel.MouseLeftButtonDown += (s, args) =>
-                    {
-                        MusicPlayerService.Instance.Play(song.AudioUrl);
-                        SearchPopup.IsOpen = false;
-                    };
-
-                    SearchResultsPanel.Children.Add(songPanel);
-                }
-
-                SearchPopup.IsOpen = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                SearchPopup.IsOpen = false;
-            }
-        }
     }
 }

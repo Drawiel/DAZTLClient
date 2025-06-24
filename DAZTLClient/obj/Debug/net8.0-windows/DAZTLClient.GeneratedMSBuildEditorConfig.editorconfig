@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DAZTLClient
-build_property.ProjectDir = C:\Users\chuch\OneDrive\Desktop\LIS-UV\6to-Semestre\Desarrollo de sistemas en red\DAZTLClient\DAZTLClient\
+build_property.ProjectDir = C:\Users\zaido\Desktop\UV\6to\DesSistRed\Daztl\DAZTLClient\DAZTLClient\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

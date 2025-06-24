@@ -109,12 +109,12 @@ namespace DAZTLClient.Windows {
                 var player = MusicPlayerService.Instance;
 
                 BitmapImage albumCover = null;
-                if (!string.IsNullOrEmpty(player.CurrentAlbumCoverUrl))
+                if (!string.IsNullOrEmpty(player.CurrentSong.AlbumCoverUrl))
                 {
-                    albumCover = new BitmapImage(new Uri(player.CurrentAlbumCoverUrl));
+                    albumCover = new BitmapImage(new Uri(player.CurrentSong.AlbumCoverUrl));
                 }
-                SongPlayingNow3.SongTitle.Text = player.CurrentSongTitle ?? "Desconocido";
-                SongPlayingNow3.ArtistName.Text = player.CurrentArtistName ?? "Artista desconocido";
+                SongPlayingNow3.SongTitle.Text = player.CurrentSong.Title ?? "Desconocido";
+                SongPlayingNow3.ArtistName.Text = player.CurrentSong.Artist ?? "Artista desconocido";
                 SongPlayingNow3.AlbumCover.Source = albumCover;
             });
         }

@@ -12,15 +12,16 @@ namespace DAZTLClient.Services
         private MediaPlayer _mediaPlayer;
         private DispatcherTimer _timer;
 
-        private List<string> _originalPlaylist = new List<string>();
-        private List<string> _shuffledPlaylist = new List<string>();
+        private List<SongInfo> _originalPlaylist = new List<SongInfo>();
+        private List<SongInfo> _shuffledPlaylist = new List<SongInfo>();
         private int _currentIndex = -1;
         private Random _random = new Random();
 
-        public string CurrentSongTitle { get; private set; }
-        public string CurrentArtistName { get; private set; }
-        public string CurrentAlbumCoverUrl { get; private set; }
+        public SongInfo CurrentSong => _currentIndex >= 0 && _currentIndex < CurrentPlaylist.Count
+            ? CurrentPlaylist[_currentIndex]
+            : null;
 
+        private List<SongInfo> CurrentPlaylist => IsShuffling ? _shuffledPlaylist : _originalPlaylist;
 
         public bool IsRepeating { get; set; } = false;
         public event Action<bool> ShuffleStateChanged;
@@ -41,10 +42,10 @@ namespace DAZTLClient.Services
                     {
                         if (_originalPlaylist.Count == 0 && _shuffledPlaylist.Count > 0)
                         {
-                            _originalPlaylist = new List<string>(_shuffledPlaylist);
+                            _originalPlaylist = new List<SongInfo>(_shuffledPlaylist);
                         }
 
-                        _shuffledPlaylist = new List<string>(_originalPlaylist);
+                        _shuffledPlaylist = new List<SongInfo>(_originalPlaylist);
                         ShuffleList(_shuffledPlaylist);
 
                         // Mantenemos la canción actual en la misma posición si es posible
@@ -82,15 +83,14 @@ namespace DAZTLClient.Services
             _timer.Tick += Timer_Tick;
         }
 
-        // Método para mezclar una lista
-        private void ShuffleList(List<string> list)
+        private void ShuffleList(List<SongInfo> list)
         {
             int n = list.Count;
             while (n > 1)
             {
                 n--;
                 int k = _random.Next(n + 1);
-                string value = list[k];
+                var value = list[k];
                 list[k] = list[n];
                 list[n] = value;
             }
@@ -135,10 +135,10 @@ namespace DAZTLClient.Services
             }
         }
 
-        public void SetPlaylist(List<string> playlist)
+        public void SetPlaylist(List<SongInfo> playlist)
         {
-            _originalPlaylist = new List<string>(playlist);
-            _shuffledPlaylist = new List<string>(playlist);
+            _originalPlaylist = new List<SongInfo>(playlist);
+            _shuffledPlaylist = new List<SongInfo>(playlist);
             _currentIndex = -1;
 
             if (IsShuffling)
@@ -147,45 +147,33 @@ namespace DAZTLClient.Services
             }
         }
 
-        public void PlayAt(int index, string title = "", string artist = "", string coverUrl = "")
+        public void PlayAt(int index)
         {
-            if (_originalPlaylist.Count == 0) return;
+            if (CurrentPlaylist.Count == 0) return;
 
-            var currentPlaylist = IsShuffling ? _shuffledPlaylist : _originalPlaylist;
-
-            if (index < 0 || index >= currentPlaylist.Count) return;
+            if (index < 0 || index >= CurrentPlaylist.Count) return;
 
             _currentIndex = index;
-            CurrentSongTitle = title;
-            CurrentArtistName = artist;
-            CurrentAlbumCoverUrl = coverUrl;
             PlayCurrent();
         }
 
         private void PlayCurrent()
         {
-            var currentPlaylist = IsShuffling ? _shuffledPlaylist : _originalPlaylist;
+            if (_currentIndex < 0 || _currentIndex >= CurrentPlaylist.Count) return;
 
-            if (_currentIndex < 0 || _currentIndex >= currentPlaylist.Count) return;
-
-            var url = currentPlaylist[_currentIndex];
-            _mediaPlayer.Open(new Uri(url));
+            var song = CurrentPlaylist[_currentIndex];
+            _mediaPlayer.Open(new Uri(song.AudioUrl));
             _mediaPlayer.Play();
             _timer.Start();
             PlaybackStateChanged?.Invoke(true);
-
             SongInfoChanged?.Invoke();
         }
 
-        public void Play(string url, string title = "", string artist = "", string coverUrl = "")
+        public void Play(SongInfo song)
         {
-            _originalPlaylist = new List<string> { url };
-            _shuffledPlaylist = new List<string> { url };
+            _originalPlaylist = new List<SongInfo> { song };
+            _shuffledPlaylist = new List<SongInfo> { song };
             _currentIndex = 0;
-
-            CurrentSongTitle = title;
-            CurrentArtistName = artist;
-            CurrentAlbumCoverUrl = coverUrl;
 
             SongInfoChanged?.Invoke();
             PlayCurrent();
@@ -193,46 +181,25 @@ namespace DAZTLClient.Services
 
         public void PlayNext()
         {
-            var currentPlaylist = IsShuffling ? _shuffledPlaylist : _originalPlaylist;
+            if (CurrentPlaylist.Count == 0) return;
 
-            if (currentPlaylist.Count == 0) return;
+            _currentIndex++;
+            if (_currentIndex >= CurrentPlaylist.Count)
+                _currentIndex = 0;
 
-            if (IsShuffling)
-            {
-                // En modo shuffle, simplemente avanzamos al siguiente índice
-                _currentIndex++;
-                if (_currentIndex >= currentPlaylist.Count)
-                    _currentIndex = 0;
-            }
-            else
-            {
-                _currentIndex++;
-                if (_currentIndex >= currentPlaylist.Count)
-                    _currentIndex = 0;
-            }
-
+            SongInfoChanged?.Invoke();
             PlayCurrent();
         }
 
         public void PlayPrevious()
         {
-            var currentPlaylist = IsShuffling ? _shuffledPlaylist : _originalPlaylist;
+            if (CurrentPlaylist.Count == 0) return;
 
-            if (currentPlaylist.Count == 0) return;
+            _currentIndex--;
+            if (_currentIndex < 0)
+                _currentIndex = CurrentPlaylist.Count - 1;
 
-            if (IsShuffling)
-            {
-                _currentIndex--;
-                if (_currentIndex < 0)
-                    _currentIndex = currentPlaylist.Count - 1;
-            }
-            else
-            {
-                _currentIndex--;
-                if (_currentIndex < 0)
-                    _currentIndex = currentPlaylist.Count - 1;
-            }
-
+            SongInfoChanged?.Invoke();
             PlayCurrent();
         }
 
@@ -261,5 +228,12 @@ namespace DAZTLClient.Services
         {
             _mediaPlayer.Position = position;
         }
+    }
+    public class SongInfo
+    {
+        public string AudioUrl { get; set; }
+        public string Title { get; set; }
+        public string Artist { get; set; }
+        public string AlbumCoverUrl { get; set; }
     }
 }

@@ -377,6 +377,7 @@
                 Style="{StaticResource IconPlusButtonStyle}" 
                 Click="BtnGoToCreatePlaylist_Click"/>
             <TextBox
+                x:Name="txtBoxSearch"
                 Style="{StaticResource TextBoxWithIconStyle}"
                 HorizontalAlignment="Left" 
                 Height="70" 
@@ -384,7 +385,27 @@
                 TextWrapping="NoWrap" 
                 Tag="Buscar..." 
                 VerticalAlignment="Center" 
-                Width="1251"/>
+                Width="1251"
+                TextChanged="txtBoxSearch_TextChanged"/>
+            <Popup x:Name="SearchPopup"
+                PlacementTarget="{Binding ElementName=txtBoxSearch}"
+                Placement="Bottom"
+                AllowsTransparency="True"
+                StaysOpen="False"
+                PopupAnimation="Fade">
+                            <Border Width="1250" Height="400"
+                    Background="#202123"
+                    CornerRadius="8"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Padding="10"
+                    SnapsToDevicePixels="True"
+                    Effect="{DynamicResource MaterialDesignElevation3}">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                    <StackPanel x:Name="SearchResultsPanel"/>
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
             <Button Style="{StaticResource AccountButtonStyle}" 
                 HorizontalAlignment="Left" 
                 Margin="1853,0,0,0" 

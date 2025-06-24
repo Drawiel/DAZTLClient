@@ -114,13 +114,6 @@ namespace DAZTLClient.Windows {
         {
             dataGridReportData.Columns.Add(new DataGridTextColumn
             {
-                Header = "ID",
-                Binding = new Binding("Id"),
-                Width = new DataGridLength(60)
-            });
-
-            dataGridReportData.Columns.Add(new DataGridTextColumn
-            {
                 Header = "Título",
                 Binding = new Binding("Title"),
                 Width = new DataGridLength(300)
@@ -136,13 +129,6 @@ namespace DAZTLClient.Windows {
 
         private void ConfigureAlbumsColumns()
         {
-            dataGridReportData.Columns.Add(new DataGridTextColumn
-            {
-                Header = "ID",
-                Binding = new Binding("Id"),
-                Width = new DataGridLength(60)
-            });
-
             dataGridReportData.Columns.Add(new DataGridTextColumn
             {
                 Header = "Título",
